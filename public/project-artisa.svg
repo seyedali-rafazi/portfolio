@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <!-- Background gallery room gradient -->
+    <linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141a24"/>
+      <stop offset="65%" stop-color="#0b1017"/>
+      <stop offset="100%" stop-color="#06090e"/>
+    </linearGradient>
+
+    <!-- Museum Floor gradient with reflection -->
+    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1b120c"/>
+      <stop offset="30%" stop-color="#2a1c12"/>
+      <stop offset="100%" stop-color="#0e0a07"/>
+    </linearGradient>
+
+    <!-- Warm museum spotlights -->
+    <radialGradient id="spotlight1" cx="30%" cy="10%" r="65%">
+      <stop offset="0%" stop-color="#ffdfa0" stop-opacity="0.35"/>
+      <stop offset="40%" stop-color="#ffb852" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffb852" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="spotlight2" cx="72%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#ffe6b8" stop-opacity="0.32"/>
+      <stop offset="45%" stop-color="#ffc368" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffc368" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Gold frame gradient -->
+    <linearGradient id="goldFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5b869"/>
+      <stop offset="25%" stop-color="#8c6426"/>
+      <stop offset="50%" stop-color="#ffd984"/>
+      <stop offset="75%" stop-color="#694816"/>
+      <stop offset="100%" stop-color="#f0c674"/>
+    </linearGradient>
+
+    <linearGradient id="innerGold" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3d2a0e"/>
+      <stop offset="50%" stop-color="#b8893d"/>
+      <stop offset="100%" stop-color="#211505"/>
+    </linearGradient>
+
+    <!-- Renaissance Artwork 1 (Mythological / Classical) -->
+    <linearGradient id="art1Sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a6984"/>
+      <stop offset="40%" stop-color="#cf9e65"/>
+      <stop offset="70%" stop-color="#84452a"/>
+      <stop offset="100%" stop-color="#2d1c15"/>
+    </linearGradient>
+
+    <!-- Artwork 2 (Portrait / Floral) -->
+    <linearGradient id="art2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f3e46"/>
+      <stop offset="35%" stop-color="#84a98c"/>
+      <stop offset="65%" stop-color="#c96f43"/>
+      <stop offset="100%" stop-color="#522e24"/>
+    </linearGradient>
+
+    <!-- Small art 3 -->
+    <linearGradient id="art3Grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <!-- Person gradient -->
+    <linearGradient id="personGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f242e"/>
+      <stop offset="50%" stop-color="#111620"/>
+      <stop offset="100%" stop-color="#090c12"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wall Background -->
+  <rect width="800" height="340" fill="url(#wallGrad)"/>
+
+  <!-- Museum Baseboard / Moldings -->
+  <rect y="336" width="800" height="8" fill="#1b222d"/>
+  <rect y="342" width="800" height="4" fill="#0d1117"/>
+
+  <!-- Museum Hardwood Parquet Floor -->
+  <rect y="344" width="800" height="106" fill="url(#floorGrad)"/>
+
+  <!-- Parquet Floor Perspective Lines -->
+  <g stroke="#ffbf66" stroke-opacity="0.06" stroke-width="1.2">
+    <line x1="400" y1="344" x2="150" y2="450"/>
+    <line x1="400" y1="344" x2="280" y2="450"/>
+    <line x1="400" y1="344" x2="400" y2="450"/>
+    <line x1="400" y1="344" x2="520" y2="450"/>
+    <line x1="400" y1="344" x2="650" y2="450"/>
+    <line x1="400" y1="344" x2="780" y2="450"/>
+    <line x1="400" y1="344" x2="20" y2="450"/>
+    <!-- Horizontal floor boards -->
+    <line x1="0" y1="365" x2="800" y2="365"/>
+    <line x1="0" y1="395" x2="800" y2="395"/>
+    <line x1="0" y1="430" x2="800" y2="430"/>
+  </g>
+
+  <!-- Ceiling track lights -->
+  <rect x="0" y="10" width="800" height="4" fill="#2a3342"/>
+  <circle cx="230" cy="12" r="5" fill="#f0c674"/>
+  <circle cx="560" cy="12" r="5" fill="#f0c674"/>
+  <circle cx="700" cy="12" r="4" fill="#d0b060"/>
+
+  <!-- Light Cones -->
+  <polygon points="230,12 80,344 380,344" fill="url(#spotlight1)"/>
+  <polygon points="560,12 430,344 690,344" fill="url(#spotlight2)"/>
+
+  <!-- ==================== PAINTING 1 (Large Ornate Classic) ==================== -->
+  <g id="painting1">
+    <!-- Frame Drop Shadow -->
+    <rect x="110" y="48" width="260" height="234" rx="3" fill="#000" opacity="0.6" filter="blur(6px)"/>
+    <!-- Outer Gold Frame -->
+    <rect x="105" y="44" width="260" height="232" rx="4" fill="url(#goldFrame)" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+    <!-- Frame Carvings / Relief -->
+    <rect x="115" y="54" width="240" height="212" fill="url(#innerGold)"/>
+    <rect x="120" y="59" width="230" height="202" fill="url(#goldFrame)" stroke="#301f08" stroke-width="1.5"/>
+    <!-- Matting / Passepartout -->
+    <rect x="127" y="66" width="216" height="188" fill="#181310"/>
+    <!-- The Classical Oil Artwork -->
+    <rect x="133" y="72" width="204" height="176" fill="url(#art1Sky)"/>
+    <!-- Classical painting figures / composition silhouette -->
+    <ellipse cx="235" cy="165" rx="45" ry="60" fill="#f5cf9e" opacity="0.85"/>
+    <ellipse cx="235" cy="130" rx="16" ry="18" fill="#d49f6b"/>
+    <ellipse cx="210" cy="180" rx="35" ry="45" fill="#a83a2a" opacity="0.9"/>
+    <ellipse cx="260" cy="185" rx="30" ry="40" fill="#305679" opacity="0.85"/>
+    <!-- Classical drapery and light reflections -->
+    <path d="M140 210 Q 190 190 235 220 T 330 200 L 337 248 L 133 248 Z" fill="#241711" opacity="0.9"/>
+    <path d="M180 120 Q 220 100 280 125" stroke="#ffe8c2" stroke-width="3" fill="none" opacity="0.6"/>
+    <!-- Varnish sheen -->
+    <path d="M133 72 L 250 72 L 180 248 L 133 248 Z" fill="#ffffff" opacity="0.08"/>
+    <!-- Museum label below painting -->
+    <rect x="215" y="286" width="40" height="14" rx="1.5" fill="#f0f3f8" opacity="0.9"/>
+    <rect x="220" y="290" width="30" height="2" fill="#333"/>
+    <rect x="223" y="294" width="24" height="2" fill="#777"/>
+  </g>
+
+  <!-- ==================== PAINTING 2 (Vertical Baroque Frame) ==================== -->
+  <g id="painting2">
+    <!-- Frame Drop Shadow -->
+    <rect x="475" y="44" width="170" height="240" rx="3" fill="#000" opacity="0.55" filter="blur(5px)"/>
+    <!-- Outer Gold Frame -->
+    <rect x="470" y="40" width="170" height="238" rx="4" fill="url(#goldFrame)"/>
+    <!-- Frame Inner Bevel -->
+    <rect x="478" y="48" width="154" height="222" fill="url(#innerGold)"/>
+    <rect x="483" y="53" width="144" height="212" fill="url(#goldFrame)"/>
+    <rect x="489" y="59" width="132" height="200" fill="#15120c"/>
+    <!-- Artwork Canvas -->
+    <rect x="494" y="64" width="122" height="190" fill="url(#art2Grad)"/>
+    <!-- Renaissance Portrait Shapes -->
+    <ellipse cx="555" cy="140" rx="25" ry="32" fill="#ffdcb0"/>
+    <ellipse cx="555" cy="120" rx="14" ry="15" fill="#e2af7b"/>
+    <path d="M530 170 Q 555 160 580 170 L 595 240 L 515 240 Z" fill="#692419"/>
+    <path d="M535 155 Q 555 175 575 155" stroke="#fce28b" stroke-width="3" fill="none"/>
+    <circle cx="555" cy="108" r="16" fill="#422517"/>
+    <!-- Sheen -->
+    <path d="M494 64 L 560 64 L 520 254 L 494 254 Z" fill="#ffffff" opacity="0.07"/>
+    <!-- Museum label -->
+    <rect x="535" y="288" width="40" height="14" rx="1.5" fill="#f0f3f8" opacity="0.9"/>
+    <rect x="540" y="292" width="30" height="2" fill="#333"/>
+    <rect x="543" y="296" width="24" height="2" fill="#777"/>
+  </g>
+
+  <!-- ==================== PAINTING 3 (Smaller side piece) ==================== -->
+  <g id="painting3">
+    <rect x="680" y="70" width="105" height="140" rx="2" fill="url(#goldFrame)"/>
+    <rect x="686" y="76" width="93" height="128" fill="#1c1612"/>
+    <rect x="690" y="80" width="85" height="120" fill="url(#art3Grad)"/>
+    <circle cx="732" cy="135" r="22" fill="#fcd34d" opacity="0.8"/>
+  </g>
+
+  <!-- Floor Reflections of the glowing paintings -->
+  <ellipse cx="235" cy="358" rx="80" ry="14" fill="#cf9e65" opacity="0.14" filter="blur(4px)"/>
+  <ellipse cx="555" cy="356" rx="55" ry="12" fill="#ffdcb0" opacity="0.12" filter="blur(3px)"/>
+
+  <!-- ==================== VISITOR (Seen from behind admiring art) ==================== -->
+  <g id="visitor">
+    <!-- Visitor Floor Shadow -->
+    <ellipse cx="560" cy="425" rx="42" ry="10" fill="#030406" opacity="0.85" filter="blur(4px)"/>
+    <!-- Lower Body / Trousers -->
+    <path d="M536 335 L 530 422 L 552 422 L 558 355 L 564 355 L 570 422 L 592 422 L 586 335 Z" fill="#0d1117"/>
+    <!-- Torso / Jacket -->
+    <path d="M528 245 C 522 280, 524 330, 532 342 C 550 346, 572 346, 590 342 C 598 330, 600 280, 594 245 C 580 235, 542 235, 528 245 Z" fill="#171e29"/>
+    <!-- Shoulders and Arms -->
+    <path d="M528 245 C 516 260, 514 300, 522 330 L 534 326 C 528 300, 530 268, 538 250 Z" fill="#131922"/>
+    <path d="M594 245 C 606 260, 608 300, 600 330 L 588 326 C 594 300, 592 268, 584 250 Z" fill="#131922"/>
+    <!-- Head / Hair seen from behind with subtle warm gallery rim light -->
+    <ellipse cx="561" cy="205" rx="20" ry="24" fill="#1c1613"/>
+    <path d="M545 208 C 543 190, 550 182, 561 182 C 572 182, 579 190, 577 208 C 572 214, 550 214, 545 208 Z" fill="#0e0a08"/>
+    <!-- Warm rim light on left shoulder from painting spotlight -->
+    <path d="M528 245 C 532 242, 546 238, 555 238" stroke="#ffdfa0" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+    <path d="M544 195 C 544 186, 550 183, 558 183" stroke="#ffdfa0" stroke-width="1.8" stroke-opacity="0.4" fill="none"/>
+  </g>
+
+  <!-- Ambient Cinematic Vignette Overlay -->
+  <rect width="800" height="450" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="20"/>
+</svg>

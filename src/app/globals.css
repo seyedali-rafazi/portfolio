@@ -1,0 +1,511 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+/* Local Vazirmatn Font Definitions */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn[wght].woff2") format("woff2 supports variations"),
+       url("/fonts/vazirmatn/Vazirmatn[wght].woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazirmatn-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #070b12;
+  --bg-2: #0a1019;
+  --surface: #0c131e;
+  --surface-2: #101927;
+  --surface-3: #141f30;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(22, 131, 255, 0.5);
+
+  --text: #f5f7fb;
+  --text-bright: #ffffff;
+  --muted: #8d9aae;
+  --muted-2: #657286;
+
+  --primary: #1683ff;
+  --primary-light: #42a5ff;
+  --primary-dark: #0965d4;
+  --primary-gradient: linear-gradient(135deg, #1683ff 0%, #0069df 100%);
+
+  --glow: rgba(22, 131, 255, 0.18);
+  --glow-strong: rgba(22, 131, 255, 0.35);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --container: 1180px;
+
+  --font-fa: "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-en: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+[data-theme="light"],
+html.light {
+  --bg: #f5f8fc;
+  --bg-2: #edf2f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #eef3f8;
+  --border: rgba(0, 0, 0, 0.09);
+  --border-focus: rgba(22, 131, 255, 0.6);
+
+  --text: #0e1726;
+  --text-bright: #070b12;
+  --muted: #536279;
+  --muted-2: #7c8ba1;
+
+  --primary: #0070f3;
+  --primary-light: #258afb;
+  --primary-dark: #0056bd;
+  --glow: rgba(0, 112, 243, 0.12);
+  --glow-strong: rgba(0, 112, 243, 0.25);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  scroll-padding-top: 100px;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-fa);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.en,
+html[dir="ltr"] body {
+  font-family: var(--font-en);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Background Ambient Glows */
+.bg-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.14;
+  background: #006eff;
+}
+
+.bg-glow.one {
+  top: -200px;
+  left: -150px;
+}
+
+.bg-glow.two {
+  right: -200px;
+  top: 40%;
+  background: #004cff;
+  opacity: 0.12;
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+}
+
+[data-theme="light"] .grid-bg {
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.8) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   Hero Visual — Modern Glassmorphism Card & Floating Tech Badges
+   ========================================================================== */
+
+/* Studio Rim Light / Ambient Aura */
+.hero-ambient-aura {
+  position: absolute;
+  width: min(480px, 95vw);
+  height: min(480px, 95vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(22, 131, 255, 0.42) 0%,
+    rgba(99, 102, 241, 0.22) 42%,
+    rgba(6, 182, 212, 0.12) 65%,
+    transparent 78%
+  );
+  filter: blur(52px);
+  pointer-events: none;
+  animation: auraPulse 8s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .hero-ambient-aura {
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(37, 138, 251, 0.25) 0%,
+    rgba(147, 197, 253, 0.2) 48%,
+    transparent 75%
+  );
+  filter: blur(45px);
+}
+
+@keyframes auraPulse {
+  0% {
+    transform: scale(0.96) translate3d(0, 0, 0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.06) translate3d(0, -6px, 0);
+    opacity: 1;
+  }
+}
+
+/* Orbiting Tech Ring */
+.hero-orbit-svg {
+  position: absolute;
+  width: min(490px, 98vw);
+  height: min(490px, 98vw);
+  pointer-events: none;
+  animation: orbitRotate 45s linear infinite;
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glassmorphism Pedestal Card (Sits behind portrait) */
+.hero-glass-card {
+  position: absolute;
+  bottom: 0;
+  width: 310px;
+  height: 380px;
+  border-radius: 36px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(16, 25, 39, 0.7) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.55),
+    0 0 35px -5px rgba(22, 131, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+[data-theme="light"] .hero-glass-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(235, 243, 255, 0.8) 100%
+  );
+  border: 1px solid rgba(22, 131, 255, 0.2);
+  box-shadow:
+    0 25px 45px -12px rgba(0, 112, 243, 0.12),
+    0 8px 24px -4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+@media (min-width: 640px) {
+  .hero-glass-card {
+    width: 360px;
+    height: 425px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-glass-card {
+    width: 395px;
+    height: 450px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-glass-card {
+    width: 415px;
+    height: 465px;
+  }
+}
+
+/* Subtle Card Top Highlight Ray */
+.hero-glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 100%
+  );
+}
+
+[data-theme="light"] .hero-glass-card::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(22, 131, 255, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+/* Floating Tech Badge Styles */
+.hero-float-badge {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 18px;
+  background: rgba(12, 19, 30, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 32px -8px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(22, 131, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  user-select: none;
+  cursor: default;
+}
+
+[data-theme="light"] .hero-float-badge {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(22, 131, 255, 0.2);
+  box-shadow:
+    0 16px 30px -8px rgba(0, 112, 243, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.hero-float-badge:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 22px 38px -8px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(22, 131, 255, 0.3);
+}
+
+/* Natural Floating Animations with Phase Offsets */
+.animate-float-1 {
+  animation: floatBob1 5.5s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatBob2 6.5s ease-in-out infinite 1.2s;
+}
+
+.animate-float-3 {
+  animation: floatBob3 5s ease-in-out infinite 0.6s;
+}
+
+@keyframes floatBob1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes floatBob2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(7px) rotate(-1deg);
+  }
+}
+
+@keyframes floatBob3 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Profile Image Mask - Smooth bottom fade into pedestal */
+.profile-image-mask {
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* Buttons */
+.btn-primary {
+  color: #ffffff;
+  background: var(--primary-gradient);
+  box-shadow: 0 10px 30px rgba(0, 112, 255, 0.22);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 112, 255, 0.35);
+  filter: brightness(1.05);
+}
+
+.btn-outline {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-outline:hover {
+  border-color: rgba(22, 131, 255, 0.5);
+  background: rgba(22, 131, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+[data-theme="light"] .btn-outline {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(22, 131, 255, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+/* Centering and Container System */
+.portfolio-container {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .portfolio-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-container {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+}
+
+/* Direction aware alignments */
+[dir="rtl"] .text-start {
+  text-align: right;
+}
+
+[dir="ltr"] .text-start {
+  text-align: left;
+}
