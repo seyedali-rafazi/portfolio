@@ -166,5 +166,32 @@
     "title": "Page Not Found",
     "description": "The page you are looking for doesn't exist or has been moved.",
     "backHome": "Back to Home"
+  },
+  "proposal": {
+    "fabTooltip": "Send Project Proposal",
+    "title": "Send Project Proposal",
+    "category": "Category",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "ai": "AI",
+      "seo": "SEO",
+      "dataAnalyst": "Data Analyst"
+    },
+    "feedbackPlaceholder": "Describe your project proposal, objectives, or scope...",
+    "emailLabel": "Email (Required)",
+    "emailPlaceholder": "your.email@example.com",
+    "emailRequired": "Email address is required",
+    "emailInvalid": "Please enter a valid email address",
+    "descriptionRequired": "Please enter your project details (min 10 characters)",
+    "attachmentsLabel": "Attachment (optional - PDF or Image)",
+    "uploadFile": "Upload File (PDF / Image)",
+    "pasteNote": "Supports PDF or Images (PNG, JPG, WEBP). You can also paste an image from your clipboard.",
+    "submitBtn": "Submit Proposal",
+    "submitting": "Submitting Proposal...",
+    "submitted": "Proposal Sent Successfully!",
+    "successMessage": "Thank you! Your proposal has been received. I'll get back to you via your email soon.",
+    "charsRemaining": "characters",
+    "removeFile": "Remove file"
   }
 }
