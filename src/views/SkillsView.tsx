@@ -22,6 +22,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface SkillsViewProps {
   locale: Locale;
@@ -192,88 +193,116 @@ export function SkillsView({ locale }: SkillsViewProps) {
             </div>
 
             {/* Category tabs */}
-            <div className="flex items-center gap-2.5 flex-wrap" role="tablist" aria-label="Skill Categories">
-              {categories.map((cat) => (
-                <Button
-                  key={cat.id}
-                  variant={selectedCategory === cat.id ? "primary" : "secondary"}
-                  size="default"
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className="rounded-xl px-5 py-2.5 text-xs sm:text-sm font-semibold cursor-pointer"
-                  role="tab"
-                  aria-selected={selectedCategory === cat.id}
-                >
-                  {cat.label}
-                </Button>
-              ))}
+            <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="Skill Categories">
+              {categories.map((cat) => {
+                const isActive = selectedCategory === cat.id;
+                return (
+                  <motion.button
+                    key={cat.id}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`relative rounded-xl px-5 py-2.5 text-xs sm:text-sm font-semibold cursor-pointer transition-colors focus:outline-none ${
+                      isActive
+                        ? "text-white"
+                        : "text-[var(--text)] hover:text-[var(--text-bright)] bg-[var(--surface-2)] border border-[var(--border)]"
+                    }`}
+                    role="tab"
+                    aria-selected={isActive}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSkillFilterPill"
+                        transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                        className="absolute inset-0 bg-[var(--primary)] rounded-xl shadow-lg shadow-[var(--primary)]/30 -z-0"
+                      />
+                    )}
+                    <span className="relative z-10">{cat.label}</span>
+                  </motion.button>
+                );
+              })}
             </div>
           </header>
 
-          {/* Detailed Skills Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filtered.map((skill) => (
-              <Card
-                key={skill.id}
-                onClick={() => setSelectedSkill(skill)}
-                className="p-6 sm:p-8 rounded-2xl hover:border-[var(--primary)]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/25 cursor-pointer flex flex-col justify-between text-start"
-                tabIndex={0}
-                role="button"
-                aria-label={`${skill.name} - ${skill.level}%`}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setSelectedSkill(skill);
-                  }
-                }}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] shrink-0"
-                      style={{
-                        backgroundColor:
-                          skill.id === "nextjs"
-                            ? "var(--surface-3)"
-                            : `${skill.color}15`,
-                      }}
-                    >
-                      {renderSkillIcon(skill.id, skill.color)}
-                    </div>
-                    <Badge variant="primarySubtle" className="px-3 py-1 text-xs font-bold">
-                      {skill.level}%
-                    </Badge>
-                  </div>
-
-                  <h2 className="text-lg font-bold text-[var(--text-bright)] mb-2">
-                    {skill.name}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mb-6 line-clamp-2">
-                    {skill.experience[locale]}
-                  </p>
-                </div>
-
-                {/* Progress bar */}
-                <div
-                  className="w-full h-2 rounded-full bg-[var(--surface-3)] overflow-hidden"
-                  role="progressbar"
-                  aria-valuenow={skill.level}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
+          {/* Detailed Skills Grid with layout animations */}
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((skill) => (
+                <motion.div
+                  layout
+                  key={skill.id}
+                  initial={{ opacity: 0, scale: 0.92, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: 15 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ y: -6 }}
                 >
-                  <div
-                    className="h-full rounded-full transition-all duration-700"
-                    style={{
-                      width: `${skill.level}%`,
-                      backgroundColor:
-                        skill.id === "nextjs"
-                          ? "var(--text-bright)"
-                          : skill.color,
+                  <Card
+                    onClick={() => setSelectedSkill(skill)}
+                    className="p-6 sm:p-8 rounded-2xl hover:border-[var(--primary)]/50 transition-colors hover:shadow-2xl hover:shadow-black/25 cursor-pointer flex flex-col justify-between text-start h-full"
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`${skill.name} - ${skill.level}%`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedSkill(skill);
+                      }
                     }}
-                  />
-                </div>
-              </Card>
-            ))}
-          </div>
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-5">
+                        <div
+                          className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] shrink-0"
+                          style={{
+                            backgroundColor:
+                              skill.id === "nextjs"
+                                ? "var(--surface-3)"
+                                : `${skill.color}15`,
+                          }}
+                        >
+                          {renderSkillIcon(skill.id, skill.color)}
+                        </div>
+                        <Badge variant="primarySubtle" className="px-3 py-1 text-xs font-bold">
+                          {skill.level}%
+                        </Badge>
+                      </div>
+
+                      <h2 className="text-lg font-bold text-[var(--text-bright)] mb-2">
+                        {skill.name}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mb-6 line-clamp-2">
+                        {skill.experience[locale]}
+                      </p>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div
+                      className="w-full h-2 rounded-full bg-[var(--surface-3)] overflow-hidden"
+                      role="progressbar"
+                      aria-valuenow={skill.level}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    >
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="h-full rounded-full"
+                        style={{
+                          backgroundColor:
+                            skill.id === "nextjs"
+                              ? "var(--text-bright)"
+                              : skill.color,
+                        }}
+                      />
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </main>
 

@@ -18,6 +18,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export type ProjectCardVariant = "auto" | "default" | "bot" | "package";
 
@@ -424,43 +425,49 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     locale === "fa" && project.titleFa ? project.titleFa : project.title;
 
   return (
-    <Card
-      className={cn(
-        "group h-full w-full max-w-[371px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 flex flex-col text-start p-0 rounded-2xl bg-[var(--surface)] border border-[var(--border)] relative select-none",
-        effectiveVariant === "bot" &&
-          "hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/15",
-        effectiveVariant === "package" &&
-          "hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/15",
-        effectiveVariant === "default" &&
-          "hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/20",
-        className,
-      )}
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+      className="h-full w-full max-w-[371px]"
     >
-      {/* Banner / Media */}
-      <ProjectCardMedia
-        project={project}
-        variant={effectiveVariant}
-        projectUrl={projectUrl}
-        displayTitle={displayTitle}
-        imagePriority={imagePriority}
-      />
-
-      {/* Card Content & Footer */}
-      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
-        <ProjectCardBody
+      <Card
+        className={cn(
+          "group h-full w-full overflow-hidden transition-colors flex flex-col text-start p-0 rounded-2xl bg-[var(--surface)] border border-[var(--border)] relative select-none shadow-md",
+          effectiveVariant === "bot" &&
+            "hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/15",
+          effectiveVariant === "package" &&
+            "hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/15",
+          effectiveVariant === "default" &&
+            "hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/20",
+          className,
+        )}
+      >
+        {/* Banner / Media */}
+        <ProjectCardMedia
           project={project}
           variant={effectiveVariant}
           projectUrl={projectUrl}
           displayTitle={displayTitle}
+          imagePriority={imagePriority}
         />
 
-        <ProjectCardFooter
-          project={project}
-          variant={effectiveVariant}
-          projectUrl={projectUrl}
-        />
-      </div>
-    </Card>
+        {/* Card Content & Footer */}
+        <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+          <ProjectCardBody
+            project={project}
+            variant={effectiveVariant}
+            projectUrl={projectUrl}
+            displayTitle={displayTitle}
+          />
+
+          <ProjectCardFooter
+            project={project}
+            variant={effectiveVariant}
+            projectUrl={projectUrl}
+          />
+        </div>
+      </Card>
+    </motion.div>
   );
 };
 

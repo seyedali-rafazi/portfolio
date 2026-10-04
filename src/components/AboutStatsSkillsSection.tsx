@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { motion } from "framer-motion";
 
 export const AboutStatsSkillsSection: React.FC = () => {
   const { locale, t, isRTL, getLocalizedHref } = useI18n();
@@ -136,70 +137,86 @@ export const AboutStatsSkillsSection: React.FC = () => {
         {/* ================= ROW 1: ABOUT ME (7 COLS) & STATS (5 COLS) ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-20 sm:mb-24">
           {/* About Me Card */}
-          <Card className="lg:col-span-7 flex flex-col justify-between p-8 sm:p-10 lg:p-12 text-start shadow-xl rounded-2xl">
-            <div>
-              {/* Section Tag */}
-              <div className="mb-3">
-                <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                  <span>{t("about.label")}</span>
-                </Badge>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="lg:col-span-7"
+          >
+            <Card className="h-full flex flex-col justify-between p-8 sm:p-10 lg:p-12 text-start shadow-xl rounded-2xl">
+              <div>
+                {/* Section Tag */}
+                <div className="mb-3">
+                  <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
+                    <span>{t("about.label")}</span>
+                  </Badge>
+                </div>
+
+                {/* Section Title */}
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight mb-5">
+                  {t("about.title")}
+                </h2>
+
+                {/* Content text */}
+                <div className="space-y-4 text-sm sm:text-base leading-relaxed text-[var(--muted)]">
+                  <p className="text-[var(--text)] leading-relaxed font-normal">
+                    {t("about.intro")}
+                  </p>
+                  <p className="leading-relaxed">
+                    {t("about.subIntro")}
+                  </p>
+                </div>
               </div>
 
-              {/* Section Title */}
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight mb-5">
-                {t("about.title")}
-              </h2>
-
-              {/* Content text */}
-              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-[var(--muted)]">
-                <p className="text-[var(--text)] leading-relaxed font-normal">
-                  {t("about.intro")}
-                </p>
-                <p className="leading-relaxed">
-                  {t("about.subIntro")}
-                </p>
+              {/* Learn More Page Link */}
+              <div className="pt-6 mt-8 border-t border-[var(--border)]/60 flex items-center justify-between">
+                <Link
+                  href={getLocalizedHref("/about")}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white group w-fit transition-colors cursor-pointer"
+                >
+                  <span>{t("about.learnMore")}</span>
+                  {isRTL ? (
+                    <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                  ) : (
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  )}
+                </Link>
               </div>
-            </div>
-
-            {/* Learn More Page Link */}
-            <div className="pt-6 mt-8 border-t border-[var(--border)]/60 flex items-center justify-between">
-              <Link
-                href={getLocalizedHref("/about")}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white group w-fit transition-colors cursor-pointer"
-              >
-                <span>{t("about.learnMore")}</span>
-                {isRTL ? (
-                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                ) : (
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                )}
-              </Link>
-            </div>
-          </Card>
+            </Card>
+          </motion.div>
 
           {/* Stats 2x2 Grid */}
           <div className="lg:col-span-5 grid grid-cols-2 gap-5 h-full">
-            {STATS.map((stat) => (
-              <Card
+            {STATS.map((stat, idx) => (
+              <motion.div
                 key={stat.id}
-                className="p-6 sm:p-7 hover:border-[var(--primary)]/40 transition-all flex flex-col justify-between shadow-xl group hover:-translate-y-1 rounded-2xl"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                whileHover={{ y: -5 }}
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-base font-bold text-[var(--primary-light)] bg-[var(--primary)]/10 border border-[var(--primary)]/20 mb-4 group-hover:scale-105 transition-transform">
-                  {stat.symbol}
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-4xl font-black text-[var(--text-bright)] leading-tight tracking-tight mb-1">
-                    {stat.number}
+                <Card
+                  className="p-6 sm:p-7 hover:border-[var(--primary)]/40 transition-colors flex flex-col justify-between shadow-xl group rounded-2xl h-full"
+                >
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-base font-bold text-[var(--primary-light)] bg-[var(--primary)]/10 border border-[var(--primary)]/20 mb-4 group-hover:scale-110 transition-transform">
+                    {stat.symbol}
                   </div>
-                  <div className="text-xs sm:text-sm font-semibold text-[var(--text)]">
-                    {stat.title[locale]}
+                  <div>
+                    <div className="text-2xl sm:text-4xl font-black text-[var(--text-bright)] leading-tight tracking-tight mb-1">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs sm:text-sm font-semibold text-[var(--text)]">
+                      {stat.title[locale]}
+                    </div>
+                    <div className="text-xs text-[var(--muted)] line-clamp-1 mt-0.5">
+                      {stat.subtitle[locale]}
+                    </div>
                   </div>
-                  <div className="text-xs text-[var(--muted)] line-clamp-1 mt-0.5">
-                    {stat.subtitle[locale]}
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -230,11 +247,17 @@ export const AboutStatsSkillsSection: React.FC = () => {
 
           {/* Responsive Skills Grid: 6 cols on lg, 4 on md, 3 on sm, 2 on xs */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
-            {SKILLS.map((skill) => (
-              <button
+            {SKILLS.map((skill, idx) => (
+              <motion.button
                 key={skill.id}
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.35, delay: idx * 0.035 }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => setSelectedSkill(skill)}
-                className="p-5 rounded-2xl bg-[var(--surface)] hover:bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)]/50 min-h-[125px] flex flex-col items-center justify-center gap-3 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/25 group focus:outline-none cursor-pointer"
+                className="p-5 rounded-2xl bg-[var(--surface)] hover:bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)]/50 min-h-[125px] flex flex-col items-center justify-center gap-3 transition-colors hover:shadow-xl hover:shadow-black/25 group focus:outline-none cursor-pointer"
                 title={`${skill.name} - ${skill.level}%`}
               >
                 <div className="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -244,11 +267,11 @@ export const AboutStatsSkillsSection: React.FC = () => {
                   <span className="text-xs sm:text-sm font-semibold text-[var(--text-bright)] block truncate">
                     {skill.name}
                   </span>
-                  <span className="text-xs text-[var(--primary-light)]  font-medium">
+                  <span className="text-xs text-[var(--primary-light)] font-medium">
                     {skill.level}%
                   </span>
                 </div>
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -296,10 +319,12 @@ export const AboutStatsSkillsSection: React.FC = () => {
                 </span>
               </div>
               <div className="w-full h-2 rounded-full bg-[var(--surface-3)] overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-500"
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${selectedSkill.level}%` }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="h-full rounded-full"
                   style={{
-                    width: `${selectedSkill.level}%`,
                     backgroundColor:
                       selectedSkill.id === "nextjs"
                         ? "var(--text-bright)"

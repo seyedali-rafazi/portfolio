@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getBreadcrumbSchema } from "@/lib/schema";
 import type { Locale } from "@/config/site";
+import { motion } from "framer-motion";
 
 interface AboutViewProps {
   locale: Locale;
@@ -60,7 +61,12 @@ export function AboutView({ locale }: AboutViewProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Main Narrative (7 cols) */}
-            <div className="lg:col-span-7 space-y-8 text-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="lg:col-span-7 space-y-8 text-start"
+            >
               <Card className="p-7 sm:p-9 space-y-6 shadow-xl">
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-[var(--primary-light)] uppercase tracking-wider">
                   <Compass className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -102,22 +108,31 @@ export function AboutView({ locale }: AboutViewProps) {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-4 flex-wrap pt-2">
-                <Button asChild variant="primary" size="lg" className="rounded-xl h-12 px-8 text-sm font-bold">
-                  <Link href={getLocalizedHref("/projects")} className="inline-flex items-center gap-2.5 cursor-pointer">
-                    <span>{t("nav.projects")}</span>
-                    {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-xl h-12 px-8 text-sm font-semibold">
-                  <Link href={getLocalizedHref("/contact")} className="cursor-pointer">
-                    <span>{t("nav.contact")}</span>
-                  </Link>
-                </Button>
+                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                  <Button asChild variant="primary" size="lg" className="rounded-xl h-12 px-8 text-sm font-bold shadow-md">
+                    <Link href={getLocalizedHref("/projects")} className="inline-flex items-center gap-2.5 cursor-pointer">
+                      <span>{t("nav.projects")}</span>
+                      {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                  <Button asChild variant="outline" size="lg" className="rounded-xl h-12 px-8 text-sm font-semibold shadow-sm">
+                    <Link href={getLocalizedHref("/contact")} className="cursor-pointer">
+                      <span>{t("nav.contact")}</span>
+                    </Link>
+                  </Button>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stats Sidebar (5 cols) */}
-            <aside className="lg:col-span-5 space-y-6">
+            <motion.aside
+              initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
+              className="lg:col-span-5 space-y-6"
+            >
               <Card className="p-7 sm:p-9 divide-y divide-[var(--border)]/60 shadow-xl">
                 <h3 className="text-lg font-bold text-[var(--text-bright)] mb-6">
                   {t("about.highlightsHeading")}
@@ -141,7 +156,7 @@ export function AboutView({ locale }: AboutViewProps) {
                   </div>
                 ))}
               </Card>
-            </aside>
+            </motion.aside>
           </div>
         </div>
       </main>

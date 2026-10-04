@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 interface ContactSectionProps {
   className?: string;
@@ -59,7 +60,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     >
       <div className="portfolio-container">
         {/* Contact Container Box */}
-        <div className="relative border border-[var(--border)] rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--surface)] via-[var(--surface-2)] to-[var(--surface)] p-8 sm:p-12 lg:p-14 shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative border border-[var(--border)] rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--surface)] via-[var(--surface-2)] to-[var(--surface)] p-8 sm:p-12 lg:p-14 shadow-2xl"
+        >
           {/* Subtle Ambient Radial Highlight */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -85,9 +92,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Contact Items */}
               <div className="space-y-5 pt-6 border-t border-[var(--border)]/50 mt-auto">
-                <a
+                <motion.a
+                  whileHover={{ x: isRTL ? -4 : 4 }}
                   href={`mailto:${CONTACT_DATA.email}`}
-                  className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)] hover:text-[var(--primary-light)] transition-colors group"
+                  className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)] hover:text-[var(--primary-light)] transition-colors group cursor-pointer"
                 >
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] group-hover:scale-105 transition-transform shrink-0">
                     <Mail className="w-5 h-5" />
@@ -95,11 +103,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <span className="text-xs sm:text-sm">
                     {CONTACT_DATA.email}
                   </span>
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileHover={{ x: isRTL ? -4 : 4 }}
                   href={`tel:${CONTACT_DATA.phone.replace(/\s+/g, "")}`}
-                  className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)] hover:text-[var(--primary-light)] transition-colors group"
+                  className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)] hover:text-[var(--primary-light)] transition-colors group cursor-pointer"
                 >
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] group-hover:scale-105 transition-transform shrink-0">
                     <Phone className="w-5 h-5" />
@@ -107,7 +116,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <span className="text-xs sm:text-sm" dir="ltr">
                     {CONTACT_DATA.phone}
                   </span>
-                </a>
+                </motion.a>
 
                 <div className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)]">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] shrink-0">
@@ -173,22 +182,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 )}
 
                 <div className="flex justify-end pt-2">
-                  <Button
-                    variant="outline"
-                    type="submit"
-                    size="lg"
-                    disabled={status === "submitting"}
-                    className="w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-bold rounded-xl"
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full sm:w-auto"
                   >
-                    <span>
-                      {status === "submitting"
-                        ? t("contact.sending")
-                        : t("contact.submitBtn")}
-                    </span>
-                    <Send
-                      className={`w-4 h-4 ${isRTL ? "scale-x-[-1]" : ""}`}
-                    />
-                  </Button>
+                    <Button
+                      variant="outline"
+                      type="submit"
+                      size="lg"
+                      disabled={status === "submitting"}
+                      className="w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-bold rounded-xl cursor-pointer"
+                    >
+                      <span>
+                        {status === "submitting"
+                          ? t("contact.sending")
+                          : t("contact.submitBtn")}
+                      </span>
+                      <Send
+                        className={`w-4 h-4 ${isRTL ? "scale-x-[-1]" : ""}`}
+                      />
+                    </Button>
+                  </motion.div>
                 </div>
               </form>
             </div>
@@ -204,7 +219,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

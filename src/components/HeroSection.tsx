@@ -7,6 +7,7 @@ import { useI18n } from "@/i18n/client";
 import { ArrowLeft, ArrowRight, Download, Sparkles, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { motion, type Variants } from "framer-motion";
 
 export const HeroSection: React.FC = () => {
   const { locale, t, isRTL, getLocalizedHref } = useI18n();
@@ -22,6 +23,30 @@ export const HeroSection: React.FC = () => {
     { name: "X", url: "https://x.com/seyedalirafazi", icon: "X" },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 120,
+        damping: 18,
+      },
+    },
+  };
+
   return (
     <section
       id="home"
@@ -33,9 +58,14 @@ export const HeroSection: React.FC = () => {
       <div className="portfolio-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Hero Content (7 cols on lg) */}
-          <div className="lg:col-span-7 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-start">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-start"
+          >
             {/* Intro Greeting */}
-            <div className="mb-3">
+            <motion.div variants={itemVariants} className="mb-3">
               <Badge
                 variant="primarySubtle"
                 className="text-xs sm:text-sm px-4 py-1"
@@ -43,20 +73,26 @@ export const HeroSection: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)] animate-pulse" />
                 <span>{t("hero.intro")}</span>
               </Badge>
-            </div>
+            </motion.div>
 
             {/* Main Title - Seyekali Rafazi / سید علی رفضی */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] mb-5">
+            <motion.h1
+              variants={itemVariants}
+              className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] mb-5"
+            >
               <span className="text-[var(--text-bright)]">
                 {t("hero.namePrefix")}
               </span>{" "}
               <span className="text-[var(--primary)] text-shadow-glow">
                 {t("hero.nameSuffix")}
               </span>
-            </h1>
+            </motion.h1>
 
             {/* Role & Tech Badges */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border)] text-xs sm:text-[13px] font-medium text-[var(--muted)] mb-6 flex-wrap justify-center lg:justify-start shadow-sm">
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border)] text-xs sm:text-[13px] font-medium text-[var(--muted)] mb-6 flex-wrap justify-center lg:justify-start shadow-sm"
+            >
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)] shrink-0" />
               <span className="font-semibold text-[var(--text-bright)]">
                 Frontend Engineer
@@ -67,10 +103,10 @@ export const HeroSection: React.FC = () => {
               <span>Next.js</span>
               <span className="opacity-30">•</span>
               <span>TypeScript</span>
-            </div>
+            </motion.div>
 
             {/* Descriptions */}
-            <div className="max-w-[580px] mb-8 space-y-3">
+            <motion.div variants={itemVariants} className="max-w-[580px] mb-8 space-y-3">
               <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--text)] font-normal">
                 {t("hero.bio")}
               </p>
@@ -79,61 +115,73 @@ export const HeroSection: React.FC = () => {
                   ? "متخصص در رندرینگ پیشرفته Next.js، مدیریت بهینه استیت، و تجسم سه‌بعدی داده‌های GIS با کارایی ۶۰ فریم."
                   : "Specializing in high-performance Next.js architectures, responsive design systems, and 3D GIS visualization."}
               </p>
-            </div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex items-center gap-4 flex-wrap justify-center lg:justify-start mb-8">
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold"
-              >
-                <Link
-                  href={getLocalizedHref("/projects")}
-                  className="flex items-center justify-center gap-2.5"
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-4 flex-wrap justify-center lg:justify-start mb-8"
+            >
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold shadow-sm hover:shadow-md"
                 >
-                  <span>{t("hero.viewProjects")}</span>
-                  {isRTL ? (
-                    <ArrowLeft className="w-4 h-4" />
-                  ) : (
-                    <ArrowRight className="w-4 h-4" />
-                  )}
-                </Link>
-              </Button>
+                  <Link
+                    href={getLocalizedHref("/projects")}
+                    className="flex items-center justify-center gap-2.5"
+                  >
+                    <span>{t("hero.viewProjects")}</span>
+                    {isRTL ? (
+                      <ArrowLeft className="w-4 h-4" />
+                    ) : (
+                      <ArrowRight className="w-4 h-4" />
+                    )}
+                  </Link>
+                </Button>
+              </motion.div>
 
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold"
-              >
-                <a
-                  href="/seyedali-rafazi-cv.pdf"
-                  download="seyedali-rafazi-cv.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold shadow-sm hover:shadow-md"
                 >
-                  <Download className="w-4 h-4 text-[var(--primary-light)]" />
-                  <span>{t("hero.downloadCv")}</span>
-                </a>
-              </Button>
-            </div>
+                  <a
+                    href="/seyedali-rafazi-cv.pdf"
+                    download="seyedali-rafazi-cv.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Download className="w-4 h-4 text-[var(--primary-light)]" />
+                    <span>{t("hero.downloadCv")}</span>
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3.5 flex-wrap justify-center lg:justify-start">
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-3.5 flex-wrap justify-center lg:justify-start"
+            >
               <span className="text-[12px] text-[var(--muted)] font-medium">
                 {t("hero.connectWithMe")}
               </span>
               <div className="flex items-center gap-2">
                 {socials.map((social) => (
-                  <a
+                  <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     title={social.name}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[var(--muted)] hover:text-[var(--primary)] dark:hover:text-white bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:-translate-y-0.5 transition-all text-xs font-semibold shadow-sm"
+                    whileHover={{ y: -3, scale: 1.12 }}
+                    whileTap={{ scale: 0.92 }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[var(--muted)] hover:text-[var(--primary)] dark:hover:text-white bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 transition-colors text-xs font-semibold shadow-sm"
                   >
                     {social.icon === "GH" && (
                       <svg
@@ -167,14 +215,19 @@ export const HeroSection: React.FC = () => {
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
                     )}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Hero Visual (5 cols on lg) */}
-          <div className="lg:col-span-5 relative flex justify-center items-center w-full select-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative flex justify-center items-center w-full select-none"
+          >
             <div className="relative w-[320px] sm:w-[380px] md:w-[420px] lg:w-[440px] h-[450px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
               {/* Studio Rim Light / Ambient Aura */}
               <div className="hero-ambient-aura" aria-hidden="true" />
@@ -239,7 +292,12 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* Floating Badge 1: React & Next.js Specialization */}
-              <div className="hero-float-badge animate-float-1 -top-2 sm:top-5 -start-2 sm:-start-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: -15 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.35, type: "spring" }}
+                className="hero-float-badge animate-float-1 -top-2 sm:top-5 -start-2 sm:-start-6"
+              >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 shrink-0">
                   <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
                 </div>
@@ -253,10 +311,15 @@ export const HeroSection: React.FC = () => {
                       : "Frontend Specialist"}
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Floating Badge 2: Experience & Open to Work */}
-              <div className="hero-float-badge animate-float-2 bottom-12 sm:bottom-16 -end-2 sm:-end-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: 15 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.45, type: "spring" }}
+                className="hero-float-badge animate-float-2 bottom-12 sm:bottom-16 -end-2 sm:-end-6"
+              >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center relative shrink-0">
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -275,10 +338,15 @@ export const HeroSection: React.FC = () => {
                       : "Available for Projects"}
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Floating Badge 3: Mini Tech Stack Capsule (Center Bottom) */}
-              <div className="hero-float-badge animate-float-3 -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 px-3.5 py-1.5 hidden sm:flex">
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.55, type: "spring" }}
+                className="hero-float-badge animate-float-3 -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 px-3.5 py-1.5 hidden sm:flex"
+              >
                 <Code2 className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
                 <span className="text-[11px] text-[var(--text)] font-semibold flex items-center gap-1.5 whitespace-nowrap">
                   <span>TypeScript</span>
@@ -287,9 +355,9 @@ export const HeroSection: React.FC = () => {
                   <span className="text-[var(--primary)]">•</span>
                   <span>GIS / 3D</span>
                 </span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

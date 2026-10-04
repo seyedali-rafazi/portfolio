@@ -17,6 +17,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useI18n } from "@/i18n/useI18n";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CATEGORIES = ["frontend", "backend", "ai", "seo", "dataAnalyst"] as const;
 type CategoryType = (typeof CATEGORIES)[number];
@@ -223,10 +224,15 @@ export function ProjectProposalModal() {
     <>
       {/* Floating Action Button (FAB) on Bottom-Right */}
       <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
-        <button
+        <motion.button
           type="button"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.4 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
           onClick={() => setIsOpen(true)}
-          className="relative group flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-[#1683ff] to-[#005cd8] text-white shadow-[0_8px_25px_rgba(22,131,255,0.45)] hover:shadow-[0_12px_35px_rgba(22,131,255,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/25 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500/30"
+          className="relative group flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-[#1683ff] to-[#005cd8] text-white shadow-[0_8px_25px_rgba(22,131,255,0.45)] hover:shadow-[0_12px_35px_rgba(22,131,255,0.65)] transition-all duration-300 border border-white/25 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500/30"
           aria-label={t("proposal.fabTooltip", "Send Project Proposal")}
           title={t("proposal.fabTooltip", "Send Project Proposal")}
         >
@@ -242,22 +248,34 @@ export function ProjectProposalModal() {
           <span className="pointer-events-none absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text-bright)] text-xs font-medium shadow-xl whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 hidden sm:block">
             {t("proposal.fabTooltip", "Send Project Proposal")}
           </span>
-        </button>
+        </motion.button>
       </div>
 
-      {/* Modal Dialog */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsOpen(false);
-          }}
-          dir={isRTL ? "rtl" : "ltr"}
-        >
+      {/* Modal Dialog with AnimatePresence */}
+      <AnimatePresence>
+        {isOpen && (
           <div
-            ref={modalRef}
-            className="relative w-full max-w-[480px] bg-[var(--surface)] text-[var(--text)] border border-[var(--border)] rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-6 animate-in zoom-in-95 duration-200 overflow-hidden"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
+            dir={isRTL ? "rtl" : "ltr"}
           >
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
+
+            <motion.div
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.92, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 18 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-[480px] bg-[var(--surface)] text-[var(--text)] border border-[var(--border)] rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-6 overflow-hidden z-10"
+            >
             {/* Header */}
             <div className="flex items-center justify-between pb-4">
               <h2 className="text-xl font-bold tracking-tight text-[var(--text-bright)]">
@@ -497,9 +515,10 @@ export function ProjectProposalModal() {
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       )}
+    </AnimatePresence>
     </>
   );
 }

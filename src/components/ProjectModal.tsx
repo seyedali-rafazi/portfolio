@@ -7,6 +7,7 @@ import { Project } from "@/types";
 import { X, ExternalLink, CheckCircle2, Activity } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -16,24 +17,39 @@ interface ProjectModalProps {
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const { locale, t } = useI18n();
 
-  if (!project) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div
-        className="fixed inset-0"
-        aria-hidden="true"
-        onClick={onClose}
-      />
-      <div className="relative max-w-3xl w-full bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col z-10 animate-in zoom-in-95 duration-200">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 end-4 z-20 w-9 h-9 rounded-full flex items-center justify-center bg-black/60 hover:bg-black text-white border border-white/20 transition-all cursor-pointer"
-          aria-label="Close Modal"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <AnimatePresence>
+      {project && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            aria-hidden="true"
+            onClick={onClose}
+          />
+
+          {/* Modal Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 18 }}
+            transition={{ type: "spring", damping: 26, stiffness: 320 }}
+            className="relative max-w-3xl w-full bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col z-10"
+          >
+            {/* Close Button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onClose}
+              className="absolute top-4 end-4 z-20 w-9 h-9 rounded-full flex items-center justify-center bg-black/60 hover:bg-black text-white border border-white/20 transition-colors cursor-pointer"
+              aria-label="Close Modal"
+            >
+              <X className="w-5 h-5" />
+            </motion.button>
 
         {/* Project Header Image */}
         <div className="relative h-72 sm:h-80 w-full bg-[var(--surface-2)] shrink-0 overflow-hidden">
@@ -180,7 +196,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
-  );
+  )}
+</AnimatePresence>
+);
 };
