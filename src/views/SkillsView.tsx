@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { SKILLS } from "@/data/portfolioData";
 import { Skill } from "@/types";
 import { Layers } from "lucide-react";
@@ -28,7 +28,7 @@ interface SkillsViewProps {
 }
 
 export function SkillsView({ locale }: SkillsViewProps) {
-  const { language, t, getLocalizedHref } = useLanguage();
+  const { t, getLocalizedHref } = useI18n();
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -38,10 +38,10 @@ export function SkillsView({ locale }: SkillsViewProps) {
   ];
 
   const categories = [
-    { id: "all", label: t("skills.filterAll", language === "fa" ? "همه مهارت‌ها" : "All Skills") },
-    { id: "core", label: t("skills.filterCore", language === "fa" ? "فرانت‌اند و هسته اصلی" : "Core Frontend") },
-    { id: "geospatial", label: t("skills.filterGeo", language === "fa" ? "سامانه‌های مکانی و نقشه" : "Geospatial & 3D") },
-    { id: "state-tools", label: t("skills.filterTools", language === "fa" ? "مدیریت استیت و ابزارها" : "State & DevOps") },
+    { id: "all", label: t("skills.filterAll") },
+    { id: "core", label: t("skills.filterCore") },
+    { id: "geospatial", label: t("skills.filterGeo") },
+    { id: "state-tools", label: t("skills.filterTools") },
   ];
 
   const filtered =
@@ -173,10 +173,10 @@ export function SkillsView({ locale }: SkillsViewProps) {
           <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[var(--border)]/40 pb-10 mb-12 text-start">
             <div>
               <Badge variant="primarySubtle" className="mb-3 px-3 py-1 text-xs">
-                {language === "fa" ? "فهرست مهارت‌ها" : "Skill Matrix"}
+                {t("skills.label")}
               </Badge>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[var(--text-bright)] tracking-tight mb-4">
-                {t("skills.pageHeading", language === "fa" ? "مهارت‌ها و تخصص‌ها" : "Skills & Technologies")}
+                {t("skills.pageHeading")}
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-[var(--muted)] max-w-2xl leading-relaxed">
                 {t("skills.pageSubheading")}
@@ -235,7 +235,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
                     {skill.name}
                   </h2>
                   <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mb-6 line-clamp-2">
-                    {skill.experience[language]}
+                    {skill.experience[locale]}
                   </p>
                 </div>
 
@@ -286,7 +286,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
               <div className="py-4">
                 <div className="flex justify-between text-xs sm:text-sm mb-2 font-medium">
                   <span className="text-[var(--muted)]">
-                    {t("skills.proficiency", language === "fa" ? "میزان تسلط" : "Proficiency")}
+                    {t("skills.proficiency")}
                   </span>
                   <span className="font-bold text-[var(--primary-light)]">
                     {selectedSkill.level}%
@@ -305,7 +305,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
 
               <div className="bg-[var(--surface-2)] border border-[var(--border)] rounded-2xl p-5 text-xs sm:text-sm text-[var(--text)] leading-relaxed text-start">
                 <p className="font-medium">
-                  {selectedSkill.experience[language]}
+                  {selectedSkill.experience[locale]}
                 </p>
               </div>
 
@@ -316,7 +316,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
                   onClick={() => setSelectedSkill(null)}
                   className="rounded-xl text-xs sm:text-sm px-6 h-11"
                 >
-                  {t("skills.close", language === "fa" ? "متوجه شدم" : "Got it")}
+                  {t("skills.close")}
                 </Button>
               </DialogFooter>
             </>

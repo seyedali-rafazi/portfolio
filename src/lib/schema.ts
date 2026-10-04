@@ -84,3 +84,38 @@ export function getBreadcrumbSchema(
     }),
   };
 }
+
+export function getProjectDetailSchema(locale: Locale, project: {
+  id: string;
+  title: string;
+  titleFa?: string;
+  summary: { fa: string; en: string };
+  image: string;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+}) {
+  const isEn = locale === "en";
+  const baseUrl = siteConfig.url;
+  const projectUrl = isEn
+    ? `${baseUrl}/projects/${project.id}`
+    : `${baseUrl}/fa/projects/${project.id}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: isEn ? project.title : project.titleFa || project.title,
+    applicationCategory: "WebApplication",
+    operatingSystem: "Web Browser",
+    url: projectUrl,
+    description: project.summary[locale],
+    image: `${baseUrl}${project.image}`,
+    keywords: project.tags.join(", "),
+    author: {
+      "@type": "Person",
+      name: isEn ? siteConfig.name : siteConfig.nameFa,
+    },
+    ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
+  };
+}
+

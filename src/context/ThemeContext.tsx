@@ -32,10 +32,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-theme") as Theme | null;
     const initialTheme: Theme = saved === "light" || saved === "dark" ? saved : "dark";
+    setThemeState(initialTheme);
     applyTheme(initialTheme);
-    requestAnimationFrame(() => {
-      setThemeState(initialTheme);
-    });
   }, []);
 
   const setTheme = (th: Theme) => {

@@ -151,6 +151,8 @@ export function getAboutMetadata(locale: Locale): Metadata {
   });
 }
 
+import type { Project } from "@/types";
+
 export function getProjectsMetadata(locale: Locale): Metadata {
   const dict = dictionaries[locale].seo;
   return buildLocalizedMetadata({
@@ -158,6 +160,23 @@ export function getProjectsMetadata(locale: Locale): Metadata {
     path: "/projects",
     title: dict.projectsTitle,
     description: dict.projectsDesc,
+  });
+}
+
+export function getSingleProjectMetadata(locale: Locale, project: Project): Metadata {
+  const isEn = locale === "en";
+  const title = isEn
+    ? `${project.title} — Technical Case Study & Architecture`
+    : `${project.titleFa || project.title} — مطالعه موردی و بررسی فنی معماری`;
+  const description = project.summary[locale];
+
+  return buildLocalizedMetadata({
+    locale,
+    path: `/projects/${project.id}`,
+    title,
+    description,
+    keywords: [...project.tags, project.title, "Seyekali Rafazi"],
+    ogType: "article",
   });
 }
 

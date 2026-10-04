@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { CONTACT_DATA } from "@/data/portfolioData";
 import { GlobeCanvas } from "./GlobeCanvas";
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
@@ -19,7 +19,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   className = "",
   isStandalone = false,
 }) => {
-  const { language, t, isRTL } = useLanguage();
+  const { locale, t, isRTL } = useI18n();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,12 +58,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <div className="mb-3">
                   <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                    <span>{t("contact.label", language === "fa" ? "ارتباط با من" : "Contact")}</span>
+                    <span>{t("contact.label")}</span>
                   </Badge>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight mb-4">
-                  {language === "fa" ? "تماس با من و همکاری" : "Get In Touch & Collaborate"}
+                  {t("contact.title")}
                 </h2>
 
                 <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mb-8">
@@ -101,7 +101,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <span>{t("contact.locationValue", CONTACT_DATA.location[language])}</span>
+                  <span>{CONTACT_DATA.location[locale]}</span>
                 </div>
               </div>
             </div>
@@ -116,7 +116,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder={t("contact.namePlaceholder", language === "fa" ? "نام شما" : "Your Name")}
+                      placeholder={t("contact.namePlaceholder")}
                     />
                   </div>
                   <div>
@@ -125,7 +125,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder={t("contact.emailPlaceholder", language === "fa" ? "ایمیل شما" : "Your Email")}
+                      placeholder={t("contact.emailPlaceholder")}
                     />
                   </div>
                 </div>
@@ -136,7 +136,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder={t("contact.messagePlaceholder", language === "fa" ? "پیام شما" : "Your Message")}
+                    placeholder={t("contact.messagePlaceholder")}
                   />
                 </div>
 

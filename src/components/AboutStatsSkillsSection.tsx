@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { STATS, SKILLS } from "@/data/portfolioData";
 import { ArrowLeft, ArrowRight, Layers } from "lucide-react";
 import { Skill } from "@/types";
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export const AboutStatsSkillsSection: React.FC = () => {
-  const { language, t, isRTL, getLocalizedHref } = useLanguage();
+  const { locale, t, isRTL, getLocalizedHref } = useI18n();
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 
   const renderSkillIcon = (id: string, color: string) => {
@@ -138,13 +138,13 @@ export const AboutStatsSkillsSection: React.FC = () => {
               <div className="mb-3">
                 <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                  <span>{t("about.label", language === "fa" ? "درباره من" : "About Me")}</span>
+                  <span>{t("about.label")}</span>
                 </Badge>
               </div>
 
               {/* Section Title */}
               <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight mb-5">
-                {t("about.title", language === "fa" ? "درباره من" : "About Me")}
+                {t("about.title")}
               </h2>
 
               {/* Content text */}
@@ -164,7 +164,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                 href={getLocalizedHref("/about")}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary-light)] hover:text-white group w-fit transition-colors cursor-pointer"
               >
-                <span>{t("about.learnMore", language === "fa" ? "بیشتر درباره من و مسیر شغلی" : "Learn more about me")}</span>
+                <span>{t("about.learnMore")}</span>
                 {isRTL ? (
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                 ) : (
@@ -189,10 +189,10 @@ export const AboutStatsSkillsSection: React.FC = () => {
                     {stat.number}
                   </div>
                   <div className="text-xs sm:text-sm font-semibold text-[var(--text)]">
-                    {stat.title[language]}
+                    {stat.title[locale]}
                   </div>
                   <div className="text-xs text-[var(--muted)] line-clamp-1 mt-0.5">
-                    {stat.subtitle[language]}
+                    {stat.subtitle[locale]}
                   </div>
                 </div>
               </Card>
@@ -207,11 +207,11 @@ export const AboutStatsSkillsSection: React.FC = () => {
               <div className="mb-2">
                 <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                  <span>{t("skills.label", language === "fa" ? "مهارت‌های فنی" : "Technical Skills")}</span>
+                  <span>{t("skills.label")}</span>
                 </Badge>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight">
-                {t("skills.title", language === "fa" ? "تکنولوژی‌ها و مهارت‌ها" : "Technologies & Skills")}
+                {t("skills.title")}
               </h2>
             </div>
 
@@ -219,7 +219,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
               href={getLocalizedHref("/skills")}
               className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
             >
-              <span>{language === "fa" ? "مشاهده سطح تسلط همه مهارت‌ها" : "View Detailed Skills"}</span>
+              <span>{locale === "fa" ? "مشاهده سطح تسلط همه مهارت‌ها" : "View Detailed Skills"}</span>
               {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
             </Link>
           </div>
@@ -280,7 +280,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
             <div className="mb-4">
               <div className="flex justify-between text-xs mb-1.5">
                 <span className="text-[var(--muted)]">
-                  {t("skills.proficiency", language === "fa" ? "میزان تسلط" : "Proficiency")}
+                  {t("skills.proficiency")}
                 </span>
                 <span className="font-bold text-[var(--primary-light)]">
                   {selectedSkill.level}%
@@ -300,7 +300,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
             {/* Experience Summary */}
             <div className="bg-[var(--surface-2)] border border-[var(--border)] rounded-xl p-3.5 text-xs text-[var(--muted)] leading-relaxed space-y-2">
               <p className="text-[var(--text)] font-medium">
-                {selectedSkill.experience[language]}
+                {selectedSkill.experience[locale]}
               </p>
             </div>
 
@@ -310,7 +310,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                 size="sm"
                 onClick={() => setSelectedSkill(null)}
               >
-                {t("skills.close", language === "fa" ? "متوجه شدم" : "Got it")}
+                {t("skills.close")}
               </Button>
             </div>
           </DialogContent>

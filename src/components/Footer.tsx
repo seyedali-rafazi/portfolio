@@ -2,21 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 
 export const Footer: React.FC = () => {
-  const { language, t, getLocalizedHref, alternateHref } = useLanguage();
+  const { locale, t, i18n, getLocalizedHref, alternateLocale } = useI18n();
 
   return (
     <footer className="border-t border-[var(--border)] py-12 sm:py-16 relative bg-[var(--bg)]/90 backdrop-blur-md mt-auto">
       <div className="portfolio-container flex flex-col sm:flex-row items-center justify-between gap-6 text-xs sm:text-sm text-[var(--muted)]">
         {/* Copyright */}
         <div className="flex items-center gap-2 text-center sm:text-start">
-          <span>
-            {language === "fa"
-              ? "© 2026 سید علی رفضی. تمامی حقوق محفوظ است."
-              : "© 2026 Seyekali Rafazi. All rights reserved."}
-          </span>
+          <span>{t("footer.copyright")}</span>
         </div>
 
         {/* Footer Navigation Links with Next.js Link */}
@@ -52,13 +48,14 @@ export const Footer: React.FC = () => {
             {t("nav.contact", "Contact")}
           </Link>
           <span className="opacity-30" aria-hidden="true">|</span>
-          <Link
-            href={alternateHref}
+          <button
+            type="button"
+            onClick={() => i18n.changeLanguage(alternateLocale)}
             className="font-semibold text-[var(--primary-light)] hover:text-white transition-colors cursor-pointer"
-            aria-label={language === "fa" ? "Switch language to English" : "تغییر زبان به فارسی"}
+            aria-label={locale === "fa" ? "Switch language to English" : "تغییر زبان به فارسی"}
           >
-            {t("footer.switchLang", language === "fa" ? "English (EN)" : "فارسی (FA)")}
-          </Link>
+            {t("footer.switchLang")}
+          </button>
         </nav>
       </div>
     </footer>

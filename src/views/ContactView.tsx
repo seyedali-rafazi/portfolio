@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ContactSection } from "@/components/ContactSection";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getBreadcrumbSchema } from "@/lib/schema";
 import type { Locale } from "@/config/site";
@@ -15,7 +15,7 @@ interface ContactViewProps {
 }
 
 export function ContactView({ locale }: ContactViewProps) {
-  const { t, getLocalizedHref } = useLanguage();
+  const { t, getLocalizedHref } = useI18n();
 
   const breadcrumbs = [
     { name: t("nav.home"), path: "/" },

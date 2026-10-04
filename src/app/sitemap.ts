@@ -1,11 +1,17 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { PROJECTS } from "@/data/portfolioData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { path: "/", priority: 1.0, changeFrequency: "daily" as const },
     { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/projects", priority: 0.9, changeFrequency: "weekly" as const },
+    ...PROJECTS.map((p) => ({
+      path: `/projects/${p.id}`,
+      priority: 0.85,
+      changeFrequency: "weekly" as const,
+    })),
     { path: "/skills", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
   ];

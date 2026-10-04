@@ -3,44 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { ArrowLeft, ArrowRight, Download, Sparkles, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export const HeroSection: React.FC = () => {
-  const { language, t, isRTL, getLocalizedHref } = useLanguage();
+  const { locale, t, isRTL, getLocalizedHref } = useI18n();
 
-  const handleDownloadCV = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const cvContent = `SEYEKALI RAFAZI - FRONTEND ENGINEER
-Email: seyedali.rafazi@gmail.com | Phone: +98 912 345 6789
-Location: Tehran, Iran
-
-SUMMARY:
-Frontend Engineer with 4+ years of experience building modern, data-intensive web applications and geospatial interfaces using React, Next.js, TypeScript, MapLibre, and CesiumJS.
-
-TECHNICAL SKILLS:
-- Core: React 19, Next.js 15/16 (App Router), TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS
-- State & Data: Redux Toolkit, RTK Query, React Query, Zustand
-- Geospatial & Visualization: MapLibre GL JS, Mapbox GL JS, CesiumJS, Leaflet, D3.js, GeoJSON
-- Tools: Git, Docker, Vite, Webpack, Postman, Jest, Cypress
-
-FEATURED PROJECTS:
-1. AsemanYar - Real-time flight tracking & radar telemetry map using React and MapLibre GL.
-2. Kihannama - 3D orbital satellite simulator using CesiumJS and Norad TLE feeds.
-3. Artisa Gallery - Modern art e-commerce platform built with Next.js App Router and Tailwind CSS.
-`;
-    const blob = new Blob([cvContent], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "Seyekali_Rafazi_CV.txt";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
 
   const socials = [
     { name: "GitHub", url: "https://github.com/seyedalirafazi", icon: "GH" },
@@ -73,10 +43,7 @@ FEATURED PROJECTS:
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)] animate-pulse" />
                 <span>
-                  {t(
-                    "hero.intro",
-                    language === "fa" ? "سلام، من هستم" : "Hi, I'm",
-                  )}
+                  {t("hero.intro")}
                 </span>
               </Badge>
             </div>
@@ -84,10 +51,10 @@ FEATURED PROJECTS:
             {/* Main Title - Seyekali Rafazi / سید علی رفضی */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] mb-5">
               <span className="text-[var(--text-bright)]">
-                {language === "fa" ? "سید علی" : "Seyekali"}
+                {t("hero.namePrefix")}
               </span>{" "}
               <span className="text-[var(--primary)] text-shadow-glow">
-                {language === "fa" ? "رفضی" : "Rafazi"}
+                {t("hero.nameSuffix")}
               </span>
             </h1>
 
@@ -108,12 +75,10 @@ FEATURED PROJECTS:
             {/* Descriptions */}
             <div className="max-w-[580px] mb-8 space-y-3">
               <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--text)] font-normal">
-                {language === "fa"
-                  ? "توسعه‌دهنده فرانت‌اند با بیش از ۴ سال تجربه در ساخت رابط‌های کاربری مدرن، سیستم‌های داده‌محور و نقشه‌محور."
-                  : "Frontend Engineer with 4+ years of experience building modern user interfaces, data-intensive and geospatial systems."}
+                {t("hero.bio")}
               </p>
               <p className="text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
-                {language === "fa"
+                {locale === "fa"
                   ? "متخصص در رندرینگ پیشرفته Next.js، مدیریت بهینه استیت، و تجسم سه‌بعدی داده‌های GIS با کارایی ۶۰ فریم."
                   : "Specializing in high-performance Next.js architectures, responsive design systems, and 3D GIS visualization."}
               </p>
@@ -128,10 +93,7 @@ FEATURED PROJECTS:
               >
                 <Link href={getLocalizedHref("/projects")} className="gap-2.5">
                   <span>
-                    {t(
-                      "hero.viewProjects",
-                      language === "fa" ? "مشاهده پروژه‌ها" : "View Projects",
-                    )}
+                    {t("hero.viewProjects")}
                   </span>
                   {isRTL ? (
                     <ArrowLeft className="w-4 h-4" />
@@ -144,26 +106,27 @@ FEATURED PROJECTS:
               <Button
                 variant="outline"
                 size="lg"
-                onClick={handleDownloadCV}
+                asChild
                 className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold"
               >
-                <Download className="w-4 h-4 text-[var(--primary-light)]" />
-                <span>
-                  {t(
-                    "hero.downloadCv",
-                    language === "fa" ? "دانلود رزومه" : "Download CV",
-                  )}
-                </span>
+                <a
+                  href="/seyedali-rafazi-cv.pdf"
+                  download="seyedali-rafazi-cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Download className="w-4 h-4 text-[var(--primary-light)]" />
+                  <span>
+                    {t("hero.downloadCv")}
+                  </span>
+                </a>
               </Button>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-3.5 flex-wrap justify-center lg:justify-start">
               <span className="text-[12px] text-[var(--muted)] font-medium">
-                {t(
-                  "hero.connectWithMe",
-                  language === "fa" ? "ارتباط با من:" : "Connect with me:",
-                )}
+                {t("hero.connectWithMe")}
               </span>
               <div className="flex items-center gap-2">
                 {socials.map((social) => (
@@ -271,11 +234,7 @@ FEATURED PROJECTS:
               <div className="relative z-10 w-[290px] sm:w-[345px] md:w-[385px] lg:w-[400px] h-[430px] sm:h-[485px] md:h-[525px] profile-image-mask drop-shadow-2xl flex items-end justify-center mb-0">
                 <Image
                   src="/my-photo.png"
-                  alt={
-                    language === "fa"
-                      ? "سید علی رفضی — Frontend Engineer"
-                      : "Seyekali Rafazi — Frontend Engineer"
-                  }
+                  alt={t("hero.photoAlt")}
                   fill
                   priority
                   className="object-cover object-top select-none pointer-events-none"
@@ -293,7 +252,7 @@ FEATURED PROJECTS:
                     React &amp; Next.js
                   </span>
                   <span className="text-[10px] text-[var(--muted)] font-medium">
-                    {language === "fa" ? "متخصص فرانت‌اند مدرن" : "Frontend Specialist"}
+                    {locale === "fa" ? "متخصص فرانت‌اند مدرن" : "Frontend Specialist"}
                   </span>
                 </div>
               </div>
@@ -308,10 +267,10 @@ FEATURED PROJECTS:
                 </div>
                 <div className="flex flex-col text-start">
                   <span className="text-[12px] sm:text-[13px] font-bold text-[var(--text-bright)] leading-tight">
-                    {language === "fa" ? "۴+ سال سابقه تخصصی" : "4+ Years Experience"}
+                    {locale === "fa" ? "۴+ سال سابقه تخصصی" : "4+ Years Experience"}
                   </span>
                   <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                    {language === "fa" ? "آماده پروژه‌های چالش‌برانگیز" : "Available for Projects"}
+                    {locale === "fa" ? "آماده پروژه‌های چالش‌برانگیز" : "Available for Projects"}
                   </span>
                 </div>
               </div>

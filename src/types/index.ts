@@ -3,10 +3,30 @@ export type Locale = "en" | "fa";
 
 export type Theme = "dark" | "light";
 
+export interface ProjectTechStackItem {
+  category: {
+    fa: string;
+    en: string;
+  };
+  items: string[];
+}
+
+export interface ProjectChallenge {
+  title: {
+    fa: string;
+    en: string;
+  };
+  solution: {
+    fa: string;
+    en: string;
+  };
+}
+
 export interface Project {
   id: string;
   title: string;
-  category: "geospatial" | "fullstack" | "frontend";
+  titleFa?: string;
+  category: "geospatial" | "fullstack" | "frontend" | "bot" | "package";
   tags: string[];
   image: string;
   summary: {
@@ -25,8 +45,20 @@ export interface Project {
     fa: string;
     en: string;
   };
+  techStackDetailed?: ProjectTechStackItem[];
+  challenges?: ProjectChallenge[];
+  architecture?: {
+    fa: string;
+    en: string;
+  };
   githubUrl?: string;
   liveUrl?: string;
+  npmUrl?: string;
+  packageName?: string;
+  installCommand?: string;
+  botId?: string;
+  botUrl?: string;
+  botPlatform?: "bale" | "telegram";
 }
 
 export interface Skill {

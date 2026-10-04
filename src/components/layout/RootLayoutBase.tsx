@@ -1,6 +1,5 @@
 import React from "react";
-import { LanguageProvider } from "@/context/LanguageContext";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { Providers } from "@/components/layout/Providers";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Locale } from "@/config/site";
 
@@ -9,12 +8,35 @@ interface RootLayoutBaseProps {
   locale: Locale;
 }
 
+const themeInitScript = `
+(function() {
+  try {
+    var saved = localStorage.getItem('portfolio-theme');
+    var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+    var root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+    } else {
+      root.classList.add('light');
+      root.classList.remove('dark');
+    }
+  } catch (e) {}
+})();
+`;
+
 export function RootLayoutBase({ children, locale }: RootLayoutBaseProps) {
   const dir = locale === "fa" ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className="dark">
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeInitScript,
+          }}
+        />
         <link
           rel="preload"
           href="/fonts/vazirmatn/Vazirmatn[wght].woff2"
@@ -31,9 +53,7 @@ export function RootLayoutBase({ children, locale }: RootLayoutBaseProps) {
         }`}
       >
         <ScrollToTop />
-        <ThemeProvider>
-          <LanguageProvider initialLocale={locale}>{children}</LanguageProvider>
-        </ThemeProvider>
+        <Providers locale={locale}>{children}</Providers>
       </body>
     </html>
   );

@@ -4,8 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { useLanguage } from "@/context/LanguageContext";
-import { PERSONAL_INFO, STATS } from "@/data/portfolioData";
+import { useI18n } from "@/i18n/client";
+import { STATS } from "@/data/portfolioData";
 import { ArrowLeft, ArrowRight, Compass, Sparkles, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +19,7 @@ interface AboutViewProps {
 }
 
 export function AboutView({ locale }: AboutViewProps) {
-  const { language, t, isRTL, getLocalizedHref } = useLanguage();
+  const { t, isRTL, getLocalizedHref } = useI18n();
 
   const breadcrumbs = [
     { name: t("nav.home"), path: "/" },
@@ -51,7 +51,7 @@ export function AboutView({ locale }: AboutViewProps) {
               {t("about.label")}
             </Badge>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[var(--text-bright)] tracking-tight mb-4">
-              {t("about.pageHeading", language === "fa" ? "درباره من" : "About Me")}
+              {t("about.pageHeading")}
             </h1>
             <p className="text-sm sm:text-base lg:text-lg text-[var(--muted)] max-w-3xl leading-relaxed">
               {t("about.pageSubheading")}
@@ -67,14 +67,10 @@ export function AboutView({ locale }: AboutViewProps) {
                   <h2>{t("about.bioHeading")}</h2>
                 </div>
                 <p className="text-sm sm:text-base text-[var(--text)] leading-relaxed font-normal">
-                  {language === "fa"
-                    ? PERSONAL_INFO.aboutMe.introFa
-                    : PERSONAL_INFO.aboutMe.introEn}
+                  {t("about.intro")}
                 </p>
                 <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed pt-4 border-t border-[var(--border)]/50">
-                  {language === "fa"
-                    ? PERSONAL_INFO.aboutMe.extendedFa
-                    : PERSONAL_INFO.aboutMe.extendedEn}
+                  {t("about.extended")}
                 </p>
               </Card>
 
@@ -136,10 +132,10 @@ export function AboutView({ locale }: AboutViewProps) {
                         {stat.number}
                       </div>
                       <div className="text-sm font-semibold text-[var(--text)] mt-1">
-                        {stat.title[language]}
+                        {stat.title[locale]}
                       </div>
                       <div className="text-xs text-[var(--muted)] mt-0.5">
-                        {stat.subtitle[language]}
+                        {stat.subtitle[locale]}
                       </div>
                     </div>
                   </div>

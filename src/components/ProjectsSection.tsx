@@ -1,34 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
-import { PROJECTS } from "@/data/portfolioData";
-import { Project } from "@/types";
-import { ProjectModal } from "./ProjectModal";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useI18n } from "@/i18n/client";
+import { FEATURED_PROJECTS, BOT_PROJECTS, PACKAGE_PROJECTS } from "@/data/portfolioData";
+import { ProjectSwiper } from "./ProjectSwiper";
+import { BotProjectSwiper } from "./BotProjectSwiper";
+import { PackageProjectSwiper } from "./PackageProjectSwiper";
+import { ArrowLeft, ArrowRight, Bot, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 
 export const ProjectsSection: React.FC = () => {
-  const { language, t, isRTL, getLocalizedHref } = useLanguage();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const { t, isRTL, getLocalizedHref } = useI18n();
 
   return (
-    <section id="projects" className="py-20 sm:py-28 lg:py-32 relative">
+    <section
+      id="projects"
+      className="py-20 sm:py-28 lg:py-32 relative overflow-hidden"
+    >
       <div className="portfolio-container">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 pb-4 border-b border-[var(--border)]/40">
+        {/* Section Header: Featured Projects */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 pb-4 border-b border-[var(--border)]/40">
           <div className="text-start">
             <div className="mb-2">
               <Badge variant="primarySubtle" className="px-3 py-1 text-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                <span>{t("projects.label", language === "fa" ? "پروژه‌های منتخب" : "Featured Projects")}</span>
+                <span>{t("projects.label")}</span>
               </Badge>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight">
-              {language === "fa" ? "پروژه‌های برجسته و کاربردی" : "Featured Engineering Projects"}
+              {t("projects.heading")}
             </h2>
           </div>
 
@@ -36,87 +37,96 @@ export const ProjectsSection: React.FC = () => {
             href={getLocalizedHref("/projects")}
             className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
           >
-            <span>{t("projects.viewAll", language === "fa" ? "مشاهده همه پروژه‌ها" : "View All Projects")}</span>
-            {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+            <span>{t("projects.viewAll")}</span>
+            {isRTL ? (
+              <ArrowLeft className="w-4 h-4" />
+            ) : (
+              <ArrowRight className="w-4 h-4" />
+            )}
           </Link>
         </div>
 
-        {/* Projects 3-Column Grid */}
+        {/* Interactive Swiper Slider for Featured Web & Geospatial Projects */}
+        <ProjectSwiper projects={FEATURED_PROJECTS} />
+
+        {/* Bot Projects Section - Positioned at bottom of Featured Projects */}
         <div
-          id="projectsGrid"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9"
+          id="bot-projects"
+          className="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-[var(--border)]/40"
         >
-          {PROJECTS.map((project) => (
-            <Card
-              key={project.id}
-              onClick={() => setSelectedProject(project)}
-              className="group overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/15 flex flex-col cursor-pointer text-start shadow-xl p-0 rounded-2xl"
+          {/* Bot Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 pb-4 border-b border-[var(--border)]/40">
+            <div className="text-start">
+              <div className="mb-2">
+                <Badge
+                  variant="primarySubtle"
+                  className="px-3 py-1 text-xs border-emerald-500/30 text-emerald-300 bg-emerald-950/40"
+                >
+                  <Bot className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t("botProjects.badge")}</span>
+                </Badge>
+              </div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight">
+                {t("botProjects.heading")}
+              </h3>
+            </div>
+
+            <Link
+              href={getLocalizedHref("/projects")}
+              className="text-xs sm:text-sm font-semibold text-emerald-400 hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
             >
-              {/* Card Image */}
-              <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[var(--surface-2)]">
-                <Image
-                  src={project.image}
-                  alt={
-                    language === "fa"
-                      ? `${project.title} — ${project.summary.fa}`
-                      : `${project.title} — ${project.summary.en}`
-                  }
-                  fill
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-60" />
+              <span>{t("projects.viewAll")}</span>
+              {isRTL ? (
+                <ArrowLeft className="w-4 h-4" />
+              ) : (
+                <ArrowRight className="w-4 h-4" />
+              )}
+            </Link>
+          </div>
+
+          {/* Interactive Swiper Slider for Bot Projects */}
+          <BotProjectSwiper projects={BOT_PROJECTS} />
+        </div>
+
+        {/* Package & Open Source Projects Section - Positioned at bottom of Bot Projects */}
+        <div
+          id="package-projects"
+          className="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-[var(--border)]/40"
+        >
+          {/* Package Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 pb-4 border-b border-[var(--border)]/40">
+            <div className="text-start">
+              <div className="mb-2">
+                <Badge
+                  variant="primarySubtle"
+                  className="px-3 py-1 text-xs border-indigo-500/30 text-indigo-300 bg-indigo-950/40"
+                >
+                  <Package className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>{t("packageProjects.badge")}</span>
+                </Badge>
               </div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-bright)] tracking-tight">
+                {t("packageProjects.heading")}
+              </h3>
+            </div>
 
-              {/* Card Content */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="primarySubtle"
-                        className="px-3 py-1 text-xs"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
+            <Link
+              href={getLocalizedHref("/projects")}
+              className="text-xs sm:text-sm font-semibold text-indigo-400 hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
+            >
+              <span>{t("projects.viewAll")}</span>
+              {isRTL ? (
+                <ArrowLeft className="w-4 h-4" />
+              ) : (
+                <ArrowRight className="w-4 h-4" />
+              )}
+            </Link>
+          </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-bright)] mb-3 group-hover:text-[var(--primary-light)] transition-colors">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-3 mb-6">
-                    {project.summary[language]}
-                  </p>
-                </div>
-
-                {/* Footer Action */}
-                <div className="mt-auto pt-4 border-t border-[var(--border)]/50 flex items-center justify-between">
-                  <span className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] group-hover:text-white inline-flex items-center gap-2 transition-colors">
-                    <span>{t("projects.viewProject", language === "fa" ? "مشاهده جزئیات پروژه" : "View Project Details")}</span>
-                    {isRTL ? (
-                      <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                    ) : (
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    )}
-                  </span>
-                </div>
-              </div>
-            </Card>
-          ))}
+          {/* Interactive Swiper Slider for Package & Open Source Projects */}
+          <PackageProjectSwiper projects={PACKAGE_PROJECTS} />
         </div>
       </div>
-
-      {/* Project Details Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </section>
   );
 };

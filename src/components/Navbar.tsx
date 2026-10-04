@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { useTheme } from "@/context/ThemeContext";
 import { Moon, Sun, Menu, X, Globe } from "lucide-react";
 
 export const Navbar: React.FC = () => {
-  const { language, t, isRTL, getLocalizedHref, alternateHref } = useLanguage();
+  const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale } = useI18n();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname() || "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
           <Link
             href={getLocalizedHref("/")}
             className="text-2xl font-black tracking-tighter text-[var(--text)] group flex items-center gap-1 focus:outline-none"
-            aria-label={language === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
+            aria-label={locale === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
           >
             <span className="transition-transform group-hover:scale-105">S</span>
             <span className="text-[var(--primary)] text-shadow-glow">R</span>
@@ -83,28 +83,30 @@ export const Navbar: React.FC = () => {
 
         {/* Action Controls - End */}
         <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3">
-          {/* Semantic Language Switcher */}
-          <Link
-            href={alternateHref}
+          {/* i18n Language Switcher */}
+          <button
+            type="button"
+            onClick={() => i18n.changeLanguage(alternateLocale)}
             id="languageBtn"
-            title={language === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
-            aria-label={language === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
+            title={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
+            aria-label={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--text)] transition-all cursor-pointer shadow-sm"
           >
             <Globe className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" aria-hidden="true" />
-            <span className={language === "en" ? "text-[var(--primary-light)] font-bold" : ""}>
+            <span className={locale === "en" ? "text-[var(--primary-light)] font-bold" : ""}>
               EN
             </span>
             <span className="opacity-40" aria-hidden="true">|</span>
-            <span className={language === "fa" ? "text-[var(--primary-light)] font-bold" : ""}>
+            <span className={locale === "fa" ? "text-[var(--primary-light)] font-bold" : ""}>
               فارسی
             </span>
-          </Link>
+          </button>
 
           {/* Theme Switcher */}
           <button
             onClick={toggleTheme}
             id="themeBtn"
+            suppressHydrationWarning
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             className="w-9 h-9 rounded-full flex items-center justify-center text-[var(--muted)] hover:text-[var(--text-bright)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] transition-all cursor-pointer shrink-0"

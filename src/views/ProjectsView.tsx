@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProjectModal } from "@/components/ProjectModal";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { PROJECTS } from "@/data/portfolioData";
 import { Project } from "@/types";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -22,7 +22,7 @@ interface ProjectsViewProps {
 }
 
 export function ProjectsView({ locale }: ProjectsViewProps) {
-  const { language, t, isRTL, getLocalizedHref } = useLanguage();
+  const { t, isRTL, getLocalizedHref } = useI18n();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
@@ -32,9 +32,11 @@ export function ProjectsView({ locale }: ProjectsViewProps) {
   ];
 
   const categories = [
-    { id: "all", label: t("projects.filterAll", language === "fa" ? "همه پروژه‌ها" : "All Projects") },
-    { id: "geospatial", label: t("projects.filterGeo", language === "fa" ? "سامانه‌های مکانی و ۳بعدی" : "Geospatial & 3D") },
-    { id: "fullstack", label: t("projects.filterFullstack", language === "fa" ? "فول‌استک و وب‌اپ" : "Fullstack & Web") },
+    { id: "all", label: t("projects.filterAll") },
+    { id: "geospatial", label: t("projects.filterGeo") },
+    { id: "fullstack", label: t("projects.filterFullstack") },
+    { id: "bot", label: t("projects.filterBot") },
+    { id: "package", label: t("projects.filterPackage") },
   ];
 
   const filtered =
@@ -65,10 +67,10 @@ export function ProjectsView({ locale }: ProjectsViewProps) {
           <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[var(--border)]/40 pb-10 mb-12 text-start">
             <div>
               <Badge variant="primarySubtle" className="mb-3 px-3 py-1 text-xs">
-                {language === "fa" ? "نمونه‌کارها" : "Portfolio"}
+                {t("projects.label")}
               </Badge>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[var(--text-bright)] tracking-tight mb-4">
-                {t("projects.pageHeading", language === "fa" ? "پروژه‌ها" : "Projects")}
+                {t("projects.pageHeading")}
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-[var(--muted)] max-w-2xl leading-relaxed">
                 {t("projects.pageSubheading")}
@@ -96,74 +98,66 @@ export function ProjectsView({ locale }: ProjectsViewProps) {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
             {filtered.map((project) => {
-              const imageAlt =
-                language === "fa"
-                  ? `${project.title} — ${project.summary.fa}`
-                  : `${project.title} — ${project.summary.en}`;
+              const imageAlt = `${project.title} — ${project.summary[locale]}`;
+              const projectUrl = getLocalizedHref(`/projects/${project.id}`);
+              const displayTitle = locale === "fa" && project.titleFa ? project.titleFa : project.title;
 
               return (
-                <Card
+                <Link
                   key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  className="group overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/15 flex flex-col cursor-pointer text-start p-0 rounded-2xl"
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${project.title} - ${t("projects.viewProject")}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedProject(project);
-                    }
-                  }}
+                  href={projectUrl}
+                  className="block group"
                 >
-                  {/* Card Image */}
-                  <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[var(--surface-2)]">
-                    <Image
-                      src={project.image}
-                      alt={imageAlt}
-                      fill
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-60" />
-                  </div>
+                  <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/15 flex flex-col cursor-pointer text-start p-0 rounded-2xl">
+                    {/* Card Image */}
+                    <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[var(--surface-2)]">
+                      <Image
+                        src={project.image}
+                        alt={imageAlt}
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-60" />
+                    </div>
 
-                  {/* Card Content */}
-                  <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                    <div>
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="primarySubtle" className="px-3 py-1 text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
+                    {/* Card Content */}
+                    <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                      <div>
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tags.map((tag) => (
+                            <Badge key={tag} variant="primarySubtle" className="px-3 py-1 text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        {/* Title */}
+                        <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-bright)] mb-3 group-hover:text-[var(--primary-light)] transition-colors">
+                          {displayTitle}
+                        </h2>
+
+                        {/* Description */}
+                        <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-3 mb-6">
+                          {project.summary[locale]}
+                        </p>
                       </div>
 
-                      {/* Title */}
-                      <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-bright)] mb-3 group-hover:text-[var(--primary-light)] transition-colors">
-                        {project.title}
-                      </h2>
-
-                      {/* Description */}
-                      <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-3 mb-6">
-                        {project.summary[language]}
-                      </p>
+                      {/* Action Link */}
+                      <div className="mt-auto pt-4 border-t border-[var(--border)]/50 flex items-center justify-between">
+                        <span className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] group-hover:text-white inline-flex items-center gap-2 transition-colors">
+                          <span>{t("projects.viewDetails")}</span>
+                          {isRTL ? (
+                            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                          ) : (
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                          )}
+                        </span>
+                      </div>
                     </div>
-
-                    {/* Action Link */}
-                    <div className="mt-auto pt-4 border-t border-[var(--border)]/50 flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] group-hover:text-white inline-flex items-center gap-2 transition-colors">
-                        <span>{t("projects.viewProject", language === "fa" ? "مشاهده جزئیات پروژه" : "View Project Details")}</span>
-                        {isRTL ? (
-                          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                        ) : (
-                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </Link>
               );
             })}
           </div>

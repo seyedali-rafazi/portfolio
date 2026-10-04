@@ -509,3 +509,59 @@ html[dir="ltr"] body {
 [dir="ltr"] .text-start {
   text-align: left;
 }
+
+/* Swiper Custom Styling */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 1.75rem !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+.custom-swiper-bullet {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--muted-2);
+  opacity: 0.45;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-swiper-bullet:hover {
+  opacity: 0.8;
+  background: var(--primary-light);
+}
+
+.custom-swiper-bullet-active {
+  width: 28px !important;
+  border-radius: 9999px !important;
+  background: var(--primary) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 12px var(--primary);
+}
+
+/* Swiper Container & Slide Adjustments */
+.portfolio-swiper {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0.5rem 0.25rem 1.25rem 0.25rem !important;
+  margin: 0 auto !important;
+}
+
+.portfolio-swiper .swiper-wrapper {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.portfolio-swiper .swiper-slide {
+  height: auto !important;
+  display: flex !important;
+  box-sizing: border-box !important;
+}
+
+

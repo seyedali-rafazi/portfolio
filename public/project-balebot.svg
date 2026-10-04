@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="cyberBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070b14"/>
+      <stop offset="50%" stop-color="#0b1324"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+
+    <!-- Radial Glows -->
+    <radialGradient id="cyanGlow" cx="25%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.32"/>
+      <stop offset="45%" stop-color="#0284c7" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="emeraldGlow" cx="80%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.28"/>
+      <stop offset="50%" stop-color="#059669" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="ytGlow" cx="50%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.22"/>
+      <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#b91c1c" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Card Glass Gradient -->
+    <linearGradient id="glassCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Glowing Border Gradient -->
+    <linearGradient id="neonBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <!-- YouTube Red Gradient -->
+    <linearGradient id="ytRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+
+    <!-- Bale Messenger Emerald Gradient -->
+    <linearGradient id="baleGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Python Blue/Gold Gradient -->
+    <linearGradient id="pyBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="pyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="glowDrop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#06b6d4" flood-opacity="0.3"/>
+    </filter>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Deep Cyber Background -->
+  <rect width="800" height="450" fill="url(#cyberBg)"/>
+  <rect width="800" height="450" fill="url(#cyanGlow)"/>
+  <rect width="800" height="450" fill="url(#emeraldGlow)"/>
+  <rect width="800" height="450" fill="url(#ytGlow)"/>
+
+  <!-- Futuristic Tech Grid Lines -->
+  <g stroke="#334155" stroke-opacity="0.18" stroke-width="1">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Digital Circuit Nodes -->
+  <g fill="#06b6d4" fill-opacity="0.4">
+    <circle cx="100" cy="75" r="3"/>
+    <circle cx="300" cy="150" r="3"/>
+    <circle cx="500" cy="75" r="3"/>
+    <circle cx="700" cy="225" r="3"/>
+    <circle cx="200" cy="375" r="3"/>
+    <circle cx="600" cy="375" r="3"/>
+  </g>
+
+  <!-- Top Header Banner / Floating Badges -->
+  <g transform="translate(48, 32)">
+    <!-- Bale Messenger Pill Badge -->
+    <rect x="0" y="0" width="168" height="34" rx="17" fill="#064e3b" fill-opacity="0.85" stroke="#10b981" stroke-width="1.2"/>
+    <circle cx="18" cy="17" r="7" fill="url(#baleGreen)"/>
+    <path d="M15 17l2 2 4-4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="34" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#a7f3d0">Bale Messenger</text>
+
+    <!-- Python 3.10+ Badge -->
+    <rect x="180" y="0" width="132" height="34" rx="17" fill="#0c4a6e" fill-opacity="0.8" stroke="#0284c7" stroke-width="1.2"/>
+    <circle cx="198" cy="17" r="7" fill="url(#pyBlue)"/>
+    <text x="214" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#bae6fd">Python Async</text>
+
+    <!-- yt-dlp & FFmpeg Pill -->
+    <rect x="324" y="0" width="146" height="34" rx="17" fill="#7f1d1d" fill-opacity="0.8" stroke="#ef4444" stroke-width="1.2"/>
+    <polygon points="340,11 340,23 350,17" fill="#ffffff"/>
+    <text x="358" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#fecaca">yt-dlp + FFmpeg</text>
+
+    <!-- Bot ID Badge on the right -->
+    <rect x="520" y="0" width="184" height="34" rx="17" fill="#1e1b4b" fill-opacity="0.85" stroke="#818cf8" stroke-width="1.2"/>
+    <text x="536" y="22" font-family="monospace" font-size="12" font-weight="700" fill="#c7d2fe">@PerYTDownloaderbot</text>
+  </g>
+
+  <!-- Central Interactive Terminal & Media Console -->
+  <g transform="translate(48, 86)" filter="url(#cardShadow)">
+    <!-- Terminal Outer Frame -->
+    <rect x="0" y="0" width="460" height="310" rx="18" fill="url(#glassCard)" stroke="url(#neonBorder)" stroke-width="1.5"/>
+
+    <!-- Terminal Header Bar -->
+    <rect x="0" y="0" width="460" height="38" rx="18" fill="#0f172a" fill-opacity="0.95"/>
+    <rect x="0" y="24" width="460" height="14" fill="#0f172a" fill-opacity="0.95"/>
+    <line x1="0" y1="38" x2="460" y2="38" stroke="#334155" stroke-width="1"/>
+
+    <!-- Window Controls -->
+    <circle cx="22" cy="19" r="5" fill="#ef4444"/>
+    <circle cx="38" cy="19" r="5" fill="#f59e0b"/>
+    <circle cx="54" cy="19" r="5" fill="#10b981"/>
+
+    <!-- Window Title -->
+    <text x="230" y="23" font-family="monospace" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">
+      bale-downloader-engine // live-session
+    </text>
+
+    <!-- Terminal Body: Chat / Bot Interaction Stream -->
+    <g transform="translate(18, 54)">
+      <!-- User command bubble -->
+      <rect x="180" y="0" width="244" height="32" rx="10" fill="#0284c7" fill-opacity="0.25" stroke="#0ea5e9" stroke-width="1"/>
+      <text x="194" y="21" font-family="monospace" font-size="11" fill="#e0f2fe">/dl https://youtube.com/watch?v=...</text>
+
+      <!-- Bot response bubble -->
+      <g transform="translate(0, 44)">
+        <rect x="0" y="0" width="370" height="88" rx="12" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1"/>
+        <circle cx="22" cy="22" r="10" fill="url(#baleGreen)"/>
+        <text x="22" y="26" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">🤖</text>
+
+        <text x="42" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Bale Downloader Bot</text>
+        <text x="42" y="38" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">🎬 Media detected: 1080p Video / 320kbps Audio</text>
+
+        <!-- Progress bar simulation -->
+        <g transform="translate(42, 50)">
+          <rect x="0" y="0" width="280" height="8" rx="4" fill="#334155"/>
+          <rect x="0" y="0" width="230" height="8" rx="4" fill="url(#baleGreen)"/>
+          <text x="290" y="8" font-family="monospace" font-size="10" fill="#34d399">82%</text>
+          <text x="0" y="22" font-family="monospace" font-size="10" fill="#64748b">⚡ 18.4 MB/s • FFmpeg stream remuxing</text>
+        </g>
+      </g>
+
+      <!-- Bot Output / Action Buttons inside terminal -->
+      <g transform="translate(0, 144)">
+        <!-- Video option button -->
+        <rect x="0" y="0" width="130" height="34" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1"/>
+        <text x="12" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#fca5a5">🎥 Video 720p</text>
+
+        <!-- Audio MP3 button -->
+        <rect x="140" y="0" width="130" height="34" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+        <text x="152" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#6ee7b7">🎵 MP3 Audio</text>
+
+        <!-- Image to PDF button -->
+        <rect x="280" y="0" width="130" height="34" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="1"/>
+        <text x="292" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#67e8f9">📄 PDF Convert</text>
+      </g>
+
+      <!-- Status Footer Bar inside terminal -->
+      <g transform="translate(0, 196)">
+        <rect x="0" y="0" width="424" height="36" rx="8" fill="#0f172a" stroke="#334155" stroke-opacity="0.6" stroke-width="1"/>
+        <circle cx="16" cy="18" r="4" fill="#10b981"/>
+        <text x="28" y="22" font-family="monospace" font-size="11" fill="#a7f3d0">Status: Listening to webhook tapi.bale.ai:8080</text>
+        <text x="360" y="22" font-family="monospace" font-size="10" fill="#64748b">0.03s latency</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Side Interactive Features & Highlight Cards -->
+  <g transform="translate(528, 86)">
+    <!-- Feature Card 1: YouTube Engine -->
+    <g transform="translate(0, 0)" filter="url(#cardShadow)">
+      <rect x="0" y="0" width="224" height="92" rx="14" fill="url(#glassCard)" stroke="#ef4444" stroke-opacity="0.4" stroke-width="1.2"/>
+      <!-- YouTube Icon -->
+      <rect x="16" y="16" width="34" height="26" rx="6" fill="url(#ytRed)"/>
+      <polygon points="28,23 28,35 38,29" fill="#ffffff"/>
+      <text x="60" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff">YouTube Stream</text>
+      <text x="60" y="44" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f87171">Video &amp; Audio Extraction</text>
+      <text x="16" y="74" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Multi-quality 144p-720p, high-bitrate MP3, channel search</text>
+    </g>
+
+    <!-- Feature Card 2: Image Tools & PDF Maker -->
+    <g transform="translate(0, 108)" filter="url(#cardShadow)">
+      <rect x="0" y="0" width="224" height="92" rx="14" fill="url(#glassCard)" stroke="#06b6d4" stroke-opacity="0.4" stroke-width="1.2"/>
+      <!-- Icon -->
+      <rect x="16" y="16" width="32" height="32" rx="8" fill="#0891b2" fill-opacity="0.3" stroke="#06b6d4" stroke-width="1"/>
+      <path d="M22 28l6-6 10 10M32 26l4-4 4 4" stroke="#67e8f9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="60" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff">Image &amp; PDF Tools</text>
+      <text x="60" y="44" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#38bdf8">Batch Media Engine</text>
+      <text x="16" y="74" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Convert 20 images to PDF, resize, format change, AI cut</text>
+    </g>
+
+    <!-- Feature Card 3: AI, Music & VIP Cloud -->
+    <g transform="translate(0, 216)" filter="url(#cardShadow)">
+      <rect x="0" y="0" width="224" height="94" rx="14" fill="url(#glassCard)" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.2"/>
+      <!-- Icon -->
+      <rect x="16" y="16" width="32" height="32" rx="8" fill="#059669" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+      <path d="M26 22v12M26 26a4 4 0 0 1 8 0v8" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <text x="60" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff">Smart Automation</text>
+      <text x="60" y="44" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#34d399">Shazam, OCR &amp; Cache</text>
+      <text x="16" y="74" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Music finder, Instagram reels, shared cache, VIP tiers</text>
+    </g>
+  </g>
+
+  <!-- Glowing Accent Lines & Circuit Dots -->
+  <g stroke="#10b981" stroke-width="1.5" stroke-opacity="0.5" fill="none">
+    <path d="M508 240 h20"/>
+    <circle cx="508" cy="240" r="3" fill="#10b981"/>
+    <circle cx="528" cy="240" r="3" fill="#10b981"/>
+  </g>
+</svg>

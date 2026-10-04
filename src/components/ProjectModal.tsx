@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { useLanguage } from "@/context/LanguageContext";
+import { useI18n } from "@/i18n/client";
 import { Project } from "@/types";
 import { X, ExternalLink, CheckCircle2, Activity } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,7 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
-  const { language } = useLanguage();
+  const { locale, t } = useI18n();
 
   if (!project) return null;
 
@@ -71,20 +71,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {/* Summary / Description */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--primary-light)] mb-2.5">
-              {language === "fa" ? "معرفی پروژه" : "Overview"}
+              {t("projects.overview")}
             </h4>
             <p className="text-sm sm:text-base text-[var(--text)] leading-relaxed">
-              {project.description[language]}
+              {project.description[locale]}
             </p>
           </div>
 
           {/* Key Features */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--primary-light)] mb-3.5">
-              {language === "fa" ? "ویژگی‌های فنی و برجسته" : "Key Engineering Features"}
+              {t("projects.keyFeatures")}
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {project.features[language].map((feature, idx) => (
+              {project.features[locale].map((feature, idx) => (
                 <div
                   key={idx}
                   className="flex items-start gap-3 p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] text-xs sm:text-sm text-[var(--muted)]"
@@ -102,9 +102,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <Activity className="w-5 h-5 text-[var(--primary-light)] shrink-0" />
               <div className="text-xs sm:text-sm text-[var(--text-bright)] font-semibold">
                 <span className="text-[var(--primary-light)] font-bold">
-                  {language === "fa" ? "دستاورد کلیدی: " : "Key Benchmark: "}
+                  {t("projects.keyBenchmark")}
                 </span>
-                {project.metrics[language]}
+                {project.metrics[locale]}
               </div>
             </div>
           )}
@@ -132,7 +132,26 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   </a>
                 </Button>
               )}
-              {project.liveUrl && (
+              {project.npmUrl && (
+                <Button
+                  size="default"
+                  asChild
+                  className="rounded-xl h-11 px-5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold"
+                >
+                  <a
+                    href={project.npmUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                      <path d="M0 7.334v9.332h7.334V12H10v4.666h14V7.334H0zm4.667 7.333H2.333V9.667h2.334v5zm4.666-4.667H7.333V9.667h2v5zm4.667 4.667h-2.333V9.667h2.333v5zm4.667 0H16.333V9.667h2.334v5z" />
+                    </svg>
+                    <span>NPM</span>
+                  </a>
+                </Button>
+              )}
+              {project.liveUrl && !project.npmUrl && (
                 <Button
                   size="default"
                   asChild
@@ -145,7 +164,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     className="inline-flex items-center gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    <span>{language === "fa" ? "مشاهده نسخه زنده" : "Live Demo"}</span>
+                    <span>{t("projects.liveDemo")}</span>
                   </a>
                 </Button>
               )}
@@ -157,7 +176,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               onClick={onClose}
               className="h-11 px-5"
             >
-              {language === "fa" ? "بستن" : "Close"}
+              {t("projects.close")}
             </Button>
           </div>
         </div>
