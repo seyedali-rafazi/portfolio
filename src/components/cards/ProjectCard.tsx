@@ -7,11 +7,7 @@ import { useI18n } from "@/i18n/client";
 import { Project } from "@/types";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  BaleLogo,
-  NpmLogo,
-  GitHubLogo,
-} from "@/components/icons/BrandLogos";
+import { BaleLogo, NpmLogo, GitHubLogo } from "@/components/icons/BrandLogos";
 import {
   ExternalLink,
   ArrowLeft,
@@ -37,7 +33,7 @@ export interface ProjectCardProps {
  */
 export function resolveProjectCardVariant(
   project: Project,
-  variant: ProjectCardVariant = "auto"
+  variant: ProjectCardVariant = "auto",
 ): "default" | "bot" | "package" {
   if (variant !== "auto") return variant;
   if (project.category === "bot") return "bot";
@@ -99,7 +95,7 @@ export const ProjectCardMedia: React.FC<ProjectCardMediaProps> = ({
             "absolute inset-0 transition-opacity",
             variant === "default"
               ? "bg-gradient-to-t from-[var(--surface)] via-transparent to-black/30 opacity-70 group-hover:opacity-50"
-              : "bg-gradient-to-t from-[var(--surface)] via-transparent to-black/35 opacity-75 group-hover:opacity-55"
+              : "bg-gradient-to-t from-[var(--surface)] via-transparent to-black/35 opacity-75 group-hover:opacity-55",
           )}
         />
       </Link>
@@ -136,7 +132,7 @@ export const ProjectCardMedia: React.FC<ProjectCardMediaProps> = ({
               e.stopPropagation();
               handleCopy(project.botId!, "botId");
             }}
-            className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-black/70 backdrop-blur-md border border-white/20 text-emerald-300 hover:bg-emerald-950 hover:border-emerald-400 transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+            className="px-2.5 py-1 rounded-full text-xs font-bold bg-black/70 backdrop-blur-md border border-white/20 text-emerald-300 hover:bg-emerald-950 hover:border-emerald-400 transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
             title={t("botProjects.copyHandle")}
           >
             {copiedKey === "botId" ? (
@@ -163,7 +159,7 @@ export const ProjectCardMedia: React.FC<ProjectCardMediaProps> = ({
               e.stopPropagation();
               handleCopy(installCmd, "installCmd");
             }}
-            className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-black/75 backdrop-blur-md border border-white/20 text-indigo-300 hover:bg-indigo-950 hover:border-indigo-400 transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+            className="px-2.5 py-1 rounded-full text-xs font-bold bg-black/75 backdrop-blur-md border border-white/20 text-indigo-300 hover:bg-indigo-950 hover:border-indigo-400 transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
             title={t("packageProjects.copyInstall")}
           >
             {copiedKey === "installCmd" ? (
@@ -229,9 +225,9 @@ export const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
             className={cn(
               "px-2.5 py-0.5 text-[11px] font-medium",
               variant === "bot" &&
-                "border-emerald-500/20 text-emerald-300 bg-emerald-500/10",
+                "border-emerald-500/20 text-emerald-700 dark:text-emerald-300 bg-emerald-500/10",
               variant === "package" &&
-                "border-indigo-500/20 text-indigo-300 bg-indigo-500/10"
+                "border-indigo-500/20 text-indigo-700 dark:text-indigo-300 bg-indigo-500/10",
             )}
           >
             {tag}
@@ -244,17 +240,23 @@ export const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
         href={projectUrl}
         className={cn(
           "block transition-colors",
-          variant === "bot" && "group-hover:text-emerald-400",
-          variant === "package" && "group-hover:text-indigo-400",
-          variant === "default" && "group-hover:text-[var(--primary-light)]"
+          variant === "bot" &&
+            "group-hover:text-emerald-600 dark:group-hover:text-emerald-400",
+          variant === "package" &&
+            "group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
+          variant === "default" &&
+            "group-hover:text-[var(--primary)] dark:group-hover:text-[var(--primary-light)]",
         )}
       >
         <h3
           className={cn(
             "text-xl sm:text-2xl font-black text-[var(--text-bright)] mb-2 tracking-tight transition-colors",
-            variant === "bot" && "group-hover:text-emerald-400",
-            variant === "package" && "group-hover:text-indigo-400",
-            variant === "default" && "group-hover:text-[var(--primary-light)]"
+            variant === "bot" &&
+              "group-hover:text-emerald-600 dark:group-hover:text-emerald-400",
+            variant === "package" &&
+              "group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
+            variant === "default" &&
+              "group-hover:text-[var(--primary)] dark:group-hover:text-[var(--primary-light)]",
           )}
         >
           {displayTitle}
@@ -272,19 +274,20 @@ export const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
           className={cn(
             "mb-4 p-2.5 rounded-xl border flex items-center gap-2 text-xs",
             variant === "bot" &&
-              "bg-emerald-950/20 border-emerald-500/30 text-emerald-200",
+              "bg-emerald-500/10 dark:bg-emerald-950/20 border-emerald-500/30 text-emerald-800 dark:text-emerald-200",
             variant === "package" &&
-              "bg-indigo-950/20 border-indigo-500/30 text-indigo-200",
+              "bg-indigo-500/10 dark:bg-indigo-950/20 border-indigo-500/30 text-indigo-800 dark:text-indigo-200",
             variant === "default" &&
-              "bg-[var(--surface-2)] border-[var(--border)]/70 text-[var(--text)]"
+              "bg-[var(--surface-2)] border-[var(--border)]/70 text-[var(--text)]",
           )}
         >
           <Activity
             className={cn(
               "w-3.5 h-3.5 shrink-0",
-              variant === "bot" && "text-emerald-400",
-              variant === "package" && "text-indigo-400",
-              variant === "default" && "text-[var(--primary-light)]"
+              variant === "bot" && "text-emerald-600 dark:text-emerald-400",
+              variant === "package" && "text-indigo-600 dark:text-indigo-400",
+              variant === "default" &&
+                "text-[var(--primary)] dark:text-[var(--primary-light)]",
             )}
           />
           <span className="line-clamp-1 font-medium text-[11px] sm:text-xs">
@@ -320,10 +323,12 @@ export const ProjectCardFooter: React.FC<ProjectCardFooterProps> = ({
         href={projectUrl}
         className={cn(
           "text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 transition-colors cursor-pointer",
-          variant === "bot" && "text-emerald-400 hover:text-white",
-          variant === "package" && "text-indigo-400 hover:text-white",
+          variant === "bot" &&
+            "text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-white",
+          variant === "package" &&
+            "text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-white",
           variant === "default" &&
-            "text-[var(--primary-light)] group-hover:text-white"
+            "text-[var(--primary)] dark:text-[var(--primary-light)] group-hover:text-[var(--primary-dark)] dark:group-hover:text-white",
         )}
       >
         <span>{t("projects.viewDetails")}</span>
@@ -369,12 +374,13 @@ export const ProjectCardFooter: React.FC<ProjectCardFooterProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "w-8 h-8 rounded-lg flex items-center justify-center border border-[var(--border)] text-[var(--muted)] hover:text-white transition-all cursor-pointer",
-              variant === "bot" && "hover:border-emerald-500 hover:bg-emerald-500/10",
+              "w-8 h-8 rounded-lg flex items-center justify-center border border-[var(--border)] text-[var(--muted)] hover:text-[var(--text-bright)] transition-all cursor-pointer",
+              variant === "bot" &&
+                "hover:border-emerald-500 hover:bg-emerald-500/10",
               variant === "package" &&
                 "hover:border-indigo-500 hover:bg-indigo-500/10",
               variant === "default" &&
-                "hover:border-[var(--primary)] hover:bg-[var(--primary)]/10"
+                "hover:border-[var(--primary)] hover:bg-[var(--primary)]/10",
             )}
             aria-label={`${project.title} GitHub`}
             title={t("projects.github")}
@@ -389,7 +395,7 @@ export const ProjectCardFooter: React.FC<ProjectCardFooterProps> = ({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-8 h-8 rounded-lg flex items-center justify-center border border-[var(--border)] text-[var(--muted)] hover:text-white hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all cursor-pointer"
+            className="w-8 h-8 rounded-lg flex items-center justify-center border border-[var(--border)] text-[var(--muted)] hover:text-[var(--primary)] dark:hover:text-white hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all cursor-pointer"
             aria-label={`${project.title} Live Demo`}
             title={t("projects.liveDemo")}
           >
@@ -427,7 +433,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           "hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/15",
         effectiveVariant === "default" &&
           "hover:border-[var(--primary)]/50 hover:shadow-2xl hover:shadow-[var(--primary)]/20",
-        className
+        className,
       )}
     >
       {/* Banner / Media */}
@@ -463,9 +469,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
    ========================================================================= */
 
 export const BotProjectCard: React.FC<Omit<ProjectCardProps, "variant">> = (
-  props
+  props,
 ) => <ProjectCard {...props} variant="bot" />;
 
 export const PackageProjectCard: React.FC<Omit<ProjectCardProps, "variant">> = (
-  props
+  props,
 ) => <ProjectCard {...props} variant="package" />;

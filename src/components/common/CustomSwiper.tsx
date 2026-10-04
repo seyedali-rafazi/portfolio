@@ -84,15 +84,15 @@ export interface CustomSwiperProps<T = any> {
 
 const ACCENT_BUTTON_STYLES: Record<SwiperAccent, string> = {
   primary:
-    "border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-[var(--primary)]/15 hover:border-[var(--primary)] hover:text-white hover:scale-105 active:scale-95 shadow-md",
+    "border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-[var(--primary)]/15 hover:border-[var(--primary)] hover:text-[var(--primary-dark)] dark:hover:text-white hover:scale-105 active:scale-95 shadow-md",
   emerald:
-    "border-emerald-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-emerald-500/15 hover:border-emerald-500 hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-emerald-950/20",
+    "border-emerald-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-emerald-500/15 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-emerald-950/20",
   indigo:
-    "border-indigo-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-indigo-500/15 hover:border-indigo-500 hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-indigo-950/20",
+    "border-indigo-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-indigo-500/15 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-indigo-950/20",
   rose:
-    "border-rose-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-rose-500/15 hover:border-rose-500 hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-rose-950/20",
+    "border-rose-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-rose-500/15 hover:border-rose-500 hover:text-rose-600 dark:hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-rose-950/20",
   amber:
-    "border-amber-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-amber-500/15 hover:border-amber-500 hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-amber-950/20",
+    "border-amber-500/40 bg-[var(--surface-2)] text-[var(--text-bright)] hover:bg-amber-500/15 hover:border-amber-500 hover:text-amber-600 dark:hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-amber-950/20",
 };
 
 export function CustomSwiper<T = any>({
@@ -173,11 +173,11 @@ export function CustomSwiper<T = any>({
                   <span
                     className={cn(
                       "flex items-center gap-1.5 text-xs uppercase font-bold tracking-wider",
-                      accentColor === "emerald" && "text-emerald-400",
-                      accentColor === "indigo" && "text-indigo-400",
+                      accentColor === "emerald" && "text-emerald-600 dark:text-emerald-400",
+                      accentColor === "indigo" && "text-indigo-600 dark:text-indigo-400",
                       accentColor === "primary" && "text-[var(--muted)]",
-                      accentColor === "rose" && "text-rose-400",
-                      accentColor === "amber" && "text-amber-400"
+                      accentColor === "rose" && "text-rose-600 dark:text-rose-400",
+                      accentColor === "amber" && "text-amber-600 dark:text-amber-400"
                     )}
                   >
                     {headerBadge.icon}

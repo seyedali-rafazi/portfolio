@@ -21,7 +21,11 @@ export const PERSONAL_INFO = {
   },
   socials: [
     { name: "GitHub", short: "GH", url: "https://github.com/seyedalirafazi" },
-    { name: "LinkedIn", short: "in", url: "https://linkedin.com/in/seyedalirafazi" },
+    {
+      name: "LinkedIn",
+      short: "in",
+      url: "https://linkedin.com/in/seyedalirafazi",
+    },
     { name: "Telegram", short: "TG", url: "https://t.me/seyedalirafazi" },
     { name: "X", short: "X", url: "https://x.com/seyedalirafazi" },
   ],
@@ -32,7 +36,7 @@ export const PERSONAL_INFO = {
 };
 
 export const CONTACT_DATA: ContactInfo = {
-  email: "seyedali.rafazi@gmail.com",
+  email: "seyedalirafazi80@gmail.com",
   phone: "+98 912 345 6789",
   location: {
     fa: "تهران، ایران",
@@ -248,7 +252,14 @@ export const FEATURED_PROJECTS: Project[] = [
     title: "Artisa Gallery",
     titleFa: "آرتیسا گالری",
     category: "fullstack",
-    tags: ["Next.js 16", "React 19", "Tailwind CSS v4", "TanStack Query", "E-Commerce", "Admin CMS"],
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS v4",
+      "TanStack Query",
+      "E-Commerce",
+      "Admin CMS",
+    ],
     image: "/project-artisa.svg",
     summary: {
       fa: "پلتفرم فروشگاهی آنلاین آثار هنری و صنایع دستی فاخر با معماری Next.js 16 App Router، مدیریت سفارشات و پنل ادمین.",
@@ -328,7 +339,14 @@ export const FEATURED_PROJECTS: Project[] = [
     title: "KihanNama",
     titleFa: "کیهان‌نما",
     category: "geospatial",
-    tags: ["React 19", "CesiumJS", "Resium", "FastAPI", "3D Globe", "Orbital Telemetry"],
+    tags: [
+      "React 19",
+      "CesiumJS",
+      "Resium",
+      "FastAPI",
+      "3D Globe",
+      "Orbital Telemetry",
+    ],
     image: "/project-kihannama.jpg",
     summary: {
       fa: "پلتفرم ۳بعدی تعاملی هوافضا برای رصد ماهواره‌ها، شبیه‌سازی مدارهای کپلری و کاوشگر ایستگاه‌های فضایی.",
@@ -358,20 +376,44 @@ export const FEATURED_PROJECTS: Project[] = [
     },
     techStackDetailed: [
       {
-        category: { fa: "هسته سه‌بعدی و فرانت‌اند", en: "3D Engine & Frontend" },
-        items: ["React 19", "CesiumJS 1.142", "Resium 1.23", "Vite 8", "TypeScript 5"],
+        category: {
+          fa: "هسته سه‌بعدی و فرانت‌اند",
+          en: "3D Engine & Frontend",
+        },
+        items: [
+          "React 19",
+          "CesiumJS 1.142",
+          "Resium 1.23",
+          "Vite 8",
+          "TypeScript 5",
+        ],
       },
       {
         category: { fa: "کامپوننت و مدیریت استیت", en: "UI & State" },
-        items: ["Material UI (MUI 9)", "Emotion", "TanStack React Query v5", "React Router 7"],
+        items: [
+          "Material UI (MUI 9)",
+          "Emotion",
+          "TanStack React Query v5",
+          "React Router 7",
+        ],
       },
       {
         category: { fa: "بک‌اند و موتور محاسبات", en: "Backend & Propulsion" },
-        items: ["Python 3.10+", "FastAPI", "Uvicorn ASGI", "SGP4 Orbit Propagator", "CZML Generator"],
+        items: [
+          "Python 3.10+",
+          "FastAPI",
+          "Uvicorn ASGI",
+          "SGP4 Orbit Propagator",
+          "CZML Generator",
+        ],
       },
       {
         category: { fa: "پایگاه داده", en: "Databases" },
-        items: ["PostgreSQL (Neon Serverless)", "MongoDB (Motor Driver)", "SQLAlchemy Async"],
+        items: [
+          "PostgreSQL (Neon Serverless)",
+          "MongoDB (Motor Driver)",
+          "SQLAlchemy Async",
+        ],
       },
     ],
     challenges: [
@@ -408,7 +450,14 @@ export const FEATURED_PROJECTS: Project[] = [
     title: "AsemanYar",
     titleFa: "آسمان‌یار",
     category: "geospatial",
-    tags: ["React 19", "MapLibre GL", "deck.gl 9", "FastAPI", "ADS-B", "Real-Time Telemetry"],
+    tags: [
+      "React 19",
+      "MapLibre GL",
+      "deck.gl 9",
+      "FastAPI",
+      "ADS-B",
+      "Real-Time Telemetry",
+    ],
     image: "/project-asemanyar.jpg",
     summary: {
       fa: "سامانه پایش هوایی و رهگیری بلادرنگ پروازها بر فراز ایران با لایه‌های WebGL و ابزارهای نقشه‌برداری تاکتیکی.",
@@ -439,19 +488,38 @@ export const FEATURED_PROJECTS: Project[] = [
     techStackDetailed: [
       {
         category: { fa: "موتور نقشه و رندر", en: "GIS & Map Engines" },
-        items: ["MapLibre GL 5", "deck.gl 9 (IconLayer, PathLayer)", "Turf.js Geodesics"],
+        items: [
+          "MapLibre GL 5",
+          "deck.gl 9 (IconLayer, PathLayer)",
+          "Turf.js Geodesics",
+        ],
       },
       {
         category: { fa: "فرانت‌اند و تایپ‌سیفتی", en: "Frontend & UI" },
-        items: ["React 19", "TypeScript 5", "Material UI 7", "Vite 5", "@tanstack/react-virtual"],
+        items: [
+          "React 19",
+          "TypeScript 5",
+          "Material UI 7",
+          "Vite 5",
+          "@tanstack/react-virtual",
+        ],
       },
       {
         category: { fa: "سرویس‌های سمت سرور", en: "Backend & Ingestion" },
-        items: ["Python 3.10+", "FastAPI", "OpenSky Network API", "AirLabs ADS-B Feed"],
+        items: [
+          "Python 3.10+",
+          "FastAPI",
+          "OpenSky Network API",
+          "AirLabs ADS-B Feed",
+        ],
       },
       {
         category: { fa: "عملکرد و کشینگ", en: "Performance & Caching" },
-        items: ["In-Memory Telemetry Ring Buffer", "Disk Cache Quota Shield", "Dual-Channel State Subscriptions"],
+        items: [
+          "In-Memory Telemetry Ring Buffer",
+          "Disk Cache Quota Shield",
+          "Dual-Channel State Subscriptions",
+        ],
       },
     ],
     challenges: [
@@ -488,7 +556,14 @@ export const FEATURED_PROJECTS: Project[] = [
     title: "Langarnama",
     titleFa: "لنگرنما",
     category: "geospatial",
-    tags: ["React 19", "MapLibre GL", "deck.gl 9", "FastAPI", "AIS Live Stream", "Nautical GIS"],
+    tags: [
+      "React 19",
+      "MapLibre GL",
+      "deck.gl 9",
+      "FastAPI",
+      "AIS Live Stream",
+      "Nautical GIS",
+    ],
     image: "/project-langarnama.jpg",
     summary: {
       fa: "سامانه اطلاعات مکانی و نظارت دریایی بلادرنگ با رصد کشتی‌ها در خلیج فارس، دریای عمان و خزر بر اساس داده‌های AIS.",
@@ -518,20 +593,42 @@ export const FEATURED_PROJECTS: Project[] = [
     },
     techStackDetailed: [
       {
-        category: { fa: "موتور نقشه و لایه‌های دریایی", en: "Maritime GIS & Visualization" },
-        items: ["MapLibre GL 4.7+", "deck.gl 9 (IconLayer, PathLayer, ScatterplotLayer)", "Turf.js Nautical Calculations"],
+        category: {
+          fa: "موتور نقشه و لایه‌های دریایی",
+          en: "Maritime GIS & Visualization",
+        },
+        items: [
+          "MapLibre GL 4.7+",
+          "deck.gl 9 (IconLayer, PathLayer, ScatterplotLayer)",
+          "Turf.js Nautical Calculations",
+        ],
       },
       {
         category: { fa: "فرانت‌اند و تایپ‌سیفتی", en: "Frontend & UI" },
-        items: ["React 19", "TypeScript 5", "Material UI 7", "Vite 5", "@tanstack/react-virtual"],
+        items: [
+          "React 19",
+          "TypeScript 5",
+          "Material UI 7",
+          "Vite 5",
+          "@tanstack/react-virtual",
+        ],
       },
       {
         category: { fa: "استریم و پردازش داده", en: "Streaming & Backend" },
-        items: ["Python 3.10+", "FastAPI", "AISStream.io WebSocket Feed", "Zero-Latency Spatial Indexer"],
+        items: [
+          "Python 3.10+",
+          "FastAPI",
+          "AISStream.io WebSocket Feed",
+          "Zero-Latency Spatial Indexer",
+        ],
       },
       {
         category: { fa: "پایداری و آفلاین", en: "Resilience & Fallback" },
-        items: ["Persian Gulf & Caspian Baseline Dataset", "20 Hz Motion Interpolation", "Token-Free Vector Basemaps"],
+        items: [
+          "Persian Gulf & Caspian Baseline Dataset",
+          "20 Hz Motion Interpolation",
+          "Token-Free Vector Basemaps",
+        ],
       },
     ],
     challenges: [
@@ -571,7 +668,15 @@ export const BOT_PROJECTS: Project[] = [
     title: "Bale Downloader Bot",
     titleFa: "ربات دانلودر و دستیار هوشمند بله",
     category: "bot",
-    tags: ["Python 3.10+", "Bale API", "yt-dlp", "FFmpeg", "Pillow", "AI Assistant", "OCR"],
+    tags: [
+      "Python 3.10+",
+      "Bale API",
+      "yt-dlp",
+      "FFmpeg",
+      "Pillow",
+      "AI Assistant",
+      "OCR",
+    ],
     image: "/project-balebot.svg",
     botId: "@PerYTDownloaderbot",
     botUrl: "https://ble.ir/PerYTDownloaderbot",
@@ -612,20 +717,51 @@ export const BOT_PROJECTS: Project[] = [
     },
     techStackDetailed: [
       {
-        category: { fa: "معماری ربات و سرور", en: "Bot Architecture & Runtime" },
-        items: ["Python 3.10+", "python-telegram-bot 20.x", "Bale Bot API (tapi.bale.ai)", "Webhook & Polling", "Asyncio Worker Queue"],
+        category: {
+          fa: "معماری ربات و سرور",
+          en: "Bot Architecture & Runtime",
+        },
+        items: [
+          "Python 3.10+",
+          "python-telegram-bot 20.x",
+          "Bale Bot API (tapi.bale.ai)",
+          "Webhook & Polling",
+          "Asyncio Worker Queue",
+        ],
       },
       {
-        category: { fa: "موتور پردازش رسانه و ویدیو", en: "Media Engines & FFmpeg" },
-        items: ["yt-dlp", "FFmpeg", "Pillow (PIL)", "Mutagen (ID3 Tags)", "ShazamIO Engine"],
+        category: {
+          fa: "موتور پردازش رسانه و ویدیو",
+          en: "Media Engines & FFmpeg",
+        },
+        items: [
+          "yt-dlp",
+          "FFmpeg",
+          "Pillow (PIL)",
+          "Mutagen (ID3 Tags)",
+          "ShazamIO Engine",
+        ],
       },
       {
-        category: { fa: "خزشگر وب و ابزارهای هوش مصنوعی", en: "Web Automation & AI" },
-        items: ["Playwright (Chromium)", "BeautifulSoup4", "OpenAI API", "Tesseract OCR Engine"],
+        category: {
+          fa: "خزشگر وب و ابزارهای هوش مصنوعی",
+          en: "Web Automation & AI",
+        },
+        items: [
+          "Playwright (Chromium)",
+          "BeautifulSoup4",
+          "OpenAI API",
+          "Tesseract OCR Engine",
+        ],
       },
       {
         category: { fa: "داده‌ها و پایداری", en: "Data & Storage" },
-        items: ["aiosqlite / SQLite", "PostgreSQL", "Shared Hash Cache", "Automatic GC Cleaner"],
+        items: [
+          "aiosqlite / SQLite",
+          "PostgreSQL",
+          "Shared Hash Cache",
+          "Automatic GC Cleaner",
+        ],
       },
     ],
     challenges: [
@@ -663,7 +799,15 @@ export const PACKAGE_PROJECTS: Project[] = [
     title: "Mapixa",
     titleFa: "کتابخانه مپیکسا (Mapixa)",
     category: "package",
-    tags: ["React", "MapLibre GL", "TypeScript", "NPM Package", "GIS", "Lucide Icons", "Pure CSS"],
+    tags: [
+      "React",
+      "MapLibre GL",
+      "TypeScript",
+      "NPM Package",
+      "GIS",
+      "Lucide Icons",
+      "Pure CSS",
+    ],
     image: "/project-mapixa.svg",
     githubUrl: "https://github.com/seyedali-rafazi/Mapixa",
     liveUrl: "https://www.npmjs.com/package/mapixa",
@@ -704,20 +848,52 @@ export const PACKAGE_PROJECTS: Project[] = [
     },
     techStackDetailed: [
       {
-        category: { fa: "هسته و معماری کتابخانه", en: "Core Architecture & Runtime" },
-        items: ["React 18+", "MapLibre GL JS", "react-map-gl", "TypeScript", "ESM & CJS Dual Output"],
+        category: {
+          fa: "هسته و معماری کتابخانه",
+          en: "Core Architecture & Runtime",
+        },
+        items: [
+          "React 18+",
+          "MapLibre GL JS",
+          "react-map-gl",
+          "TypeScript",
+          "ESM & CJS Dual Output",
+        ],
       },
       {
-        category: { fa: "موتور محاسباتی GIS و هندسی", en: "Geospatial & Computational Engines" },
-        items: ["GeoJSON Spec", "Haversine Geodesic Math", "Spherical Polygon Area", "Turf.js Algorithms", "HTML5 Canvas API"],
+        category: {
+          fa: "موتور محاسباتی GIS و هندسی",
+          en: "Geospatial & Computational Engines",
+        },
+        items: [
+          "GeoJSON Spec",
+          "Haversine Geodesic Math",
+          "Spherical Polygon Area",
+          "Turf.js Algorithms",
+          "HTML5 Canvas API",
+        ],
       },
       {
-        category: { fa: "سیستم رابط کاربری و استایل", en: "UI & Styling System" },
-        items: ["Pure CSS (Zero-Bloat)", "CSS Custom Properties", "Lucide Icons", "Glassmorphic Theme", "Keyboard Navigation"],
+        category: {
+          fa: "سیستم رابط کاربری و استایل",
+          en: "UI & Styling System",
+        },
+        items: [
+          "Pure CSS (Zero-Bloat)",
+          "CSS Custom Properties",
+          "Lucide Icons",
+          "Glassmorphic Theme",
+          "Keyboard Navigation",
+        ],
       },
       {
         category: { fa: "توزیع و پکیجینگ", en: "Packaging & Distribution" },
-        items: ["NPM Registry (mapixa)", "Semantic Versioning", "Tree-shakable Exports", "GitHub Open Source"],
+        items: [
+          "NPM Registry (mapixa)",
+          "Semantic Versioning",
+          "Tree-shakable Exports",
+          "GitHub Open Source",
+        ],
       },
     ],
     challenges: [
@@ -754,5 +930,3 @@ export const PROJECTS: Project[] = [
   ...BOT_PROJECTS,
   ...PACKAGE_PROJECTS,
 ];
-
-

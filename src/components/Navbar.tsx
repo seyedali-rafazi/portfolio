@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n/client";
 import { useTheme } from "@/context/ThemeContext";
 import { Moon, Sun, Menu, X, Globe } from "lucide-react";
+import { Logo } from "@/components/common/Logo";
 
 export const Navbar: React.FC = () => {
   const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale } = useI18n();
@@ -44,11 +45,10 @@ export const Navbar: React.FC = () => {
         <div className="flex-1 flex items-center justify-start">
           <Link
             href={getLocalizedHref("/")}
-            className="text-2xl font-black tracking-tighter text-[var(--text)] group flex items-center gap-1 focus:outline-none"
+            className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-xl"
             aria-label={locale === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
           >
-            <span className="transition-transform group-hover:scale-105">S</span>
-            <span className="text-[var(--primary)] text-shadow-glow">R</span>
+            <Logo size="md" variant="badge" locale={locale} />
           </Link>
         </div>
 

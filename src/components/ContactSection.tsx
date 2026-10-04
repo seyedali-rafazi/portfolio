@@ -4,7 +4,14 @@ import React, { useState } from "react";
 import { useI18n } from "@/i18n/client";
 import { CONTACT_DATA } from "@/data/portfolioData";
 import { GlobeCanvas } from "./GlobeCanvas";
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,7 +32,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +53,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className={`relative ${isStandalone ? "py-4 sm:py-6" : "py-24 sm:py-32"} ${className}`}>
+    <section
+      id="contact"
+      className={`relative ${isStandalone ? "py-4 sm:py-6" : "py-24 sm:py-32"} ${className}`}
+    >
       <div className="portfolio-container">
         {/* Contact Container Box */}
         <div className="relative border border-[var(--border)] rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--surface)] via-[var(--surface-2)] to-[var(--surface)] p-8 sm:p-12 lg:p-14 shadow-2xl">
@@ -80,7 +92,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] group-hover:scale-105 transition-transform shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <span className="font-mono text-xs sm:text-sm">
+                  <span className="text-xs sm:text-sm">
                     {CONTACT_DATA.email}
                   </span>
                 </a>
@@ -92,7 +104,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] group-hover:scale-105 transition-transform shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <span className="font-mono text-xs sm:text-sm" dir="ltr">
+                  <span className="text-xs sm:text-sm" dir="ltr">
                     {CONTACT_DATA.phone}
                   </span>
                 </a>
@@ -115,7 +127,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                       placeholder={t("contact.namePlaceholder")}
                     />
                   </div>
@@ -124,7 +138,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       placeholder={t("contact.emailPlaceholder")}
                     />
                   </div>
@@ -135,7 +151,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     rows={5}
                     required
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     placeholder={t("contact.messagePlaceholder")}
                   />
                 </div>
@@ -156,6 +174,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                 <div className="flex justify-end pt-2">
                   <Button
+                    variant="outline"
                     type="submit"
                     size="lg"
                     disabled={status === "submitting"}
@@ -166,7 +185,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         ? t("contact.sending")
                         : t("contact.submitBtn")}
                     </span>
-                    <Send className={`w-4 h-4 ${isRTL ? "scale-x-[-1]" : ""}`} />
+                    <Send
+                      className={`w-4 h-4 ${isRTL ? "scale-x-[-1]" : ""}`}
+                    />
                   </Button>
                 </div>
               </form>

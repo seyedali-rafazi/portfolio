@@ -44,9 +44,13 @@ export const AboutStatsSkillsSection: React.FC = () => {
         );
       case "nextjs":
         return (
-          <span className="font-black text-sm tracking-tight text-white flex items-center justify-center">
-            N
-          </span>
+          <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" className="fill-zinc-900 dark:fill-white" />
+            <path
+              d="M15.5 16.5L8.5 7.5H7v9h1.5v-6.5l7 9h1.5v-9H15.5v6.5z"
+              className="fill-white dark:fill-zinc-900"
+            />
+          </svg>
         );
       case "typescript":
         return (
@@ -162,7 +166,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
             <div className="pt-6 mt-8 border-t border-[var(--border)]/60 flex items-center justify-between">
               <Link
                 href={getLocalizedHref("/about")}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary-light)] hover:text-white group w-fit transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white group w-fit transition-colors cursor-pointer"
               >
                 <span>{t("about.learnMore")}</span>
                 {isRTL ? (
@@ -217,7 +221,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
 
             <Link
               href={getLocalizedHref("/skills")}
-              className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
+              className="text-xs sm:text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
             >
               <span>{locale === "fa" ? "مشاهده سطح تسلط همه مهارت‌ها" : "View Detailed Skills"}</span>
               {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
@@ -240,7 +244,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                   <span className="text-xs sm:text-sm font-semibold text-[var(--text-bright)] block truncate">
                     {skill.name}
                   </span>
-                  <span className="text-xs text-[var(--primary-light)] font-mono font-medium">
+                  <span className="text-xs text-[var(--primary-light)]  font-medium">
                     {skill.level}%
                   </span>
                 </div>
@@ -263,7 +267,12 @@ export const AboutStatsSkillsSection: React.FC = () => {
               <div className="flex items-center gap-3">
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center border border-[var(--border)] shrink-0"
-                  style={{ backgroundColor: `${selectedSkill.color}15` }}
+                  style={{
+                    backgroundColor:
+                      selectedSkill.id === "nextjs"
+                        ? "var(--surface-3)"
+                        : `${selectedSkill.color}15`,
+                  }}
                 >
                   {renderSkillIcon(selectedSkill.id, selectedSkill.color)}
                 </div>
@@ -291,7 +300,10 @@ export const AboutStatsSkillsSection: React.FC = () => {
                   className="h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${selectedSkill.level}%`,
-                    backgroundColor: selectedSkill.color,
+                    backgroundColor:
+                      selectedSkill.id === "nextjs"
+                        ? "var(--text-bright)"
+                        : selectedSkill.color,
                   }}
                 />
               </div>

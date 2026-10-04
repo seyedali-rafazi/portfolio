@@ -35,7 +35,7 @@ export const ProjectsSection: React.FC = () => {
 
           <Link
             href={getLocalizedHref("/projects")}
-            className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
+            className="text-xs sm:text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
           >
             <span>{t("projects.viewAll")}</span>
             {isRTL ? (
@@ -60,9 +60,9 @@ export const ProjectsSection: React.FC = () => {
               <div className="mb-2">
                 <Badge
                   variant="primarySubtle"
-                  className="px-3 py-1 text-xs border-emerald-500/30 text-emerald-300 bg-emerald-950/40"
+                  className="px-3 py-1 text-xs border-emerald-500/30 text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 dark:bg-emerald-950/40"
                 >
-                  <Bot className="w-3.5 h-3.5 text-emerald-400" />
+                  <Bot className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   <span>{t("botProjects.badge")}</span>
                 </Badge>
               </div>
@@ -73,7 +73,7 @@ export const ProjectsSection: React.FC = () => {
 
             <Link
               href={getLocalizedHref("/projects")}
-              className="text-xs sm:text-sm font-semibold text-emerald-400 hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
+              className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
             >
               <span>{t("projects.viewAll")}</span>
               {isRTL ? (
@@ -99,9 +99,9 @@ export const ProjectsSection: React.FC = () => {
               <div className="mb-2">
                 <Badge
                   variant="primarySubtle"
-                  className="px-3 py-1 text-xs border-indigo-500/30 text-indigo-300 bg-indigo-950/40"
+                  className="px-3 py-1 text-xs border-indigo-500/30 text-indigo-700 dark:text-indigo-300 bg-indigo-500/10 dark:bg-indigo-950/40"
                 >
-                  <Package className="w-3.5 h-3.5 text-indigo-400" />
+                  <Package className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>{t("packageProjects.badge")}</span>
                 </Badge>
               </div>
@@ -112,7 +112,7 @@ export const ProjectsSection: React.FC = () => {
 
             <Link
               href={getLocalizedHref("/projects")}
-              className="text-xs sm:text-sm font-semibold text-indigo-400 hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
+              className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-white inline-flex items-center gap-2 transition-colors self-start sm:self-auto cursor-pointer"
             >
               <span>{t("projects.viewAll")}</span>
               {isRTL ? (

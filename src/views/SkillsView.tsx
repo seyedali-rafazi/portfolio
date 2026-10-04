@@ -77,7 +77,15 @@ export function SkillsView({ locale }: SkillsViewProps) {
           </svg>
         );
       case "nextjs":
-        return <span className="font-black text-xl tracking-tight text-white" aria-hidden="true">N</span>;
+        return (
+          <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" className="fill-zinc-900 dark:fill-white" />
+            <path
+              d="M15.5 16.5L8.5 7.5H7v9h1.5v-6.5l7 9h1.5v-9H15.5v6.5z"
+              className="fill-white dark:fill-zinc-900"
+            />
+          </svg>
+        );
       case "typescript":
         return (
           <span className="font-bold text-base tracking-tight text-[#3178C6] bg-[#3178C6]/15 px-2 py-0.5 rounded" aria-hidden="true">
@@ -162,7 +170,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
         <div className="portfolio-container">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--primary-light)] mb-6">
-            <Link href={getLocalizedHref("/")} className="hover:text-white transition-colors">
+            <Link href={getLocalizedHref("/")} className="hover:text-[var(--text-bright)] transition-colors">
               {t("nav.home")}
             </Link>
             <span className="opacity-40" aria-hidden="true">/</span>
@@ -222,7 +230,12 @@ export function SkillsView({ locale }: SkillsViewProps) {
                   <div className="flex items-center justify-between mb-5">
                     <div
                       className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] shrink-0"
-                      style={{ backgroundColor: `${skill.color}15` }}
+                      style={{
+                        backgroundColor:
+                          skill.id === "nextjs"
+                            ? "var(--surface-3)"
+                            : `${skill.color}15`,
+                      }}
                     >
                       {renderSkillIcon(skill.id, skill.color)}
                     </div>
@@ -251,7 +264,10 @@ export function SkillsView({ locale }: SkillsViewProps) {
                     className="h-full rounded-full transition-all duration-700"
                     style={{
                       width: `${skill.level}%`,
-                      backgroundColor: skill.color,
+                      backgroundColor:
+                        skill.id === "nextjs"
+                          ? "var(--text-bright)"
+                          : skill.color,
                     }}
                   />
                 </div>
@@ -269,7 +285,12 @@ export function SkillsView({ locale }: SkillsViewProps) {
               <DialogHeader className="flex flex-row items-center gap-4 text-start space-y-0 pb-2">
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] shrink-0"
-                  style={{ backgroundColor: `${selectedSkill.color}15` }}
+                  style={{
+                    backgroundColor:
+                      selectedSkill.id === "nextjs"
+                        ? "var(--surface-3)"
+                        : `${selectedSkill.color}15`,
+                  }}
                 >
                   {renderSkillIcon(selectedSkill.id, selectedSkill.color)}
                 </div>
@@ -297,7 +318,10 @@ export function SkillsView({ locale }: SkillsViewProps) {
                     className="h-full rounded-full transition-all"
                     style={{
                       width: `${selectedSkill.level}%`,
-                      backgroundColor: selectedSkill.color,
+                      backgroundColor:
+                        selectedSkill.id === "nextjs"
+                          ? "var(--text-bright)"
+                          : selectedSkill.color,
                     }}
                   />
                 </div>

@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/client";
+import { Logo } from "@/components/common/Logo";
 
 export const Footer: React.FC = () => {
   const { locale, t, i18n, getLocalizedHref, alternateLocale } = useI18n();
@@ -10,8 +11,15 @@ export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-[var(--border)] py-12 sm:py-16 relative bg-[var(--bg)]/90 backdrop-blur-md mt-auto">
       <div className="portfolio-container flex flex-col sm:flex-row items-center justify-between gap-6 text-xs sm:text-sm text-[var(--muted)]">
-        {/* Copyright */}
-        <div className="flex items-center gap-2 text-center sm:text-start">
+        {/* Brand & Copyright */}
+        <div className="flex items-center gap-3 text-center sm:text-start">
+          <Link
+            href={getLocalizedHref("/")}
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg"
+            aria-label="Home"
+          >
+            <Logo size="sm" variant="badge" withGlow={false} locale={locale} />
+          </Link>
           <span>{t("footer.copyright")}</span>
         </div>
 
@@ -51,7 +59,7 @@ export const Footer: React.FC = () => {
           <button
             type="button"
             onClick={() => i18n.changeLanguage(alternateLocale)}
-            className="font-semibold text-[var(--primary-light)] hover:text-white transition-colors cursor-pointer"
+            className="font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white transition-colors cursor-pointer"
             aria-label={locale === "fa" ? "Switch language to English" : "تغییر زبان به فارسی"}
           >
             {t("footer.switchLang")}

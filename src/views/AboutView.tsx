@@ -38,7 +38,7 @@ export function AboutView({ locale }: AboutViewProps) {
         <div className="portfolio-container">
           {/* Breadcrumb / Page Label */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--primary-light)] mb-6">
-            <Link href={getLocalizedHref("/")} className="hover:text-white transition-colors">
+            <Link href={getLocalizedHref("/")} className="hover:text-[var(--text-bright)] transition-colors">
               {t("nav.home")}
             </Link>
             <span className="opacity-40" aria-hidden="true">/</span>

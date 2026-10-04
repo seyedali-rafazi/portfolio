@@ -102,14 +102,14 @@ html.light {
 
   --text: #0e1726;
   --text-bright: #070b12;
-  --muted: #536279;
-  --muted-2: #7c8ba1;
+  --muted: #475569;
+  --muted-2: #64748b;
 
-  --primary: #0070f3;
-  --primary-light: #258afb;
-  --primary-dark: #0056bd;
-  --glow: rgba(0, 112, 243, 0.12);
-  --glow-strong: rgba(0, 112, 243, 0.25);
+  --primary: #0066e6;
+  --primary-light: #0056bd;
+  --primary-dark: #004599;
+  --glow: rgba(0, 102, 230, 0.12);
+  --glow-strong: rgba(0, 102, 230, 0.25);
 }
 
 @layer base {

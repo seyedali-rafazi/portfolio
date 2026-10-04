@@ -56,7 +56,7 @@ export function ProjectsView({ locale }: ProjectsViewProps) {
         <div className="portfolio-container">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--primary-light)] mb-6">
-            <Link href={getLocalizedHref("/")} className="hover:text-white transition-colors">
+            <Link href={getLocalizedHref("/")} className="hover:text-[var(--text-bright)] transition-colors">
               {t("nav.home")}
             </Link>
             <span className="opacity-40" aria-hidden="true">/</span>
@@ -146,7 +146,7 @@ export function ProjectsView({ locale }: ProjectsViewProps) {
 
                       {/* Action Link */}
                       <div className="mt-auto pt-4 border-t border-[var(--border)]/50 flex items-center justify-between">
-                        <span className="text-xs sm:text-sm font-semibold text-[var(--primary-light)] group-hover:text-white inline-flex items-center gap-2 transition-colors">
+                        <span className="text-xs sm:text-sm font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] group-hover:text-[var(--primary-dark)] dark:group-hover:text-white inline-flex items-center gap-2 transition-colors">
                           <span>{t("projects.viewDetails")}</span>
                           {isRTL ? (
                             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

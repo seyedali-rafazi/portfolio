@@ -11,7 +11,6 @@ import { Badge } from "@/components/ui/badge";
 export const HeroSection: React.FC = () => {
   const { locale, t, isRTL, getLocalizedHref } = useI18n();
 
-
   const socials = [
     { name: "GitHub", url: "https://github.com/seyedalirafazi", icon: "GH" },
     {
@@ -42,9 +41,7 @@ export const HeroSection: React.FC = () => {
                 className="text-xs sm:text-sm px-4 py-1"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)] animate-pulse" />
-                <span>
-                  {t("hero.intro")}
-                </span>
+                <span>{t("hero.intro")}</span>
               </Badge>
             </div>
 
@@ -87,14 +84,16 @@ export const HeroSection: React.FC = () => {
             {/* CTA Buttons */}
             <div className="flex items-center gap-4 flex-wrap justify-center lg:justify-start mb-8">
               <Button
-                asChild
+                variant="outline"
                 size="lg"
-                className="rounded-xl h-12 px-8 text-sm sm:text-base font-bold"
+                asChild
+                className="gap-2.5 rounded-xl cursor-pointer h-12 px-8 text-sm sm:text-base font-semibold"
               >
-                <Link href={getLocalizedHref("/projects")} className="gap-2.5">
-                  <span>
-                    {t("hero.viewProjects")}
-                  </span>
+                <Link
+                  href={getLocalizedHref("/projects")}
+                  className="flex items-center justify-center gap-2.5"
+                >
+                  <span>{t("hero.viewProjects")}</span>
                   {isRTL ? (
                     <ArrowLeft className="w-4 h-4" />
                   ) : (
@@ -116,9 +115,7 @@ export const HeroSection: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   <Download className="w-4 h-4 text-[var(--primary-light)]" />
-                  <span>
-                    {t("hero.downloadCv")}
-                  </span>
+                  <span>{t("hero.downloadCv")}</span>
                 </a>
               </Button>
             </div>
@@ -136,7 +133,7 @@ export const HeroSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={social.name}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[var(--muted)] hover:text-white bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:-translate-y-0.5 transition-all text-xs font-semibold shadow-sm"
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[var(--muted)] hover:text-[var(--primary)] dark:hover:text-white bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:-translate-y-0.5 transition-all text-xs font-semibold shadow-sm"
                   >
                     {social.icon === "GH" && (
                       <svg
@@ -179,7 +176,6 @@ export const HeroSection: React.FC = () => {
           {/* Hero Visual (5 cols on lg) */}
           <div className="lg:col-span-5 relative flex justify-center items-center w-full select-none">
             <div className="relative w-[320px] sm:w-[380px] md:w-[420px] lg:w-[440px] h-[450px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
-              
               {/* Studio Rim Light / Ambient Aura */}
               <div className="hero-ambient-aura" aria-hidden="true" />
 
@@ -198,7 +194,7 @@ export const HeroSection: React.FC = () => {
                   stroke="currentColor"
                   strokeWidth="1.2"
                   strokeDasharray="5 9"
-                  className="text-white/10 dark:text-white/10 text-blue-500/20"
+                  className="text-blue-500/20 dark:text-white/10"
                 />
                 <circle
                   cx="240"
@@ -207,7 +203,7 @@ export const HeroSection: React.FC = () => {
                   stroke="currentColor"
                   strokeWidth="1"
                   strokeDasharray="2 12"
-                  className="text-white/5 dark:text-white/5 text-blue-500/10"
+                  className="text-blue-500/10 dark:text-white/5"
                 />
                 {/* Orbital Glowing Nodes */}
                 <circle cx="240" cy="25" r="4" fill="#38bdf8" />
@@ -224,7 +220,7 @@ export const HeroSection: React.FC = () => {
                     <span className="w-2 h-2 rounded-full bg-amber-400/80" />
                     <span className="w-2 h-2 rounded-full bg-emerald-400/80" />
                   </div>
-                  <span className="text-[10px] font-mono tracking-wider text-[var(--muted)]">
+                  <span className="text-[10px] tracking-wider text-[var(--muted)]">
                     &lt;developer /&gt;
                   </span>
                 </div>
@@ -252,7 +248,9 @@ export const HeroSection: React.FC = () => {
                     React &amp; Next.js
                   </span>
                   <span className="text-[10px] text-[var(--muted)] font-medium">
-                    {locale === "fa" ? "متخصص فرانت‌اند مدرن" : "Frontend Specialist"}
+                    {locale === "fa"
+                      ? "متخصص فرانت‌اند مدرن"
+                      : "Frontend Specialist"}
                   </span>
                 </div>
               </div>
@@ -267,10 +265,14 @@ export const HeroSection: React.FC = () => {
                 </div>
                 <div className="flex flex-col text-start">
                   <span className="text-[12px] sm:text-[13px] font-bold text-[var(--text-bright)] leading-tight">
-                    {locale === "fa" ? "۴+ سال سابقه تخصصی" : "4+ Years Experience"}
+                    {locale === "fa"
+                      ? "۴+ سال سابقه تخصصی"
+                      : "4+ Years Experience"}
                   </span>
                   <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                    {locale === "fa" ? "آماده پروژه‌های چالش‌برانگیز" : "Available for Projects"}
+                    {locale === "fa"
+                      ? "آماده پروژه‌های چالش‌برانگیز"
+                      : "Available for Projects"}
                   </span>
                 </div>
               </div>
@@ -278,7 +280,7 @@ export const HeroSection: React.FC = () => {
               {/* Floating Badge 3: Mini Tech Stack Capsule (Center Bottom) */}
               <div className="hero-float-badge animate-float-3 -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 px-3.5 py-1.5 hidden sm:flex">
                 <Code2 className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
-                <span className="text-[11px] font-mono text-[var(--text)] font-semibold flex items-center gap-1.5 whitespace-nowrap">
+                <span className="text-[11px] text-[var(--text)] font-semibold flex items-center gap-1.5 whitespace-nowrap">
                   <span>TypeScript</span>
                   <span className="text-[var(--primary)]">•</span>
                   <span>Tailwind</span>
@@ -286,7 +288,6 @@ export const HeroSection: React.FC = () => {
                   <span>GIS / 3D</span>
                 </span>
               </div>
-
             </div>
           </div>
         </div>
