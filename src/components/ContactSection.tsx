@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 interface ContactSectionProps {
   className?: string;
@@ -32,25 +33,51 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     name: "",
     email: "",
     message: "",
+    honeypot: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      const msg = t("contact.errorMsg");
+      setErrorMessage(msg);
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      toast.error(msg);
+      setTimeout(() => setStatus("idle"), 4000);
       return;
     }
 
     setStatus("submitting");
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.error || t("contact.errorMsg"));
+      }
+
       setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      toast.success(data.message || t("contact.successMsg"));
+      setFormData({ name: "", email: "", message: "", honeypot: "" });
+      setTimeout(() => setStatus("idle"), 6000);
+    } catch (err: any) {
+      const errorText = err?.message || t("contact.errorMsg");
+      setErrorMessage(errorText);
+      setStatus("error");
+      toast.error(errorText);
       setTimeout(() => setStatus("idle"), 5000);
-    }, 1000);
+    }
   };
 
   return (
@@ -184,10 +211,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   />
                 </div>
 
+                {/* Hidden Honeypot Anti-Spam Field */}
+                <div className="hidden" aria-hidden="true">
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.honeypot}
+                    onChange={(e) =>
+                      setFormData({ ...formData, honeypot: e.target.value })
+                    }
+                  />
+                </div>
+
                 {status === "error" && (
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-rose-400 bg-rose-500/10 border border-rose-500/20 px-4 py-2.5 rounded-xl animate-in fade-in">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>{t("contact.errorMsg")}</span>
+                    <span>{errorMessage || t("contact.errorMsg")}</span>
                   </div>
                 )}
 
