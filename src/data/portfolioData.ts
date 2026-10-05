@@ -8,7 +8,7 @@ import {
 } from "@/types";
 
 export const PERSONAL_INFO = {
-  name: "Seyekali Rafazi",
+  name: "Seyedali Rafazi",
   nameFa: "سید علی رفضی",
   role: "Frontend Engineer",
   techStack: ["React", "Next.js", "TypeScript"],
@@ -55,6 +55,7 @@ export const STATS: StatItem[] = [
   {
     id: "experience",
     number: "4+",
+    numberFa: "۴+",
     symbol: "◈",
     title: {
       fa: "سال تجربه",
@@ -68,6 +69,7 @@ export const STATS: StatItem[] = [
   {
     id: "projects",
     number: "12+",
+    numberFa: "۱۲+",
     symbol: "▣",
     title: {
       fa: "پروژه",
@@ -81,6 +83,7 @@ export const STATS: StatItem[] = [
   {
     id: "technologies",
     number: "5+",
+    numberFa: "۵+",
     symbol: "◇",
     title: {
       fa: "تکنولوژی",
@@ -94,6 +97,7 @@ export const STATS: StatItem[] = [
   {
     id: "learning",
     number: "∞",
+    numberFa: "∞",
     symbol: "∞",
     title: {
       fa: "یادگیری",

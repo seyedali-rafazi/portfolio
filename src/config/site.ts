@@ -1,10 +1,10 @@
 export const siteConfig = {
-  name: "Seyekali Rafazi",
+  name: "Seyedali Rafazi",
   nameFa: "سید علی رفضی",
-  titleEn: "Seyekali Rafazi | Frontend Engineer",
+  titleEn: "Seyedali Rafazi | Frontend Engineer",
   titleFa: "سید علی رفضی | مهندس فرانت‌اند",
   descriptionEn:
-    "Seyekali Rafazi is a Frontend Engineer specializing in React, Next.js, TypeScript, and high-performance geospatial data visualization.",
+    "Seyedali Rafazi is a Frontend Engineer specializing in React, Next.js, TypeScript, and high-performance geospatial data visualization.",
   descriptionFa:
     "سید علی رفضی، توسعه‌دهنده و مهندس ارشد فرانت‌اند مسلط به React، Next.js، TypeScript و سامانه‌های تجسم داده‌های مکانی و سه‌بعدی.",
   url:
@@ -13,7 +13,7 @@ export const siteConfig = {
     "https://seyedalirafazi.com",
   defaultLocale: "en" as const,
   locales: ["en", "fa"] as const,
-  author: "Seyekali Rafazi",
+  author: "Seyedali Rafazi",
   email: "seyedalirafazi80@gmail.com",
   phone: "+98 937 989 8954",
   locationEn: "Tehran, Iran",

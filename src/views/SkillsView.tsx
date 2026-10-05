@@ -23,6 +23,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { motion, AnimatePresence } from "framer-motion";
+import { toPersianDigits } from "@/lib/numbers";
 
 interface SkillsViewProps {
   locale: Locale;
@@ -242,7 +243,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
                     className="p-6 sm:p-8 rounded-2xl hover:border-[var(--primary)]/50 transition-colors hover:shadow-2xl hover:shadow-black/25 cursor-pointer flex flex-col justify-between text-start h-full"
                     tabIndex={0}
                     role="button"
-                    aria-label={`${skill.name} - ${skill.level}%`}
+                    aria-label={`${skill.name} - ${locale === "fa" ? toPersianDigits(skill.level) : skill.level}%`}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
@@ -264,7 +265,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
                           {renderSkillIcon(skill.id, skill.color)}
                         </div>
                         <Badge variant="primarySubtle" className="px-3 py-1 text-xs font-bold">
-                          {skill.level}%
+                          {locale === "fa" ? toPersianDigits(skill.level) : skill.level}%
                         </Badge>
                       </div>
 
@@ -339,7 +340,7 @@ export function SkillsView({ locale }: SkillsViewProps) {
                     {t("skills.proficiency")}
                   </span>
                   <span className="font-bold text-[var(--primary-light)]">
-                    {selectedSkill.level}%
+                    {locale === "fa" ? toPersianDigits(selectedSkill.level) : selectedSkill.level}%
                   </span>
                 </div>
                 <div className="w-full h-2.5 rounded-full bg-[var(--surface-3)] overflow-hidden">

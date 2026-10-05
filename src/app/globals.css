@@ -59,6 +59,55 @@
   font-display: swap;
 }
 
+/* Local Vazirmatn FD (Farsi Digits) Font Definitions */
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn FD";
+  src: url("/fonts/vazirmatn/fd/Vazirmatn-FD-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #070b12;
   --bg-2: #0a1019;
@@ -86,7 +135,7 @@
   --radius-lg: 22px;
   --container: 1180px;
 
-  --font-fa: "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-fa: "Vazirmatn FD", "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-en: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -133,9 +182,49 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Persian typography & Persian numbers */
+html[lang="fa"],
+html[dir="rtl"],
+[dir="rtl"],
+.font-fa {
+  font-family: var(--font-fa);
+  font-feature-settings: "ss01" 1;
+  -webkit-font-feature-settings: "ss01" 1;
+}
+
+html[lang="fa"] body {
+  font-feature-settings: "ss01" 1;
+  -webkit-font-feature-settings: "ss01" 1;
+}
+
+/* Explicit helper for Persian numbers */
+.persian-numbers {
+  font-feature-settings: "ss01" 1;
+  -webkit-font-feature-settings: "ss01" 1;
+}
+
 body.en,
 html[dir="ltr"] body {
   font-family: var(--font-en);
+  font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
+}
+
+/* Preserve English digits and English font for LTR elements, code, and latin text */
+html[lang="fa"] .en,
+html[lang="fa"] [dir="ltr"],
+html[lang="fa"] .font-en,
+html[lang="fa"] .latin-numbers,
+html[lang="fa"] code,
+html[lang="fa"] kbd,
+html[lang="fa"] samp,
+html[lang="fa"] pre,
+html[lang="fa"] input[type="email"],
+html[lang="fa"] input[type="url"],
+html[lang="fa"] input[type="password"] {
+  font-family: var(--font-en);
+  font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
 }
 
 /* Custom Scrollbar */

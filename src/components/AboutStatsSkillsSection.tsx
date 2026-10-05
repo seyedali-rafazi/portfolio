@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
+import { toPersianDigits } from "@/lib/numbers";
 
 export const AboutStatsSkillsSection: React.FC = () => {
   const { locale, t, isRTL, getLocalizedHref } = useI18n();
@@ -206,7 +207,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-2xl sm:text-4xl font-black text-[var(--text-bright)] leading-tight tracking-tight mb-1">
-                      {stat.number}
+                      {locale === "fa" && stat.numberFa ? stat.numberFa : stat.number}
                     </div>
                     <div className="text-xs sm:text-sm font-semibold text-[var(--text)]">
                       {stat.title[locale]}
@@ -268,7 +269,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                     {skill.name}
                   </span>
                   <span className="text-xs text-[var(--primary-light)] font-medium">
-                    {skill.level}%
+                    {locale === "fa" ? toPersianDigits(skill.level) : skill.level}%
                   </span>
                 </div>
               </motion.button>
@@ -315,7 +316,7 @@ export const AboutStatsSkillsSection: React.FC = () => {
                   {t("skills.proficiency")}
                 </span>
                 <span className="font-bold text-[var(--primary-light)]">
-                  {selectedSkill.level}%
+                  {locale === "fa" ? toPersianDigits(selectedSkill.level) : selectedSkill.level}%
                 </span>
               </div>
               <div className="w-full h-2 rounded-full bg-[var(--surface-3)] overflow-hidden">

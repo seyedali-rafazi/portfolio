@@ -37,7 +37,7 @@ export function buildLocalizedMetadata({
 
   const defaultKeywords = isEn
     ? [
-        "Seyekali Rafazi",
+        "Seyedali Rafazi",
         "Frontend Engineer",
         "React",
         "Next.js",
@@ -68,7 +68,9 @@ export function buildLocalizedMetadata({
     },
     description,
     keywords: keywords || defaultKeywords,
-    authors: [{ name: isEn ? siteConfig.name : siteConfig.nameFa, url: siteConfig.url }],
+    authors: [
+      { name: isEn ? siteConfig.name : siteConfig.nameFa, url: siteConfig.url },
+    ],
     creator: siteConfig.name,
     publisher: siteConfig.name,
     alternates: {
@@ -93,7 +95,7 @@ export function buildLocalizedMetadata({
           width: 800,
           height: 800,
           alt: isEn
-            ? "Seyekali Rafazi — Frontend Engineer"
+            ? "Seyedali Rafazi — Frontend Engineer"
             : "سید علی رفضی — مهندس فرانت‌اند",
         },
       ],
@@ -162,7 +164,10 @@ export function getProjectsMetadata(locale: Locale): Metadata {
   });
 }
 
-export function getSingleProjectMetadata(locale: Locale, project: Project): Metadata {
+export function getSingleProjectMetadata(
+  locale: Locale,
+  project: Project,
+): Metadata {
   const isEn = locale === "en";
   const title = isEn
     ? `${project.title} — Technical Case Study & Architecture`
@@ -174,7 +179,7 @@ export function getSingleProjectMetadata(locale: Locale, project: Project): Meta
     path: `/projects/${project.id}`,
     title,
     description,
-    keywords: [...project.tags, project.title, "Seyekali Rafazi"],
+    keywords: [...project.tags, project.title, "Seyedali Rafazi"],
     ogType: "article",
   });
 }

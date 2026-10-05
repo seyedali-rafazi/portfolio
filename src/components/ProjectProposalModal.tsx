@@ -19,6 +19,7 @@ import {
 import { useI18n } from "@/i18n/useI18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { toPersianDigits } from "@/lib/numbers";
 
 const CATEGORIES = ["frontend", "backend", "ai", "seo", "dataAnalyst"] as const;
 type CategoryType = (typeof CATEGORIES)[number];
@@ -33,7 +34,7 @@ interface AttachmentData {
 }
 
 export function ProjectProposalModal() {
-  const { t, isRTL } = useI18n();
+  const { locale, t, isRTL } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [attachment, setAttachment] = useState<AttachmentData | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
@@ -424,7 +425,9 @@ export function ProjectProposalModal() {
                       />
                       <div className="flex items-center justify-end pt-2">
                         <span className="text-xs text-[var(--muted-2)] select-none">
-                          {descriptionValue.length}/2000
+                          {locale === "fa"
+                            ? `${toPersianDigits(descriptionValue.length)} / ${toPersianDigits(2000)}`
+                            : `${descriptionValue.length}/2000`}
                         </span>
                       </div>
                     </div>

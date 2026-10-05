@@ -77,6 +77,7 @@ export interface Skill {
 export interface StatItem {
   id: string;
   number: string;
+  numberFa?: string;
   symbol: string;
   title: {
     fa: string;

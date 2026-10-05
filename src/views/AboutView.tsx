@@ -155,7 +155,7 @@ export function AboutView({ locale }: AboutViewProps) {
                     </div>
                     <div>
                       <div className="text-3xl sm:text-4xl font-extrabold text-[var(--text-bright)] leading-tight tracking-tight">
-                        {stat.number}
+                        {locale === "fa" && stat.numberFa ? stat.numberFa : stat.number}
                       </div>
                       <div className="text-sm font-semibold text-[var(--text)] mt-1">
                         {stat.title[locale]}

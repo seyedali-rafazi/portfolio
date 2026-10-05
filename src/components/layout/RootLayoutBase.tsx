@@ -37,13 +37,32 @@ export function RootLayoutBase({ children, locale }: RootLayoutBaseProps) {
             __html: themeInitScript,
           }}
         />
-        <link
-          rel="preload"
-          href="/fonts/vazirmatn/Vazirmatn[wght].woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        {locale === "fa" ? (
+          <>
+            <link
+              rel="preload"
+              href="/fonts/vazirmatn/fd/Vazirmatn-FD-Regular.woff2"
+              as="font"
+              type="font/woff2"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preload"
+              href="/fonts/vazirmatn/fd/Vazirmatn-FD-Bold.woff2"
+              as="font"
+              type="font/woff2"
+              crossOrigin="anonymous"
+            />
+          </>
+        ) : (
+          <link
+            rel="preload"
+            href="/fonts/vazirmatn/Vazirmatn[wght].woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        )}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>

@@ -1,16 +1,16 @@
 {
   "seo": {
-    "homeTitle": "Seyekali Rafazi | Frontend Engineer — React & Next.js",
+    "homeTitle": "Seyedali Rafazi | Frontend Engineer — React & Next.js",
     "homeDesc": "Frontend Engineer specializing in React, Next.js, TypeScript, and geospatial systems. Explore modern web architectures and interactive simulations.",
-    "aboutTitle": "About Me | Seyekali Rafazi — Engineering Journey & Principles",
-    "aboutDesc": "Learn about Seyekali Rafazi's background, core engineering principles, web performance optimization, and experience building scalable web architectures.",
-    "projectsTitle": "Featured Projects | Seyekali Rafazi — Web & Geospatial Portfolio",
+    "aboutTitle": "About Me | Seyedali Rafazi — Engineering Journey & Principles",
+    "aboutDesc": "Learn about Seyedali Rafazi's background, core engineering principles, web performance optimization, and experience building scalable web architectures.",
+    "projectsTitle": "Featured Projects | Seyedali Rafazi — Web & Geospatial Portfolio",
     "projectsDesc": "Discover real-world projects in telemetry radar tracking, 3D satellite visualization, and fullstack Next.js commerce.",
-    "skillsTitle": "Skills & Technologies | Seyekali Rafazi — Technical Stack",
-    "skillsDesc": "Comprehensive overview of frontend technologies, state management tools, and 3D geospatial libraries mastered by Seyekali Rafazi.",
-    "contactTitle": "Contact | Seyekali Rafazi — Get In Touch",
-    "contactDesc": "Get in touch with Seyekali Rafazi for frontend engineering opportunities, consulting, and collaboration.",
-    "notFoundTitle": "Page Not Found | Seyekali Rafazi",
+    "skillsTitle": "Skills & Technologies | Seyedali Rafazi — Technical Stack",
+    "skillsDesc": "Comprehensive overview of frontend technologies, state management tools, and 3D geospatial libraries mastered by Seyedali Rafazi.",
+    "contactTitle": "Contact | Seyedali Rafazi — Get In Touch",
+    "contactDesc": "Get in touch with Seyedali Rafazi for frontend engineering opportunities, consulting, and collaboration.",
+    "notFoundTitle": "Page Not Found | Seyedali Rafazi",
     "notFoundDesc": "The page you are looking for could not be found."
   },
   "nav": {
@@ -22,7 +22,7 @@
   },
   "hero": {
     "intro": "Hi, I'm",
-    "namePrefix": "Seyekali",
+    "namePrefix": "Seyedali",
     "nameSuffix": "Rafazi",
     "role": "Frontend Engineer",
     "skillsLine": "React • Next.js • TypeScript",
@@ -32,7 +32,7 @@
     "downloadCv": "Download CV",
     "connectWithMe": "Connect with me:",
     "note": "Build\nBetter\nWeb\nExperiences",
-    "photoAlt": "Seyekali Rafazi — Frontend Engineer Profile Photo"
+    "photoAlt": "Seyedali Rafazi — Frontend Engineer Profile Photo"
   },
   "about": {
     "label": "About Me",
@@ -166,7 +166,7 @@
     "quote": "Technology connects ideas to the world."
   },
   "footer": {
-    "copyright": "© 2026 Seyekali Rafazi. All rights reserved.",
+    "copyright": "© 2026 Seyedali Rafazi. All rights reserved.",
     "switchLang": "فارسی (FA)"
   },
   "notFound": {

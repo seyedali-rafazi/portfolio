@@ -24,7 +24,8 @@ import { Logo } from "@/components/common/Logo";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar: React.FC = () => {
-  const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale } = useI18n();
+  const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale } =
+    useI18n();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname() || "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,9 +35,24 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { path: "/", label: t("nav.home", "Home"), id: "home", icon: Home },
     { path: "/about", label: t("nav.about", "About"), id: "about", icon: User },
-    { path: "/projects", label: t("nav.projects", "Projects"), id: "projects", icon: Briefcase },
-    { path: "/skills", label: t("nav.skills", "Skills"), id: "skills", icon: Cpu },
-    { path: "/contact", label: t("nav.contact", "Contact"), id: "contact", icon: Mail },
+    {
+      path: "/projects",
+      label: t("nav.projects", "Projects"),
+      id: "projects",
+      icon: Briefcase,
+    },
+    {
+      path: "/skills",
+      label: t("nav.skills", "Skills"),
+      id: "skills",
+      icon: Cpu,
+    },
+    {
+      path: "/contact",
+      label: t("nav.contact", "Contact"),
+      id: "contact",
+      icon: Mail,
+    },
   ];
 
   useEffect(() => {
@@ -106,20 +122,28 @@ export const Navbar: React.FC = () => {
               <Link
                 href={getLocalizedHref("/")}
                 className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-xl"
-                aria-label={locale === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
+                aria-label={
+                  locale === "fa"
+                    ? "سید علی رفضی — صفحه اصلی"
+                    : "Seyedali Rafazi — Home"
+                }
               >
                 <Logo size="md" variant="badge" locale={locale} />
               </Link>
             </div>
 
             {/* Desktop Nav Links - Centered */}
-            <nav aria-label="Main Navigation" className="flex items-center justify-center gap-6 lg:gap-8">
+            <nav
+              aria-label="Main Navigation"
+              className="flex items-center justify-center gap-6 lg:gap-8"
+            >
               {navLinks.map((item) => {
                 const localizedHref = getLocalizedHref(item.path);
                 const isHome = item.path === "/";
                 const isActive = isHome
                   ? pathname === "/" || pathname === "/fa"
-                  : pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+                  : pathname === localizedHref ||
+                    pathname.startsWith(`${localizedHref}/`);
 
                 return (
                   <Link
@@ -136,7 +160,11 @@ export const Navbar: React.FC = () => {
                     {isActive && (
                       <motion.span
                         layoutId="activeNavIndicator"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                        }}
                         className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-6 h-[2px] bg-[var(--primary)] rounded-full shadow-[0_0_10px_var(--primary)]"
                       />
                     )}
@@ -154,16 +182,37 @@ export const Navbar: React.FC = () => {
                 whileTap={{ scale: 0.94 }}
                 onClick={() => i18n.changeLanguage(alternateLocale)}
                 id="languageBtn"
-                title={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
-                aria-label={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
+                title={
+                  locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"
+                }
+                aria-label={
+                  locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"
+                }
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--text)] transition-colors cursor-pointer shadow-sm"
               >
-                <Globe className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" aria-hidden="true" />
-                <span className={locale === "en" ? "text-[var(--primary-light)] font-bold" : ""}>
+                <Globe
+                  className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0"
+                  aria-hidden="true"
+                />
+                <span
+                  className={
+                    locale === "en"
+                      ? "text-[var(--primary-light)] font-bold"
+                      : ""
+                  }
+                >
                   EN
                 </span>
-                <span className="opacity-40" aria-hidden="true">|</span>
-                <span className={locale === "fa" ? "text-[var(--primary-light)] font-bold" : ""}>
+                <span className="opacity-40" aria-hidden="true">
+                  |
+                </span>
+                <span
+                  className={
+                    locale === "fa"
+                      ? "text-[var(--primary-light)] font-bold"
+                      : ""
+                  }
+                >
                   فارسی
                 </span>
               </motion.button>
@@ -175,8 +224,16 @@ export const Navbar: React.FC = () => {
                 onClick={toggleTheme}
                 id="themeBtn"
                 suppressHydrationWarning
-                title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                title={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
                 className="w-9 h-9 rounded-full flex items-center justify-center text-[var(--muted)] hover:text-[var(--text-bright)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors cursor-pointer shrink-0"
               >
                 {theme === "dark" ? (
@@ -203,7 +260,11 @@ export const Navbar: React.FC = () => {
                 whileTap={{ scale: 0.92 }}
                 onClick={() => setMobileMenuOpen(true)}
                 className="w-10 h-10 rounded-xl flex items-center justify-center text-[var(--muted)] hover:text-[var(--text-bright)] border border-[var(--border)] bg-[var(--surface-2)]/80 hover:bg-[var(--surface-2)] transition-colors focus:outline-none cursor-pointer shadow-sm"
-                aria-label={locale === "fa" ? "باز کردن منوی ناوبری" : "Open Navigation Menu"}
+                aria-label={
+                  locale === "fa"
+                    ? "باز کردن منوی ناوبری"
+                    : "Open Navigation Menu"
+                }
                 aria-expanded={mobileMenuOpen}
                 id="mobileMenuBtn"
               >
@@ -216,7 +277,11 @@ export const Navbar: React.FC = () => {
               <Link
                 href={getLocalizedHref("/")}
                 className="group flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-xl"
-                aria-label={locale === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
+                aria-label={
+                  locale === "fa"
+                    ? "سید علی رفضی — صفحه اصلی"
+                    : "Seyedali Rafazi — Home"
+                }
               >
                 <Logo size="md" variant="badge" locale={locale} />
               </Link>
@@ -230,8 +295,16 @@ export const Navbar: React.FC = () => {
                 onClick={toggleTheme}
                 id="mobileThemeBtn"
                 suppressHydrationWarning
-                title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                title={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
                 className="w-10 h-10 rounded-xl flex items-center justify-center text-[var(--muted)] hover:text-[var(--text-bright)] bg-[var(--surface-2)]/80 hover:bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors cursor-pointer shadow-sm"
               >
                 {theme === "dark" ? (
@@ -284,10 +357,12 @@ export const Navbar: React.FC = () => {
                 transform: mobileMenuOpen
                   ? "translate3d(0, 0, 0)"
                   : isRTL
-                  ? "translate3d(100%, 0, 0)"
-                  : "translate3d(-100%, 0, 0)",
+                    ? "translate3d(100%, 0, 0)"
+                    : "translate3d(-100%, 0, 0)",
               }}
-              aria-label={locale === "fa" ? "منوی ناوبری" : "Mobile Navigation Menu"}
+              aria-label={
+                locale === "fa" ? "منوی ناوبری" : "Mobile Navigation Menu"
+              }
             >
               {/* Drawer Top Content */}
               <div>
@@ -297,7 +372,11 @@ export const Navbar: React.FC = () => {
                     href={getLocalizedHref("/")}
                     onClick={() => setMobileMenuOpen(false)}
                     className="group flex items-center gap-2.5 focus:outline-none"
-                    aria-label={locale === "fa" ? "سید علی رفضی — صفحه اصلی" : "Seyekali Rafazi — Home"}
+                    aria-label={
+                      locale === "fa"
+                        ? "سید علی رفضی — صفحه اصلی"
+                        : "Seyedali Rafazi — Home"
+                    }
                   >
                     <Logo size="md" variant="badge" locale={locale} />
                   </Link>
@@ -317,8 +396,13 @@ export const Navbar: React.FC = () => {
                   <div className="p-3 rounded-2xl bg-[var(--surface-2)]/60 border border-[var(--border)] flex flex-col gap-2.5">
                     <div className="flex items-center justify-between text-xs text-[var(--muted)]">
                       <span className="flex items-center gap-1.5 font-semibold text-[var(--text)]">
-                        <Globe className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" aria-hidden="true" />
-                        <span>{locale === "fa" ? "زبان وب‌سایت" : "Language"}</span>
+                        <Globe
+                          className="w-3.5 h-3.5 text-[var(--primary)] shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          {locale === "fa" ? "زبان وب‌سایت" : "Language"}
+                        </span>
                       </span>
                       <span className="text-[11px] font-medium text-[var(--primary)]">
                         {locale === "fa" ? "فارسی" : "English"}
@@ -343,7 +427,9 @@ export const Navbar: React.FC = () => {
                         aria-pressed={locale === "en"}
                       >
                         <span>English</span>
-                        <span className="text-[10px] opacity-75 font-mono">EN</span>
+                        <span className="text-[10px] opacity-75 font-mono">
+                          EN
+                        </span>
                       </button>
 
                       <button
@@ -363,20 +449,26 @@ export const Navbar: React.FC = () => {
                         aria-pressed={locale === "fa"}
                       >
                         <span>فارسی</span>
-                        <span className="text-[10px] opacity-75 font-mono">FA</span>
+                        <span className="text-[10px] opacity-75 font-mono">
+                          FA
+                        </span>
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* Mobile Navigation Links */}
-                <nav aria-label="Mobile Navigation Links" className="px-4 py-3 flex flex-col gap-1.5">
+                <nav
+                  aria-label="Mobile Navigation Links"
+                  className="px-4 py-3 flex flex-col gap-1.5"
+                >
                   {navLinks.map((item) => {
                     const localizedHref = getLocalizedHref(item.path);
                     const isHome = item.path === "/";
                     const isActive = isHome
                       ? pathname === "/" || pathname === "/fa"
-                      : pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+                      : pathname === localizedHref ||
+                        pathname.startsWith(`${localizedHref}/`);
                     const Icon = item.icon;
 
                     return (
@@ -399,7 +491,10 @@ export const Navbar: React.FC = () => {
                                   : "bg-[var(--surface-2)] text-[var(--muted)]"
                               }`}
                             >
-                              <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+                              <Icon
+                                className="w-3.5 h-3.5"
+                                aria-hidden="true"
+                              />
                             </div>
                             <span>{item.label}</span>
                           </div>
@@ -407,14 +502,18 @@ export const Navbar: React.FC = () => {
                           {isRTL ? (
                             <ChevronLeft
                               className={`w-4 h-4 transition-transform ${
-                                isActive ? "text-[var(--primary)]" : "text-[var(--muted)]/50"
+                                isActive
+                                  ? "text-[var(--primary)]"
+                                  : "text-[var(--muted)]/50"
                               }`}
                               aria-hidden="true"
                             />
                           ) : (
                             <ChevronRight
                               className={`w-4 h-4 transition-transform ${
-                                isActive ? "text-[var(--primary)]" : "text-[var(--muted)]/50"
+                                isActive
+                                  ? "text-[var(--primary)]"
+                                  : "text-[var(--muted)]/50"
                               }`}
                               aria-hidden="true"
                             />
@@ -430,28 +529,41 @@ export const Navbar: React.FC = () => {
               <div className="p-4 border-t border-[var(--border)]/60 bg-[var(--surface-2)]/30 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>{locale === "fa" ? "آماده همکاری و استخدام" : "Available for Projects"}</span>
+                  <span>
+                    {locale === "fa"
+                      ? "آماده همکاری و استخدام"
+                      : "Available for Projects"}
+                  </span>
                 </div>
 
                 <button
                   type="button"
                   onClick={toggleTheme}
                   className="w-8 h-8 rounded-lg flex items-center justify-center bg-[var(--surface-2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--text-bright)] active:scale-95 transition-all cursor-pointer"
-                  title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                  title={
+                    theme === "dark"
+                      ? "Switch to Light Mode"
+                      : "Switch to Dark Mode"
+                  }
                   aria-label="Toggle theme"
                 >
                   {theme === "dark" ? (
-                    <Moon className="w-3.5 h-3.5 text-blue-300" aria-hidden="true" />
+                    <Moon
+                      className="w-3.5 h-3.5 text-blue-300"
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <Sun className="w-3.5 h-3.5 text-amber-500" aria-hidden="true" />
+                    <Sun
+                      className="w-3.5 h-3.5 text-amber-500"
+                      aria-hidden="true"
+                    />
                   )}
                 </button>
               </div>
             </aside>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );
 };
-

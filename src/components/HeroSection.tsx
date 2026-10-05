@@ -74,7 +74,7 @@ export const HeroSection: React.FC = () => {
               </Badge>
             </motion.div>
 
-            {/* Main Title - Seyekali Rafazi / سید علی رفضی */}
+            {/* Main Title - Seyedali Rafazi / سید علی رفضی */}
             <motion.h1
               variants={itemVariants}
               className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] mb-5"

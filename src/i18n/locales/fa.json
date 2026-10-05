@@ -21,7 +21,7 @@
     "contact": "تماس"
   },
   "hero": {
-    "intro": "سلام، من",
+    "intro": "سلام، اسم من",
     "namePrefix": "سید علی",
     "nameSuffix": "رفضی",
     "role": "مهندس فرانت‌اند",
@@ -61,13 +61,13 @@
     "backHome": "بازگشت به خانه"
   },
   "stats": {
-    "expNumber": "4+",
+    "expNumber": "۴+",
     "expTitle": "سال تجربه",
     "expSubtitle": "تجربه حرفه‌ای",
-    "projNumber": "12+",
+    "projNumber": "۱۲+",
     "projTitle": "پروژه",
     "projSubtitle": "پروژه تکمیل‌شده",
-    "techNumber": "5+",
+    "techNumber": "۵+",
     "techTitle": "تکنولوژی",
     "techSubtitle": "تکنولوژی اصلی",
     "learnNumber": "∞",
@@ -166,7 +166,7 @@
     "quote": "تکنولوژی پیونددهنده ایده‌ها با جهان است."
   },
   "footer": {
-    "copyright": "© 2026 سید علی رفضی. تمامی حقوق محفوظ است.",
+    "copyright": "© ۲۰۲۶ سید علی رفضی. تمامی حقوق محفوظ است.",
     "switchLang": "English (EN)"
   },
   "notFound": {
