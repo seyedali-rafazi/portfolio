@@ -9,13 +9,15 @@ interface PageMetadataOptions {
   description: string;
   keywords?: string[];
   ogType?: "website" | "profile" | "article";
+  image?: string;
+  imageAlt?: string;
 }
 
 /**
  * Builds standard, strict, Google-compliant bilingual SEO metadata for Next.js App Router.
  * - Deterministic, self-referencing canonical URL
  * - Reciprocal bidirectional hreflang (en, fa, x-default)
- * - Open Graph & Twitter Card metadata
+ * - Open Graph & Twitter Card metadata with rich preview images
  * - Safe robot indexing rules
  */
 export function buildLocalizedMetadata({
@@ -25,12 +27,14 @@ export function buildLocalizedMetadata({
   description,
   keywords,
   ogType = "website",
+  image,
+  imageAlt,
 }: PageMetadataOptions): Metadata {
   const isEn = locale === "en";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   const pathSuffix = cleanPath === "/" ? "" : cleanPath;
 
-  // Canonical URLs
+  // Canonical URLs (strictly pointing to https://www.seyedalirafazi.ir)
   const enUrl = `${siteConfig.url}${pathSuffix}`;
   const faUrl = `${siteConfig.url}/fa${pathSuffix}`;
   const currentCanonical = isEn ? enUrl : faUrl;
@@ -50,6 +54,7 @@ export function buildLocalizedMetadata({
       ]
     : [
         "سید علی رفضی",
+        "سید علی رفزی",
         "مهندس فرانت‌اند",
         "توسعه‌دهنده React",
         "Next.js",
@@ -59,6 +64,16 @@ export function buildLocalizedMetadata({
         "مپ‌لیبره",
         "نمونه کار",
       ];
+
+  const ogImageUrl = image || `${siteConfig.url}/my-photo.png`;
+  const defaultImageAlt = isEn
+    ? "Seyedali Rafazi — Frontend Engineer"
+    : "سید علی رفضی — مهندس فرانت‌اند";
+
+  const googleVerification =
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+    process.env.GOOGLE_SITE_VERIFICATION ||
+    undefined;
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -91,12 +106,10 @@ export function buildLocalizedMetadata({
       type: ogType,
       images: [
         {
-          url: `${siteConfig.url}/my-photo.png`,
-          width: 800,
-          height: 800,
-          alt: isEn
-            ? "Seyedali Rafazi — Frontend Engineer"
-            : "سید علی رفضی — مهندس فرانت‌اند",
+          url: ogImageUrl,
+          width: image ? 1200 : 800,
+          height: image ? 630 : 800,
+          alt: imageAlt || defaultImageAlt,
         },
       ],
     },
@@ -104,7 +117,7 @@ export function buildLocalizedMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [`${siteConfig.url}/my-photo.png`],
+      images: [ogImageUrl],
     },
     robots: {
       index: true,
@@ -118,6 +131,7 @@ export function buildLocalizedMetadata({
         "max-snippet": -1,
       },
     },
+    ...(googleVerification ? { verification: { google: googleVerification } } : {}),
   };
 }
 
@@ -174,13 +188,28 @@ export function getSingleProjectMetadata(
     : `${project.titleFa || project.title} — مطالعه موردی و بررسی فنی معماری`;
   const description = project.summary[locale];
 
+  const projectImageUrl = project.image.startsWith("http")
+    ? project.image
+    : `${siteConfig.url}${project.image.startsWith("/") ? "" : "/"}${project.image}`;
+
   return buildLocalizedMetadata({
     locale,
     path: `/projects/${project.id}`,
     title,
     description,
-    keywords: [...project.tags, project.title, "Seyedali Rafazi"],
+    keywords: [
+      ...project.tags,
+      project.title,
+      project.titleFa || "",
+      "Seyedali Rafazi",
+      "سید علی رفضی",
+      "سید علی رفزی",
+    ].filter(Boolean),
     ogType: "article",
+    image: projectImageUrl,
+    imageAlt: isEn
+      ? `${project.title} — Architectural Preview`
+      : `پیش‌نمایش و بررسی فنی پروژه ${project.titleFa || project.title}`,
   });
 }
 

@@ -7,10 +7,11 @@ export const siteConfig = {
     "Seyedali Rafazi is a Frontend Engineer specializing in React, Next.js, TypeScript, and high-performance geospatial data visualization.",
   descriptionFa:
     "سید علی رفضی، توسعه‌دهنده و مهندس ارشد فرانت‌اند مسلط به React، Next.js، TypeScript و سامانه‌های تجسم داده‌های مکانی و سه‌بعدی.",
-  url:
+  url: (
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.SITE_URL ||
-    "https://seyedalirafazi.com",
+    "https://www.seyedalirafazi.ir"
+  ).replace(/\/+$/, ""),
   defaultLocale: "en" as const,
   locales: ["en", "fa"] as const,
   author: "Seyedali Rafazi",

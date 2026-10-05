@@ -19,7 +19,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getBreadcrumbSchema } from "@/lib/schema";
+import { getBreadcrumbSchema, getProfilePageSchema } from "@/lib/schema";
 import type { Locale } from "@/config/site";
 import { motion } from "framer-motion";
 
@@ -38,6 +38,7 @@ export function AboutView({ locale }: AboutViewProps) {
   return (
     <>
       <JsonLd data={getBreadcrumbSchema(locale, breadcrumbs)} />
+      <JsonLd data={getProfilePageSchema(locale)} />
       <div className="bg-glow one" aria-hidden="true" />
       <div className="bg-glow two" aria-hidden="true" />
 

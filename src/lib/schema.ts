@@ -106,6 +106,10 @@ export function getProjectDetailSchema(locale: Locale, project: {
     ? `${baseUrl}/projects/${project.id}`
     : `${baseUrl}/fa/projects/${project.id}`;
 
+  const projectImageUrl = project.image.startsWith("http")
+    ? project.image
+    : `${baseUrl}${project.image.startsWith("/") ? "" : "/"}${project.image}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -114,7 +118,7 @@ export function getProjectDetailSchema(locale: Locale, project: {
     operatingSystem: "Web Browser",
     url: projectUrl,
     description: project.summary[locale],
-    image: `${baseUrl}${project.image}`,
+    image: projectImageUrl,
     keywords: project.tags.join(", "),
     author: {
       "@type": "Person",
@@ -123,4 +127,20 @@ export function getProjectDetailSchema(locale: Locale, project: {
     ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
   };
 }
+
+export function getProfilePageSchema(locale: Locale) {
+  const isEn = locale === "en";
+  const baseUrl = siteConfig.url;
+  const pageUrl = isEn ? `${baseUrl}/about` : `${baseUrl}/fa/about`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: pageUrl,
+    name: isEn ? "About Seyedali Rafazi" : "درباره سید علی رفضی",
+    description: isEn ? siteConfig.descriptionEn : siteConfig.descriptionFa,
+    mainEntity: getPersonSchema(locale),
+  };
+}
+
 
