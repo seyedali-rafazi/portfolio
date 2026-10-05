@@ -55,13 +55,13 @@ export const HeroSection: React.FC = () => {
       <div className="grid-bg" />
 
       <div className="portfolio-container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          {/* Hero Content (7 cols on lg) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-center">
+          {/* Hero Content (7 cols on lg, order-2 on mobile so photo is first) */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-start"
+            className="lg:col-span-7 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-start order-2 lg:order-1"
           >
             {/* Intro Greeting */}
             <motion.div variants={itemVariants} className="mb-3">
@@ -114,7 +114,7 @@ export const HeroSection: React.FC = () => {
               </p>
               <p className="text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
                 {locale === "fa"
-                  ? "متخصص در رندرینگ پیشرفته Next.js، مدیریت بهینه استیت، و تجسم سه‌بعدی داده‌های GIS با کارایی ۶۰ فریم."
+                  ? "متخصص در Next.js، مدیریت بهینه استیت، و تجسم سه‌بعدی داده‌های GIS با کارایی ۶۰ فریم."
                   : "Specializing in high-performance Next.js architectures, responsive design systems, and 3D GIS visualization."}
               </p>
             </motion.div>
@@ -221,7 +221,7 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Hero Visual (5 cols on lg) */}
+          {/* Hero Visual (5 cols on lg, order-1 on mobile so photo is first) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -230,9 +230,9 @@ export const HeroSection: React.FC = () => {
               delay: 0.15,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="lg:col-span-5 relative flex justify-center items-center w-full select-none"
+            className="lg:col-span-5 relative flex justify-center items-center w-full select-none order-1 lg:order-2"
           >
-            <div className="relative w-[320px] sm:w-[380px] md:w-[420px] lg:w-[440px] h-[450px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
+            <div className="relative w-[300px] sm:w-[380px] md:w-[420px] lg:w-[440px] h-[430px] sm:h-[500px] md:h-[540px] max-w-full flex items-center justify-center">
               {/* Studio Rim Light / Ambient Aura */}
               <div className="hero-ambient-aura" aria-hidden="true" />
 
