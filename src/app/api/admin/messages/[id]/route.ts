@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifyAdminRequest } from "@/lib/admin-auth";
 
+export const dynamic = "force-dynamic";
+
 interface RouteParams {
   params: Promise<{
     id: string;

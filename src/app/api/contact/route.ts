@@ -3,6 +3,8 @@ import { contactMessageSchema } from "@/lib/validations/contact";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
     // 1. Rate limiting check (50 messages per hour per IP)
