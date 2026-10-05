@@ -13,14 +13,13 @@ export const HeroSection: React.FC = () => {
   const { locale, t, isRTL, getLocalizedHref } = useI18n();
 
   const socials = [
-    { name: "GitHub", url: "https://github.com/seyedalirafazi", icon: "GH" },
+    { name: "GitHub", url: "https://github.com/seyedali-rafazi", icon: "GH" },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/seyedalirafazi",
+      url: "https://www.linkedin.com/in/seyedali-rafazi",
       icon: "in",
     },
-    { name: "Telegram", url: "https://t.me/seyedalirafazi", icon: "TG" },
-    { name: "X", url: "https://x.com/seyedalirafazi", icon: "X" },
+    { name: "Telegram", url: "https://t.me/ali_rfzt", icon: "TG" },
   ];
 
   const containerVariants: Variants = {
@@ -106,7 +105,10 @@ export const HeroSection: React.FC = () => {
             </motion.div>
 
             {/* Descriptions */}
-            <motion.div variants={itemVariants} className="max-w-[580px] mb-8 space-y-3">
+            <motion.div
+              variants={itemVariants}
+              className="max-w-[580px] mb-8 space-y-3"
+            >
               <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--text)] font-normal">
                 {t("hero.bio")}
               </p>
@@ -122,7 +124,10 @@ export const HeroSection: React.FC = () => {
               variants={itemVariants}
               className="flex items-center gap-4 flex-wrap justify-center lg:justify-start mb-8"
             >
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
                 <Button
                   variant="outline"
                   size="lg"
@@ -143,7 +148,10 @@ export const HeroSection: React.FC = () => {
                 </Button>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
                 <Button
                   variant="outline"
                   size="lg"
@@ -207,14 +215,6 @@ export const HeroSection: React.FC = () => {
                         <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z" />
                       </svg>
                     )}
-                    {social.icon === "X" && (
-                      <svg
-                        className="w-3.5 h-3.5 fill-current"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                    )}
                   </motion.a>
                 ))}
               </div>
@@ -225,7 +225,11 @@ export const HeroSection: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 0.75,
+              delay: 0.15,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="lg:col-span-5 relative flex justify-center items-center w-full select-none"
           >
             <div className="relative w-[320px] sm:w-[380px] md:w-[420px] lg:w-[440px] h-[450px] sm:h-[500px] md:h-[540px] flex items-center justify-center">

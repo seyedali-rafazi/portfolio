@@ -102,7 +102,6 @@ export function buildLocalizedMetadata({
       card: "summary_large_image",
       title,
       description,
-      creator: siteConfig.socialHandles.twitter,
       images: [`${siteConfig.url}/my-photo.png`],
     },
     robots: {

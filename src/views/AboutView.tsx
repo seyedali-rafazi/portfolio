@@ -6,7 +6,15 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useI18n } from "@/i18n/client";
 import { STATS } from "@/data/portfolioData";
-import { ArrowLeft, ArrowRight, Compass, Sparkles, CheckCircle2 } from "lucide-react";
+import { WorkExperienceTimeline } from "@/components/WorkExperienceTimeline";
+import { EducationSection } from "@/components/EducationSection";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Compass,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -35,14 +43,25 @@ export function AboutView({ locale }: AboutViewProps) {
 
       <Navbar />
 
-      <main className="flex-1 pt-36 sm:pt-40 lg:pt-44 pb-24 sm:pb-32" id="main-content">
+      <main
+        className="flex-1 pt-36 sm:pt-40 lg:pt-44 pb-24 sm:pb-32"
+        id="main-content"
+      >
         <div className="portfolio-container">
           {/* Breadcrumb / Page Label */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--primary-light)] mb-6">
-            <Link href={getLocalizedHref("/")} className="hover:text-[var(--text-bright)] transition-colors">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--primary-light)] mb-6"
+          >
+            <Link
+              href={getLocalizedHref("/")}
+              className="hover:text-[var(--text-bright)] transition-colors"
+            >
               {t("nav.home")}
             </Link>
-            <span className="opacity-40" aria-hidden="true">/</span>
+            <span className="opacity-40" aria-hidden="true">
+              /
+            </span>
             <span className="text-[var(--text)]">{t("about.title")}</span>
           </nav>
 
@@ -89,41 +108,30 @@ export function AboutView({ locale }: AboutViewProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm text-[var(--muted)]">
                   <div className="flex items-start gap-3 p-4 sm:p-5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--primary-light)] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{t("about.principle1")}</span>
+                    <span className="leading-relaxed">
+                      {t("about.principle1")}
+                    </span>
                   </div>
                   <div className="flex items-start gap-3 p-4 sm:p-5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--primary-light)] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{t("about.principle2")}</span>
+                    <span className="leading-relaxed">
+                      {t("about.principle2")}
+                    </span>
                   </div>
                   <div className="flex items-start gap-3 p-4 sm:p-5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--primary-light)] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{t("about.principle3")}</span>
+                    <span className="leading-relaxed">
+                      {t("about.principle3")}
+                    </span>
                   </div>
                   <div className="flex items-start gap-3 p-4 sm:p-5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--primary-light)] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{t("about.principle4")}</span>
+                    <span className="leading-relaxed">
+                      {t("about.principle4")}
+                    </span>
                   </div>
                 </div>
               </Card>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-4 flex-wrap pt-2">
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-                  <Button asChild variant="primary" size="lg" className="rounded-xl h-12 px-8 text-sm font-bold shadow-md">
-                    <Link href={getLocalizedHref("/projects")} className="inline-flex items-center gap-2.5 cursor-pointer">
-                      <span>{t("nav.projects")}</span>
-                      {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
-                    </Link>
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-                  <Button asChild variant="outline" size="lg" className="rounded-xl h-12 px-8 text-sm font-semibold shadow-sm">
-                    <Link href={getLocalizedHref("/contact")} className="cursor-pointer">
-                      <span>{t("nav.contact")}</span>
-                    </Link>
-                  </Button>
-                </motion.div>
-              </div>
             </motion.div>
 
             {/* Stats Sidebar (5 cols) */}
@@ -138,7 +146,10 @@ export function AboutView({ locale }: AboutViewProps) {
                   {t("about.highlightsHeading")}
                 </h3>
                 {STATS.map((stat) => (
-                  <div key={stat.id} className="py-6 first:pt-2 last:pb-2 flex items-center gap-5">
+                  <div
+                    key={stat.id}
+                    className="py-6 first:pt-2 last:pb-2 flex items-center gap-5"
+                  >
                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold text-[var(--primary-light)] bg-[var(--primary)]/10 border border-[var(--primary)]/20 shrink-0">
                       {stat.symbol}
                     </div>
@@ -157,6 +168,71 @@ export function AboutView({ locale }: AboutViewProps) {
                 ))}
               </Card>
             </motion.aside>
+          </div>
+
+          {/* Work Experience Timeline */}
+          <WorkExperienceTimeline />
+
+          {/* Academic Education Section */}
+          <EducationSection />
+
+          {/* Action / Next Steps Footer Card */}
+          <div className="mt-12 sm:mt-16 pt-8 border-t border-[var(--border)]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="text-start">
+              <h3 className="text-base sm:text-lg font-bold text-[var(--text-bright)]">
+                {locale === "fa"
+                  ? "علاقه‌مند به همکاری و اجرای پروژه‌های مقیاس‌پذیر هستید؟"
+                  : "Interested in collaboration or high-performance engineering?"}
+              </h3>
+              <p className="text-xs sm:text-sm text-[var(--muted)] mt-1 max-w-xl">
+                {locale === "fa"
+                  ? "پروژه‌ها و نمونه‌کارهای منتخب من را بررسی کنید یا مستقیماً از طریق صفحه تماس پیام بفرستید."
+                  : "Explore my production projects or get in touch directly to discuss new opportunities."}
+              </p>
+            </div>
+            <div className="flex items-center gap-3.5 flex-wrap">
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="rounded-xl h-11 px-7 text-sm font-bold shadow-md"
+                >
+                  <Link
+                    href={getLocalizedHref("/projects")}
+                    className="inline-flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span>{t("nav.projects")}</span>
+                    {isRTL ? (
+                      <ArrowLeft className="w-4 h-4" />
+                    ) : (
+                      <ArrowRight className="w-4 h-4" />
+                    )}
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="rounded-xl h-11 px-7 text-sm font-semibold shadow-sm"
+                >
+                  <Link
+                    href={getLocalizedHref("/contact")}
+                    className="cursor-pointer"
+                  >
+                    <span>{t("nav.contact")}</span>
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </div>
       </main>

@@ -91,7 +91,62 @@ export interface StatItem {
 export interface ContactInfo {
   email: string;
   phone: string;
+  telegram?: string;
   location: {
+    fa: string;
+    en: string;
+  };
+}
+
+export interface WorkExperienceItem {
+  id: string;
+  period: {
+    fa: string;
+    en: string;
+  };
+  role: {
+    fa: string;
+    en: string;
+  };
+  company: {
+    fa: string;
+    en: string;
+  };
+  employmentType: {
+    fa: string;
+    en: string;
+  };
+  isCurrent?: boolean;
+  location?: {
+    fa: string;
+    en: string;
+  };
+  highlights: {
+    fa: string[];
+    en: string[];
+  };
+  technologies: string[];
+}
+
+export interface EducationItem {
+  id: string;
+  degree: {
+    fa: string;
+    en: string;
+  };
+  field: {
+    fa: string;
+    en: string;
+  };
+  institution: {
+    fa: string;
+    en: string;
+  };
+  period: {
+    fa: string;
+    en: string;
+  };
+  location?: {
     fa: string;
     en: string;
   };

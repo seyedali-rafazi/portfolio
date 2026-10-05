@@ -118,6 +118,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </span>
                 </motion.a>
 
+                {CONTACT_DATA.telegram && (
+                  <motion.a
+                    whileHover={{ x: isRTL ? -4 : 4 }}
+                    href={`https://t.me/${CONTACT_DATA.telegram.replace(/^@/, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)] hover:text-[var(--primary-light)] transition-colors group cursor-pointer"
+                  >
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] group-hover:scale-105 transition-transform shrink-0">
+                      <Send className="w-5 h-5" />
+                    </div>
+                    <span className="text-xs sm:text-sm" dir="ltr">
+                      {CONTACT_DATA.telegram}
+                    </span>
+                  </motion.a>
+                )}
+
                 <div className="flex items-center gap-4 text-sm sm:text-base text-[var(--text)]">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary-light)] shrink-0">
                     <MapPin className="w-5 h-5" />

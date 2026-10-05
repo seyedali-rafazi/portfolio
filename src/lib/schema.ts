@@ -22,8 +22,13 @@ export function getPersonSchema(locale: Locale) {
       siteConfig.links.github,
       siteConfig.links.linkedin,
       siteConfig.links.telegram,
-      siteConfig.links.twitter,
     ],
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: isEn
+        ? "Islamic Azad University, Science and Research Branch"
+        : "دانشگاه آزاد اسلامی واحد علوم و تحقیقات",
+    },
     knowsAbout: [
       "React",
       "Next.js",

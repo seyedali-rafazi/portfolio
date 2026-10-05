@@ -15,17 +15,16 @@ export const siteConfig = {
   locales: ["en", "fa"] as const,
   author: "Seyekali Rafazi",
   email: "seyedalirafazi80@gmail.com",
-  phone: "+98 912 345 6789",
+  phone: "+98 937 989 8954",
   locationEn: "Tehran, Iran",
   locationFa: "تهران، ایران",
   links: {
-    github: "https://github.com/seyedalirafazi",
-    linkedin: "https://linkedin.com/in/seyedalirafazi",
-    telegram: "https://t.me/seyedalirafazi",
-    twitter: "https://x.com/seyedalirafazi",
+    github: "https://github.com/seyedali-rafazi",
+    linkedin: "https://www.linkedin.com/in/seyedali-rafazi",
+    telegram: "https://t.me/ali_rfzt",
   },
   socialHandles: {
-    twitter: "@seyedalirafazi",
+    telegram: "@ali_rfzt",
   },
 } as const;
 

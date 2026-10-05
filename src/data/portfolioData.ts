@@ -1,4 +1,11 @@
-import { Project, Skill, StatItem, ContactInfo } from "@/types";
+import {
+  Project,
+  Skill,
+  StatItem,
+  ContactInfo,
+  WorkExperienceItem,
+  EducationItem,
+} from "@/types";
 
 export const PERSONAL_INFO = {
   name: "Seyekali Rafazi",
@@ -20,14 +27,13 @@ export const PERSONAL_INFO = {
       "With over 4 years dedicated to the React and Next.js ecosystem, I specialize in web performance optimization, modern rendering strategies (SSR/SSG/ISR), accessible design systems, and advanced geospatial visualization using tools like MapLibre and CesiumJS.",
   },
   socials: [
-    { name: "GitHub", short: "GH", url: "https://github.com/seyedalirafazi" },
+    { name: "GitHub", short: "GH", url: "https://github.com/seyedali-rafazi" },
     {
       name: "LinkedIn",
       short: "in",
-      url: "https://linkedin.com/in/seyedalirafazi",
+      url: "https://www.linkedin.com/in/seyedali-rafazi",
     },
-    { name: "Telegram", short: "TG", url: "https://t.me/seyedalirafazi" },
-    { name: "X", short: "X", url: "https://x.com/seyedalirafazi" },
+    { name: "Telegram", short: "TG", url: "https://t.me/ali_rfzt" },
   ],
   quote: {
     en: "Technology connects ideas to the world.",
@@ -37,7 +43,8 @@ export const PERSONAL_INFO = {
 
 export const CONTACT_DATA: ContactInfo = {
   email: "seyedalirafazi80@gmail.com",
-  phone: "+98 912 345 6789",
+  phone: "+98 937 989 8954",
+  telegram: "@ali_rfzt",
   location: {
     fa: "تهران، ایران",
     en: "Tehran, Iran",
@@ -95,6 +102,191 @@ export const STATS: StatItem[] = [
     subtitle: {
       fa: "همیشه در حال یادگیری",
       en: "Always Improving",
+    },
+  },
+];
+
+export const WORK_EXPERIENCES: WorkExperienceItem[] = [
+  {
+    id: "estinas",
+    period: {
+      en: "2026 – Present",
+      fa: "۲۰۲۶ – اکنون",
+    },
+    role: {
+      en: "Frontend Engineer",
+      fa: "مهندس فرانت‌اند",
+    },
+    company: {
+      en: "Estinas",
+      fa: "شرکت استیناس",
+    },
+    employmentType: {
+      en: "Contract",
+      fa: "قراردادی",
+    },
+    isCurrent: true,
+    location: {
+      en: "Tehran, Iran",
+      fa: "تهران، ایران",
+    },
+    highlights: {
+      en: [
+        "Designed and developed a production-grade enterprise Telecom & B2B Platform using React, TypeScript, and Tailwind CSS, enabling centralized lifecycle management for telecom organizations, subscribers, and SIM cards.",
+        "Built interactive telemetry and data traffic visualization dashboards using Apache ECharts, tracking real-time network data consumption (upload/download traffic trends, voucher utilization, and quota limits).",
+      ],
+      fa: [
+        "طراحی و توسعه پلتفرم سازمانی و B2B در حوزه تلکام با استفاده از React، TypeScript و Tailwind CSS جهت مدیریت متمرکز چرخه عمر سازمان‌های مخابراتی، مشترکین و سیم‌کارت‌ها.",
+        "پیاده‌سازی داشبوردهای تعاملی تله‌متری و مصورسازی ترافیک مصرفی دیتا با Apache ECharts برای مانیتورینگ بلادرنگ روند ترافیک آپلود/دانلود، مصرف ووچرها و سقف بسته‌های دیتا.",
+      ],
+    },
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Apache ECharts",
+      "Telecom & B2B",
+      "Telemetry Dashboards",
+      "REST APIs",
+    ],
+  },
+  {
+    id: "sharif-hamrah-pajouhan",
+    period: {
+      en: "2024 – 2026",
+      fa: "۲۰۲۴ – ۲۰۲۶",
+    },
+    role: {
+      en: "Frontend Engineer",
+      fa: "مهندس فرانت‌اند",
+    },
+    company: {
+      en: "Sharif Hamrah Pajouhan",
+      fa: "شرکت شریف همراه پژوهان",
+    },
+    employmentType: {
+      en: "Full-time",
+      fa: "تمام‌وقت",
+    },
+    isCurrent: false,
+    location: {
+      en: "Tehran, Iran",
+      fa: "تهران، ایران",
+    },
+    highlights: {
+      en: [
+        "Designed and developed production-grade geospatial applications using React, TypeScript, monorepo (Nx, Turborepo), and MUI, supporting enterprise-level operational workflows.",
+        "Designed and developed complex and interactive dashboards and geospatial visualization systems using Mapbox, Cesium, Leaflet, AG Grid, and AG Charts, enabling real-time monitoring, analysis, and visualization of large-scale geospatial data.",
+      ],
+      fa: [
+        "طراحی و توسعه سامانه‌های مکانی و جغرافیایی (GIS) سازمانی با بهره‌گیری از React، TypeScript، ساختار مونو‌ریپو (Nx، Turborepo) و MUI برای پشتیبانی از ورک‌فلوهای عملیاتی حساس.",
+        "طراحی و پیاده‌سازی داشبوردهای تعاملی و پیشرفته تحلیل و مصورسازی داده‌های مکانی با Mapbox، Cesium، Leaflet، AG Grid و AG Charts جهت پایش و مانیتورینگ بلادرنگ داده‌های کلان جغرافیایی.",
+      ],
+    },
+    technologies: [
+      "React",
+      "TypeScript",
+      "Nx",
+      "Turborepo",
+      "MUI",
+      "Mapbox",
+      "Cesium",
+      "Leaflet",
+      "AG Grid",
+      "AG Charts",
+    ],
+  },
+  {
+    id: "freelancer",
+    period: {
+      en: "2022 – 2023",
+      fa: "۲۰۲۲ – ۲۰۲۳",
+    },
+    role: {
+      en: "Full-Stack Engineer",
+      fa: "مهندس فول‌استک",
+    },
+    company: {
+      en: "Freelance",
+      fa: "فریلنسر",
+    },
+    employmentType: {
+      en: "Freelance",
+      fa: "فریلنسر / پروژه‌ای",
+    },
+    isCurrent: false,
+    location: {
+      en: "Remote",
+      fa: "دورکاری",
+    },
+    highlights: {
+      en: [
+        "Designed and developed full-stack web applications using React, Next.js, TypeScript, and FastAPI.",
+        "Built RESTful backend APIs, authentication and authorization systems, database integrations, and business logic using FastAPI and MongoDB.",
+      ],
+      fa: [
+        "طراحی و توسعه وب‌اپلیکیشن‌های فول‌استک مدرن با استفاده از React، Next.js، TypeScript و FastAPI.",
+        "پیاده‌سازی APIهای RESTful، سیستم‌های احراز هویت و سطوح دسترسی، مدل‌سازی دیتابیس و لاجیک بک‌اند با FastAPI و MongoDB.",
+      ],
+    },
+    technologies: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "FastAPI",
+      "Python",
+      "MongoDB",
+      "RESTful APIs",
+      "Auth & Security",
+    ],
+  },
+];
+
+export const EDUCATION: EducationItem[] = [
+  {
+    id: "msc-ai",
+    degree: {
+      en: "Master of Science (M.Sc.)",
+      fa: "کارشناسی ارشد",
+    },
+    field: {
+      en: "Soft Computing and Artificial Intelligence",
+      fa: "محاسبات نرم و هوش مصنوعی",
+    },
+    institution: {
+      en: "Islamic Azad University, Science and Research Branch",
+      fa: "دانشگاه آزاد اسلامی واحد علوم و تحقیقات",
+    },
+    period: {
+      en: "2023 – 2026",
+      fa: "۲۰۲۳ – ۲۰۲۶",
+    },
+    location: {
+      en: "Tehran, Iran",
+      fa: "تهران، ایران",
+    },
+  },
+  {
+    id: "bsc-cs",
+    degree: {
+      en: "Bachelor of Science (B.Sc.)",
+      fa: "کارشناسی",
+    },
+    field: {
+      en: "Computer Science",
+      fa: "علوم کامپیوتر",
+    },
+    institution: {
+      en: "Islamic Azad University, Science and Research Branch",
+      fa: "دانشگاه آزاد اسلامی واحد علوم و تحقیقات",
+    },
+    period: {
+      en: "2019 – 2023",
+      fa: "۲۰۱۹ – ۲۰۲۳",
+    },
+    location: {
+      en: "Tehran, Iran",
+      fa: "تهران، ایران",
     },
   },
 ];
