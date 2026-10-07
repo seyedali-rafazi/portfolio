@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useTransition } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { AdminNavbar } from "@/components/admin/AdminNavbar";
 import {
   Inbox,
   Mail,
@@ -484,60 +485,7 @@ export function AdminModerationDashboard() {
 
 
       {/* Top Navbar */}
-      <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[var(--primary)] to-[var(--primary-light)] flex items-center justify-center text-white shadow-[0_0_12px_var(--glow)]">
-              <Shield className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[var(--text-bright)] text-sm sm:text-base tracking-tight">
-                  Portfolio Admin
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[var(--primary)]/15 text-[var(--primary-light)] border border-[var(--primary)]/30">
-                  Moderation
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-[11px] text-[var(--muted)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>PostgreSQL Neon Connected</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => fetchMessages()}
-              disabled={isLoading}
-              title="Refresh messages"
-              className="p-2 sm:px-3 sm:py-2 rounded-xl border border-[var(--border)] hover:bg-[var(--surface-2)] text-[var(--text)] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-            >
-              <RefreshCw
-                className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`}
-              />
-              <span className="hidden sm:inline">Refresh</span>
-            </button>
-
-            <Link
-              href="/"
-              className="p-2 sm:px-3 sm:py-2 rounded-xl border border-[var(--border)] hover:bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--text)] text-xs font-semibold flex items-center gap-1.5 transition-colors"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">View Site</span>
-            </Link>
-
-            <button
-              onClick={handleLogout}
-              title="Logout"
-              className="p-2 sm:px-3 sm:py-2 rounded-xl border border-rose-500/20 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
-          </div>
-        </div>
-      </header>
+      <AdminNavbar onRefresh={() => fetchMessages()} isRefreshing={isLoading} />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">

@@ -244,3 +244,69 @@ export function getNotFoundMetadata(locale: Locale): Metadata {
     },
   };
 }
+
+export function getBlogMetadata(locale: Locale = "en"): Metadata {
+  const isEn = locale === "en";
+  return buildLocalizedMetadata({
+    locale,
+    path: "/blog",
+    title: isEn
+      ? "Technical Blog & Engineering Insights | Seyedali Rafazi"
+      : "وبلاگ فنی و مقالات مهندسی نرم‌افزار | سید علی رفضی",
+    description: isEn
+      ? "Deep-dive articles on modern frontend engineering, React, Next.js, GIS architectures, web performance, and developer tooling."
+      : "مقالات تخصصی مهندسی فرانت‌اند، معماری سیستم‌های ری‌اکت و نکست‌جی‌اس، سامانه‌های مکانی و بهینه‌سازی وب.",
+    keywords: [
+      "Software Engineering Blog",
+      "Frontend Architecture",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Geospatial Engineering",
+      "Web Performance",
+      "Seyedali Rafazi",
+    ],
+  });
+}
+
+export interface ArticleMetadataInput {
+  title: string;
+  excerpt: string;
+  slug: string;
+  coverImage?: string | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  canonicalUrl?: string | null;
+  tags?: { name: string }[];
+  category?: { name: string } | null;
+}
+
+export function getArticleMetadata(
+  article: ArticleMetadataInput,
+  locale: Locale = "en"
+): Metadata {
+  const title = article.seoTitle || `${article.title} | Seyedali Rafazi Blog`;
+  const description = article.seoDescription || article.excerpt;
+  const keywords = article.tags?.map((t) => t.name) || [];
+
+  const baseMeta = buildLocalizedMetadata({
+    locale,
+    path: `/blog/${article.slug}`,
+    title,
+    description,
+    keywords,
+    ogType: "article",
+    image: article.coverImage || undefined,
+    imageAlt: article.title,
+  });
+
+  if (article.canonicalUrl) {
+    baseMeta.alternates = {
+      ...baseMeta.alternates,
+      canonical: article.canonicalUrl,
+    };
+  }
+
+  return baseMeta;
+}
+

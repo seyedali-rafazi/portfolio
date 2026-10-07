@@ -535,6 +535,11 @@
   dependencies:
     undici-types "~6.21.0"
 
+"@types/prismjs@^1.26.6":
+  version "1.26.6"
+  resolved "https://registry.npmjs.org/@types/prismjs/-/prismjs-1.26.6.tgz"
+  integrity sha512-vqlvI7qlMvcCBbVe0AKAb4f97//Hy0EBTaiW8AalRnG/xAN5zOiWWyrNqNXeq8+KAuvRewjCVY1+IPxk4RdNYw==
+
 "@types/react-dom@^19":
   version "19.3.0"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.3.0.tgz"
@@ -2224,6 +2229,11 @@ magic-string@^0.30.21:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.5.5"
 
+marked@^18.1.0:
+  version "18.1.0"
+  resolved "https://registry.npmjs.org/marked/-/marked-18.1.0.tgz"
+  integrity sha512-PamYXWWWg2nboG3oX5Ffzpy3EFZROqZJK9hSlMmUnekp7TxPs5DcT95vwd46m73/exfKCRVMtgXoPMI4FEJL6w==
+
 math-intrinsics@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz"
@@ -2542,6 +2552,11 @@ prisma@*, prisma@^6.19.3:
   dependencies:
     "@prisma/config" "6.19.3"
     "@prisma/engines" "6.19.3"
+
+prismjs@^1.30.0:
+  version "1.30.0"
+  resolved "https://registry.npmjs.org/prismjs/-/prismjs-1.30.0.tgz"
+  integrity sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==
 
 prop-types@^15.8.1:
   version "15.8.1"

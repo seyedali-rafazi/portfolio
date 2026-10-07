@@ -24,3 +24,74 @@ model ContactMessage {
   @@index([isRead])
   @@map("contact_messages")
 }
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Author {
+  id        String    @id @default(cuid())
+  name      String
+  email     String?   @unique
+  avatar    String?
+  bio       String?
+  articles  Article[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("authors")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  articles    Article[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+  @@map("categories")
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  articles  Article[]
+  createdAt DateTime  @default(now())
+
+  @@index([slug])
+  @@map("tags")
+}
+
+model Article {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  excerpt        String        @db.Text
+  content        String        @db.Text
+  coverImage     String?
+  status         ArticleStatus @default(DRAFT)
+  featured       Boolean       @default(false)
+  authorId       String?
+  author         Author?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  categories     Category[]
+  tags           Tag[]
+  readingTime    Int           @default(1)
+  seoTitle       String?
+  seoDescription String?
+  canonicalUrl   String?
+  publishedAt    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([publishedAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
+  @@index([featured])
+  @@map("articles")
+}

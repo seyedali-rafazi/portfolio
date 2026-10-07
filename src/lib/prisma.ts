@@ -26,7 +26,11 @@ function getPrismaClient(): PrismaClient {
  * PrismaClient upon first actual database query call, preventing
  * build-time evaluation failures on platforms like Vercel.
  */
-export const prisma = new Proxy({} as PrismaClient, {
+export type ExtendedPrismaClient = PrismaClient & {
+  [key: string]: any;
+};
+
+export const prisma: ExtendedPrismaClient = new Proxy({} as any, {
   get(_target, prop: string | symbol) {
     const client = getPrismaClient();
     const value = (client as any)[prop];

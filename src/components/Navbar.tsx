@@ -19,6 +19,7 @@ import {
   Mail,
   ChevronRight,
   ChevronLeft,
+  BookOpen,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,6 +47,12 @@ export const Navbar: React.FC = () => {
       label: t("nav.skills", "Skills"),
       id: "skills",
       icon: Cpu,
+    },
+    {
+      path: "/blog",
+      label: t("nav.blog", "Blog"),
+      id: "blog",
+      icon: BookOpen,
     },
     {
       path: "/contact",

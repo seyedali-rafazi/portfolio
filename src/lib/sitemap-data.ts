@@ -31,6 +31,7 @@ export function getSitemapRoutes(): SitemapRoute[] {
     })),
     { path: "/skills", priority: 0.8, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/blog", priority: 0.9, changeFrequency: "daily" },
   ];
 }
 

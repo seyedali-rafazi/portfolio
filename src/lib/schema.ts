@@ -143,4 +143,56 @@ export function getProfilePageSchema(locale: Locale) {
   };
 }
 
+export interface ArticleSchemaData {
+  title: string;
+  excerpt: string;
+  slug: string;
+  coverImage?: string | null;
+  publishedAt?: Date | string | null;
+  updatedAt?: Date | string | null;
+  authorName?: string;
+  authorAvatar?: string | null;
+  tags?: string[];
+}
+
+export function getArticleSchema(article: ArticleSchemaData, locale: Locale = "en") {
+  const isEn = locale === "en";
+  const baseUrl = siteConfig.url;
+  const articleUrl = isEn ? `${baseUrl}/blog/${article.slug}` : `${baseUrl}/fa/blog/${article.slug}`;
+  const imageUrl = article.coverImage
+    ? (article.coverImage.startsWith("http") ? article.coverImage : `${baseUrl}${article.coverImage}`)
+    : `${baseUrl}/my-photo.png`;
+
+  const authorName = article.authorName || (isEn ? siteConfig.name : siteConfig.nameFa);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: article.title,
+    description: article.excerpt,
+    url: articleUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    image: imageUrl,
+    datePublished: article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined,
+    dateModified: article.updatedAt ? new Date(article.updatedAt).toISOString() : undefined,
+    author: {
+      "@type": "Person",
+      name: authorName,
+      url: baseUrl,
+      ...(article.authorAvatar ? { image: article.authorAvatar } : {}),
+    },
+    publisher: {
+      "@type": "Person",
+      name: isEn ? siteConfig.name : siteConfig.nameFa,
+      url: baseUrl,
+      image: `${baseUrl}/my-photo.png`,
+    },
+    keywords: article.tags?.join(", "),
+  };
+}
+
+
 
