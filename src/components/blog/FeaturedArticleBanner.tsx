@@ -5,9 +5,13 @@ import type { BlogCardArticle } from "./BlogCard";
 
 interface FeaturedBannerProps {
   article: BlogCardArticle;
+  basePath?: string;
 }
 
-export function FeaturedArticleBanner({ article }: FeaturedBannerProps) {
+export function FeaturedArticleBanner({
+  article,
+  basePath = "/blog",
+}: FeaturedBannerProps) {
   const publishedDate = article.publishedAt
     ? new Date(article.publishedAt).toLocaleDateString("en-US", {
         month: "long",
@@ -16,8 +20,13 @@ export function FeaturedArticleBanner({ article }: FeaturedBannerProps) {
       })
     : null;
 
+  const articleHref = `${basePath}/${article.slug}`;
+
   return (
-    <div className="relative rounded-3xl border border-[var(--border)] bg-[var(--surface)]/80 hover:border-[var(--primary)]/60 backdrop-blur-xl overflow-hidden shadow-2xl transition-all duration-300 group">
+    <div
+      dir="ltr"
+      className="relative rounded-3xl border border-[var(--border)] bg-[var(--surface)]/80 hover:border-[var(--primary)]/60 backdrop-blur-xl overflow-hidden shadow-2xl transition-all duration-300 group text-left"
+    >
       {/* Ambient background glow inside card */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[var(--primary)]/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -43,7 +52,7 @@ export function FeaturedArticleBanner({ article }: FeaturedBannerProps) {
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--text-bright)] tracking-tight leading-tight group-hover:text-[var(--primary-light)] transition-colors">
-            <Link href={`/blog/${article.slug}`}>
+            <Link href={articleHref}>
               {article.title}
             </Link>
           </h2>
@@ -74,7 +83,7 @@ export function FeaturedArticleBanner({ article }: FeaturedBannerProps) {
             </div>
 
             <Link
-              href={`/blog/${article.slug}`}
+              href={articleHref}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] hover:brightness-110 active:scale-[0.98] text-white text-xs font-semibold shadow-[0_4px_20px_var(--glow)] transition-all cursor-pointer self-start sm:self-auto"
             >
               <span>Read Article</span>

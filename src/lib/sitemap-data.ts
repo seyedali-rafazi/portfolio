@@ -43,6 +43,7 @@ export function getSitemapEntries(now = new Date()): SitemapEntry[] {
     const pathSuffix = isRoot ? "" : route.path;
 
     const enUrl = `${siteConfig.url}${pathSuffix}`;
+
     const faUrl = `${siteConfig.url}/fa${pathSuffix}`;
 
     const alternates = {

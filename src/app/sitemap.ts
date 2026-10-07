@@ -46,6 +46,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           },
         },
       });
+
+      nextEntries.push({
+        url: faUrl,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 0.85,
+        alternates: {
+          languages: {
+            en: enUrl,
+            fa: faUrl,
+            "x-default": enUrl,
+          },
+        },
+      });
     }
   } catch (err) {
     console.error("[SITEMAP_FETCH_ARTICLES_ERROR]", err);

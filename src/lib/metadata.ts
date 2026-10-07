@@ -33,7 +33,6 @@ export function buildLocalizedMetadata({
   const isEn = locale === "en";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   const pathSuffix = cleanPath === "/" ? "" : cleanPath;
-
   // Canonical URLs (strictly pointing to https://www.seyedalirafazi.ir)
   const enUrl = `${siteConfig.url}${pathSuffix}`;
   const faUrl = `${siteConfig.url}/fa${pathSuffix}`;
@@ -285,7 +284,12 @@ export function getArticleMetadata(
   article: ArticleMetadataInput,
   locale: Locale = "en"
 ): Metadata {
-  const title = article.seoTitle || `${article.title} | Seyedali Rafazi Blog`;
+  const isEn = locale === "en";
+  const title =
+    article.seoTitle ||
+    (isEn
+      ? `${article.title} | Seyedali Rafazi Blog`
+      : `${article.title} | وبلاگ سید علی رفضی`);
   const description = article.seoDescription || article.excerpt;
   const keywords = article.tags?.map((t) => t.name) || [];
 

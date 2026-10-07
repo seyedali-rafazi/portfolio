@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState, useTransition } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { I18nextProvider } from "react-i18next";
 import { createI18n } from "./config";
-import { Locale, getAlternateLocalePath } from "./index";
+import type { Locale } from "./index";
 
 interface I18nProviderProps {
   children: React.ReactNode;
@@ -13,7 +13,6 @@ interface I18nProviderProps {
 
 export function I18nProvider({ children, initialLocale }: I18nProviderProps) {
   const pathname = usePathname() || "/";
-  const router = useRouter();
   const [, startTransition] = useTransition();
 
   // Instance is created once, already in the right language (no setState during render)
@@ -28,20 +27,14 @@ export function I18nProvider({ children, initialLocale }: I18nProviderProps) {
       document.documentElement.dir = targetLocale === "fa" ? "rtl" : "ltr";
       document.body.classList.toggle("en", targetLocale === "en");
 
-      const currentRouteLocale: Locale = pathname.startsWith("/fa") ? "fa" : "en";
-      if (currentRouteLocale !== targetLocale) {
-        const targetPath = getAlternateLocalePath(pathname, targetLocale);
-        startTransition(() => {
-          router.push(targetPath);
-        });
-      }
+      // Navigation is handled by the language switcher links themselves.
     };
 
     i18n.on("languageChanged", handleLanguageChanged);
     return () => {
       i18n.off("languageChanged", handleLanguageChanged);
     };
-  }, [i18n, pathname, router]);
+  }, [i18n]);
 
   // Keep i18n in sync when the route changes via regular navigation (links, back button)
   useEffect(() => {

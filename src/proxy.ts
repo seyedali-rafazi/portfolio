@@ -16,6 +16,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(cleanUrl, 301);
   }
 
+
   return NextResponse.next();
 }
 

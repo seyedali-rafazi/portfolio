@@ -158,7 +158,9 @@ export interface ArticleSchemaData {
 export function getArticleSchema(article: ArticleSchemaData, locale: Locale = "en") {
   const isEn = locale === "en";
   const baseUrl = siteConfig.url;
-  const articleUrl = isEn ? `${baseUrl}/blog/${article.slug}` : `${baseUrl}/fa/blog/${article.slug}`;
+  const articleUrl = isEn
+    ? `${baseUrl}/blog/${article.slug}`
+    : `${baseUrl}/fa/blog/${article.slug}`;
   const imageUrl = article.coverImage
     ? (article.coverImage.startsWith("http") ? article.coverImage : `${baseUrl}${article.coverImage}`)
     : `${baseUrl}/my-photo.png`;

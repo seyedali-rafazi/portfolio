@@ -2,7 +2,7 @@
 
 import { useMemo, useCallback } from "react";
 import { useTranslation as useReactI18nextTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Locale,
   getLocalizedHref as i18nGetLocalizedHref,
@@ -25,6 +25,7 @@ export interface UseI18nReturn {
 export function useI18n(): UseI18nReturn {
   const { t: i18nT, i18n } = useReactI18nextTranslation();
   const pathname = usePathname() || "/";
+  const router = useRouter();
 
   // Derive current locale from i18n or URL
   const currentLocale: Locale = useMemo(() => {
@@ -43,9 +44,11 @@ export function useI18n(): UseI18nReturn {
 
   const changeLanguage = useCallback(
     (newLang: Locale) => {
+      const targetPath = getAlternateLocalePath(pathname, newLang);
+      router.push(targetPath);
       return i18n.changeLanguage(newLang);
     },
-    [i18n]
+    [i18n, pathname, router]
   );
 
   const getLocalizedHref = useCallback(

@@ -88,7 +88,7 @@ export default async function CategoryPage({
 
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 space-y-10" id="main-content">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-[var(--muted)]">
           <Link href="/" className="hover:text-white transition-colors">

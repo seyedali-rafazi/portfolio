@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n/client";
+import { getAlternateLocalePath } from "@/i18n";
 import { useTheme } from "@/context/ThemeContext";
 import {
   Moon,
@@ -25,7 +26,7 @@ import { Logo } from "@/components/common/Logo";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar: React.FC = () => {
-  const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale } =
+  const { locale, t, i18n, isRTL, getLocalizedHref, alternateLocale, alternateHref } =
     useI18n();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname() || "/";
@@ -183,11 +184,8 @@ export const Navbar: React.FC = () => {
             {/* Action Controls - End */}
             <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3">
               {/* Desktop Language Switcher */}
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.94 }}
-                onClick={() => i18n.changeLanguage(alternateLocale)}
+              <a
+                href={alternateHref}
                 id="languageBtn"
                 title={
                   locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"
@@ -195,7 +193,7 @@ export const Navbar: React.FC = () => {
                 aria-label={
                   locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"
                 }
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--text)] transition-colors cursor-pointer shadow-sm"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--text)] transition-all cursor-pointer shadow-sm hover:scale-[1.04] active:scale-[0.94]"
               >
                 <Globe
                   className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0"
@@ -222,7 +220,7 @@ export const Navbar: React.FC = () => {
                 >
                   فارسی
                 </span>
-              </motion.button>
+              </a>
 
               {/* Desktop Theme Switcher */}
               <motion.button
@@ -417,15 +415,10 @@ export const Navbar: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-1.5 p-1 bg-[var(--bg)]/90 rounded-xl border border-[var(--border)]/50">
-                      <button
-                        type="button"
+                      <a
+                        href={getAlternateLocalePath(pathname, "en")}
                         id="mobileLanguageBtn-en"
-                        onClick={() => {
-                          if (locale !== "en") {
-                            setMobileMenuOpen(false);
-                            i18n.changeLanguage("en");
-                          }
-                        }}
+                        onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           locale === "en"
                             ? "bg-[var(--primary)] text-white shadow-sm shadow-[var(--primary)]/30 font-bold"
@@ -437,17 +430,12 @@ export const Navbar: React.FC = () => {
                         <span className="text-[10px] opacity-75 font-mono">
                           EN
                         </span>
-                      </button>
+                      </a>
 
-                      <button
-                        type="button"
+                      <a
+                        href={getAlternateLocalePath(pathname, "fa")}
                         id="mobileLanguageBtn-fa"
-                        onClick={() => {
-                          if (locale !== "fa") {
-                            setMobileMenuOpen(false);
-                            i18n.changeLanguage("fa");
-                          }
-                        }}
+                        onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           locale === "fa"
                             ? "bg-[var(--primary)] text-white shadow-sm shadow-[var(--primary)]/30 font-bold"
@@ -459,7 +447,7 @@ export const Navbar: React.FC = () => {
                         <span className="text-[10px] opacity-75 font-mono">
                           FA
                         </span>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

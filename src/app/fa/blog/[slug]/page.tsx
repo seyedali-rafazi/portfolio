@@ -13,17 +13,17 @@ import { SocialShare } from "@/components/blog/SocialShare";
 import { ArticleNavPrevNext } from "@/components/blog/ArticleNavPrevNext";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { renderMarkdownToHtml, extractTableOfContents } from "@/lib/blog/markdown";
-import { Calendar, Clock, Star, Tag, ChevronRight, BookOpen } from "lucide-react";
+import { Calendar, Clock, Star, Tag, ChevronLeft, BookOpen } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-interface ArticlePageProps {
+interface FaArticlePageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
-}: ArticlePageProps): Promise<Metadata> {
+}: FaArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = await prisma.article.findUnique({
     where: { slug, status: "PUBLISHED" },
@@ -35,7 +35,7 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Article Not Found | Seyedali Rafazi Blog",
+      title: "مقاله پیدا نشد | وبلاگ سید علی رفضی",
       robots: { index: false, follow: false },
     };
   }
@@ -52,11 +52,11 @@ export async function generateMetadata({
       tags: article.tags,
       category: article.categories[0] || null,
     },
-    "en"
+    "fa"
   );
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function FaArticlePage({ params }: FaArticlePageProps) {
   const { slug } = await params;
 
   const article = await prisma.article.findUnique({
@@ -134,7 +134,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       authorAvatar: article.author?.avatar,
       tags: article.tags.map((t) => t.name),
     },
-    "en"
+    "fa"
   );
 
   return (
@@ -148,28 +148,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Main navigation */}
       <Navbar />
 
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 space-y-10" id="main-content">
-        {/* Breadcrumb Navigation */}
+      <main
+        className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 space-y-10"
+        id="main-content"
+      >
+        {/* Persian Breadcrumb Navigation */}
         <nav
-          aria-label="Breadcrumb"
+          aria-label="مسیر راهنما"
           className="flex items-center gap-2 text-xs text-[var(--muted)] flex-wrap"
         >
           <Link
-            href="/"
+            href="/fa"
             className="hover:text-[var(--text-bright)] transition-colors"
           >
-            Home
+            خانه
           </Link>
-          <ChevronRight className="w-3 h-3 text-[var(--muted-2)]" />
+          <ChevronLeft className="w-3 h-3 text-[var(--muted-2)]" />
           <Link
-            href="/blog"
+            href="/fa/blog"
             className="hover:text-[var(--text-bright)] transition-colors"
           >
-            Blog
+            وبلاگ
           </Link>
           {article.categories[0] && (
             <>
-              <ChevronRight className="w-3 h-3 text-[var(--muted-2)]" />
+              <ChevronLeft className="w-3 h-3 text-[var(--muted-2)]" />
               <Link
                 href={`/blog/category/${article.categories[0].slug}`}
                 className="hover:text-[var(--text-bright)] transition-colors"
@@ -178,14 +181,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </Link>
             </>
           )}
-          <ChevronRight className="w-3 h-3 text-[var(--muted-2)]" />
+          <ChevronLeft className="w-3 h-3 text-[var(--muted-2)]" />
           <span className="text-[var(--text-bright)] truncate max-w-[220px]">
             {article.title}
           </span>
         </nav>
 
-        {/* Article Header */}
-        <header className="space-y-5">
+        {/* Article Header (Rendered in LTR because article is in English) */}
+        <header dir="ltr" className="space-y-5 text-left">
           <div className="flex items-center gap-2 flex-wrap">
             {article.featured && (
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center gap-1">
@@ -264,8 +267,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </div>
         )}
 
-        {/* Article Body & Sidebar Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Article Body & Sidebar Grid (Rendered in LTR because article is in English) */}
+        <div dir="ltr" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
           {/* Table of Contents Sticky Sidebar */}
           {headings.length > 0 && (
             <aside className="lg:col-span-4 lg:sticky lg:top-24 order-2 lg:order-1">
@@ -301,12 +304,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="pt-6 border-t border-[var(--border)]">
               <SocialShare
                 title={article.title}
-                url={`https://www.seyedalirafazi.ir/blog/${article.slug}`}
+                url={`https://www.seyedalirafazi.ir/fa/blog/${article.slug}`}
               />
             </div>
 
             {/* Prev & Next Post Nav */}
-            <ArticleNavPrevNext prev={prevArticle} next={nextArticle} />
+            <ArticleNavPrevNext
+              prev={prevArticle}
+              next={nextArticle}
+              basePath="/fa/blog"
+            />
           </div>
         </div>
 
@@ -316,13 +323,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-[var(--primary)]" />
               <h2 className="text-xl sm:text-2xl font-black text-[var(--text-bright)] tracking-tight">
-                Related Engineering Articles
+                مقالات مرتبط / Related Articles
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedArticles.map((rel) => (
-                <BlogCard key={rel.id} article={rel} />
+                <BlogCard key={rel.id} article={rel} basePath="/fa/blog" />
               ))}
             </div>
           </section>

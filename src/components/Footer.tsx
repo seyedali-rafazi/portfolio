@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n/client";
 import { Logo } from "@/components/common/Logo";
 
 export const Footer: React.FC = () => {
-  const { locale, t, i18n, getLocalizedHref, alternateLocale } = useI18n();
+  const { locale, t, i18n, getLocalizedHref, alternateLocale, alternateHref } = useI18n();
 
   return (
     <footer className="border-t border-[var(--border)] py-12 sm:py-16 relative bg-[var(--bg)]/90 backdrop-blur-md mt-auto">
@@ -56,14 +56,14 @@ export const Footer: React.FC = () => {
             {t("nav.contact", "Contact")}
           </Link>
           <span className="opacity-30" aria-hidden="true">|</span>
-          <button
-            type="button"
-            onClick={() => i18n.changeLanguage(alternateLocale)}
+          {/* Plain anchor: switching locale crosses root layouts, so force a full document load */}
+          <a
+            href={alternateHref}
             className="font-semibold text-[var(--primary)] dark:text-[var(--primary-light)] hover:text-[var(--primary-dark)] dark:hover:text-white transition-colors cursor-pointer"
             aria-label={locale === "fa" ? "Switch language to English" : "تغییر زبان به فارسی"}
           >
             {t("footer.switchLang")}
-          </button>
+          </a>
         </nav>
       </div>
     </footer>

@@ -30,9 +30,14 @@ export interface BlogCardArticle {
 interface BlogCardProps {
   article: BlogCardArticle;
   featuredBanner?: boolean;
+  basePath?: string;
 }
 
-export function BlogCard({ article, featuredBanner = false }: BlogCardProps) {
+export function BlogCard({
+  article,
+  featuredBanner = false,
+  basePath = "/blog",
+}: BlogCardProps) {
   const publishedDate = article.publishedAt
     ? new Date(article.publishedAt).toLocaleDateString("en-US", {
         month: "short",
@@ -41,11 +46,16 @@ export function BlogCard({ article, featuredBanner = false }: BlogCardProps) {
       })
     : null;
 
+  const articleHref = `${basePath}/${article.slug}`;
+
   return (
-    <article className="group relative flex flex-col rounded-3xl border border-[var(--border)] bg-[var(--surface)]/80 hover:border-[var(--primary)]/50 backdrop-blur-md overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_var(--glow)] hover:-translate-y-1">
+    <article
+      dir="ltr"
+      className="group relative flex flex-col rounded-3xl border border-[var(--border)] bg-[var(--surface)]/80 hover:border-[var(--primary)]/50 backdrop-blur-md overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_var(--glow)] hover:-translate-y-1 text-left"
+    >
       {/* Cover Image Container */}
       <Link
-        href={`/blog/${article.slug}`}
+        href={articleHref}
         className="relative block aspect-[16/10] overflow-hidden bg-[var(--surface-2)]"
         tabIndex={-1}
       >
@@ -94,7 +104,7 @@ export function BlogCard({ article, featuredBanner = false }: BlogCardProps) {
       <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
         <div className="space-y-2.5">
           <h3 className="text-lg sm:text-xl font-extrabold text-[var(--text-bright)] tracking-tight group-hover:text-[var(--primary-light)] transition-colors line-clamp-2">
-            <Link href={`/blog/${article.slug}`}>
+            <Link href={articleHref}>
               {article.title}
             </Link>
           </h3>
