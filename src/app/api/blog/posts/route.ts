@@ -49,6 +49,11 @@ export async function GET(req: Request) {
       };
     }
 
+    const excludeId = searchParams.get("exclude");
+    if (excludeId) {
+      where.id = { not: excludeId };
+    }
+
     if (search) {
       where.OR = [
         { title: { contains: search, mode: "insensitive" } },

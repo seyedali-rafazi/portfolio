@@ -86,3 +86,21 @@ export async function getBlogListing(params: BlogListingParams) {
     q,
   };
 }
+
+/** Static shell data for the blog index: featured spotlight + categories. */
+export async function getBlogShell() {
+  const [featuredArticle, categories] = await Promise.all([
+    prisma.article.findFirst({
+      where: { status: "PUBLISHED", featured: true },
+      orderBy: { publishedAt: "desc" },
+      include: articleInclude,
+    }),
+    prisma.category.findMany({
+      orderBy: { name: "asc" },
+      include: {
+        _count: { select: { articles: { where: { status: "PUBLISHED" } } } },
+      },
+    }),
+  ]);
+  return { featuredArticle, categories };
+}
