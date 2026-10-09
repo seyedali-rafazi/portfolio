@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 
 interface BlogSearchBarProps {
@@ -11,17 +11,23 @@ interface BlogSearchBarProps {
 
 export function BlogSearchBar({ initialQuery = "", locale = "en" }: BlogSearchBarProps) {
   const router = useRouter();
-  const [query, setQuery] = useState(initialQuery);
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(initialQuery || searchParams.get("q") || "");
   const isFa = locale === "fa";
+  const basePath = isFa ? "/fa/blog" : "/blog";
+
+  const navigate = (term: string) => {
+    const sp = new URLSearchParams();
+    if (term) sp.set("q", term);
+    const size = searchParams.get("pageSize");
+    if (size) sp.set("pageSize", size);
+    const qs = sp.toString();
+    router.push(qs ? `${basePath}?${qs}` : basePath);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const clean = query.trim();
-    if (clean) {
-      router.push(`/blog/search?q=${encodeURIComponent(clean)}`);
-    } else {
-      router.push(isFa ? "/fa/blog" : "/blog");
-    }
+    navigate(query.trim());
   };
 
   return (
@@ -43,7 +49,7 @@ export function BlogSearchBar({ initialQuery = "", locale = "en" }: BlogSearchBa
           type="button"
           onClick={() => {
             setQuery("");
-            if (initialQuery) router.push(isFa ? "/fa/blog" : "/blog");
+            if (searchParams.get("q")) navigate("");
           }}
           className="absolute end-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-white"
         >

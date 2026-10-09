@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { getBlogMetadata } from "@/lib/metadata";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -8,74 +6,21 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { FeaturedArticleBanner } from "@/components/blog/FeaturedArticleBanner";
 import { BlogSearchBar } from "@/components/blog/BlogSearchBar";
 import { CategoryFilterNav } from "@/components/blog/CategoryFilterNav";
-import { ChevronLeft, ChevronRight, FileText, Sparkles } from "lucide-react";
+import { BlogPagination } from "@/components/blog/BlogPagination";
+import { getBlogListing } from "@/lib/blog/listing";
+import { FileText, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = getBlogMetadata("en");
 
 interface BlogPageProps {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string; q?: string }>;
 }
 
 export default async function BlogIndexPage({ searchParams }: BlogPageProps) {
-  const { page: pageParam } = await searchParams;
-  const page = Math.max(1, parseInt(pageParam || "1", 10));
-  const limit = 9;
-  const skip = (page - 1) * limit;
-
-  // 1. Featured Article (only on first page)
-  const featuredArticle =
-    page === 1
-      ? await prisma.article.findFirst({
-          where: { status: "PUBLISHED", featured: true },
-          orderBy: { publishedAt: "desc" },
-          include: {
-            author: { select: { name: true, avatar: true } },
-            categories: { select: { id: true, name: true, slug: true } },
-            tags: { select: { id: true, name: true, slug: true } },
-          },
-        })
-      : null;
-
-  // Exclude featured article ID from regular feed if on page 1 so it doesn't duplicate
-  const excludeIds = featuredArticle ? [featuredArticle.id] : [];
-
-  // 2. Fetch published articles
-  const [articles, totalCount, categories] = await Promise.all([
-    prisma.article.findMany({
-      where: {
-        status: "PUBLISHED",
-        ...(excludeIds.length > 0 ? { id: { notIn: excludeIds } } : {}),
-      },
-      orderBy: { publishedAt: "desc" },
-      skip,
-      take: limit,
-      include: {
-        author: { select: { name: true, avatar: true } },
-        categories: { select: { id: true, name: true, slug: true } },
-        tags: { select: { id: true, name: true, slug: true } },
-      },
-    }),
-    prisma.article.count({
-      where: {
-        status: "PUBLISHED",
-        ...(excludeIds.length > 0 ? { id: { notIn: excludeIds } } : {}),
-      },
-    }),
-    prisma.category.findMany({
-      orderBy: { name: "asc" },
-      include: {
-        _count: {
-          select: {
-            articles: { where: { status: "PUBLISHED" } },
-          },
-        },
-      },
-    }),
-  ]);
-
-  const totalPages = Math.max(1, Math.ceil(totalCount / limit));
+  const { articles, featuredArticle, categories, totalCount, totalPages, page, pageSize, q } =
+    await getBlogListing(await searchParams);
 
   return (
     <>
@@ -125,7 +70,7 @@ export default async function BlogIndexPage({ searchParams }: BlogPageProps) {
         <section className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text-bright)] tracking-tight">
-              {page === 1 ? "Latest Publications" : `Articles — Page ${page}`}
+              {q ? `Results for “${q}”` : page === 1 ? "Latest Publications" : `Articles — Page ${page}`}
             </h2>
             <span className="text-xs text-[var(--muted)]">
               {totalCount} {totalCount === 1 ? "article" : "articles"}
@@ -150,38 +95,13 @@ export default async function BlogIndexPage({ searchParams }: BlogPageProps) {
             </div>
           )}
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="pt-8 flex items-center justify-center gap-3">
-              <Link
-                href={`/blog?page=${Math.max(1, page - 1)}`}
-                className={`px-4 py-2 rounded-xl border border-[var(--border)] text-xs font-semibold flex items-center gap-1.5 transition-colors ${
-                  page <= 1
-                    ? "pointer-events-none opacity-40"
-                    : "hover:bg-[var(--surface-2)] text-[var(--text)]"
-                }`}
-              >
-                <ChevronLeft className="w-4 h-4" />
-                <span>Previous</span>
-              </Link>
-
-              <span className="text-xs text-[var(--muted)] font-mono px-2">
-                {page} / {totalPages}
-              </span>
-
-              <Link
-                href={`/blog?page=${Math.min(totalPages, page + 1)}`}
-                className={`px-4 py-2 rounded-xl border border-[var(--border)] text-xs font-semibold flex items-center gap-1.5 transition-colors ${
-                  page >= totalPages
-                    ? "pointer-events-none opacity-40"
-                    : "hover:bg-[var(--surface-2)] text-[var(--text)]"
-                }`}
-              >
-                <span>Next</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          )}
+          <BlogPagination
+            basePath="/blog"
+            page={page}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            q={q}
+          />
         </section>
       </main>
 
