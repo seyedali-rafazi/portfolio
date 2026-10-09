@@ -83,7 +83,19 @@ export async function POST(req: Request) {
       });
     }
 
-    // Local filesystem fallback (for offline local development without credentials)
+    // In production or on Vercel serverless functions, the local filesystem is read-only.
+    // If BLOB_READ_WRITE_TOKEN is missing on Vercel, return an explicit error instead of crashing.
+    if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+      return NextResponse.json(
+        {
+          error:
+            "Vercel Blob storage is not configured on this deployment. Please add the BLOB_READ_WRITE_TOKEN environment variable in your Vercel Project Settings (or connect your Blob store in the Vercel Dashboard) and redeploy.",
+        },
+        { status: 500 }
+      );
+    }
+
+    // Local filesystem fallback (strictly for offline local development on localhost)
     const uniqueName = `img-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
     const uploadDir = join(process.cwd(), "public", "uploads");
 

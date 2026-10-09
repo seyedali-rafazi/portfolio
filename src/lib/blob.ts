@@ -1,13 +1,36 @@
 import { put, del, list, type PutBlobResult, type ListBlobResult } from "@vercel/blob";
 
-export const BLOB_STORE_ID = process.env.BLOB_STORE_ID;
-export const BLOB_READ_WRITE_TOKEN = process.env.BLOB_READ_WRITE_TOKEN;
+/**
+ * Retrieves and sanitizes the Vercel Blob read-write token from environment variables.
+ */
+export function getBlobToken(): string | undefined {
+  const rawToken =
+    process.env.BLOB_READ_WRITE_TOKEN ||
+    process.env.VERCEL_BLOB_READ_WRITE_TOKEN;
+
+  if (!rawToken) return undefined;
+  // Clean surrounding quotes and whitespace if present
+  return rawToken.replace(/^["']|["']$/g, "").trim();
+}
+
+/**
+ * Retrieves the Vercel Blob store ID.
+ */
+export function getBlobStoreId(): string | undefined {
+  const rawId = process.env.BLOB_STORE_ID;
+  if (!rawId) return undefined;
+  return rawId.replace(/^["']|["']$/g, "").trim();
+}
+
+export const BLOB_STORE_ID = getBlobStoreId();
+export const BLOB_READ_WRITE_TOKEN = getBlobToken();
 
 /**
  * Checks if Vercel Blob credentials are configured.
  */
 export function isBlobConfigured(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  const token = getBlobToken();
+  return Boolean(token && token.length > 0);
 }
 
 export interface UploadBlobOptions {
@@ -27,7 +50,7 @@ export async function uploadBlogImage(
   data: Buffer | Blob | File,
   options: UploadBlobOptions
 ): Promise<PutBlobResult> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const token = getBlobToken();
   if (!token) {
     throw new Error(
       "BLOB_READ_WRITE_TOKEN environment variable is not configured for Vercel Blob."
@@ -55,7 +78,7 @@ export async function uploadBlogImage(
 export async function deleteBlogImage(
   urlOrPathname: string | string[]
 ): Promise<void> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const token = getBlobToken();
   if (!token) {
     throw new Error("BLOB_READ_WRITE_TOKEN is not configured.");
   }
@@ -70,7 +93,7 @@ export async function listBlogImages(options?: {
   prefix?: string;
   limit?: number;
 }): Promise<ListBlobResult> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const token = getBlobToken();
   return await list({
     prefix: options?.prefix ?? "blog/",
     limit: options?.limit,
