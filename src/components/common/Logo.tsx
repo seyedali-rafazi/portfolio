@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { SrMark } from "@/components/common/SrMark";
 
 export interface LogoProps {
@@ -32,6 +32,9 @@ export const Logo: React.FC<LogoProps> = ({
     lg: { badge: "w-12 h-12", text: "text-3xl", gap: "gap-3" },
   };
   const s = sizeMap[size];
+  // Unique per instance: duplicate SVG ids make gradients resolve to a hidden
+  // (display:none) copy, so the mark vanishes at breakpoints.
+  const idSuffix = useId().replace(/[^a-zA-Z0-9_-]/g, "");
 
   return (
     <div
@@ -45,7 +48,7 @@ export const Logo: React.FC<LogoProps> = ({
             withGlow ? "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]" : ""
           }`}
         >
-          <SrMark size="100%" rounded={false} />
+          <SrMark size="100%" rounded={false} idSuffix={idSuffix} />
         </div>
       )}
 
