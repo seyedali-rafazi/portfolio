@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run generate-sitemap && next dev",
+    "dev": "next dev",
     "generate-sitemap": "npx tsx scripts/generate-sitemap.ts",
     "build": "prisma generate && npm run generate-sitemap && next build",
     "postinstall": "prisma generate",
