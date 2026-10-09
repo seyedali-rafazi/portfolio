@@ -3,11 +3,24 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight, FileText, Loader2, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Loader2, MoreHorizontal, Search, X } from "lucide-react";
 import { BlogCard, type BlogCardArticle } from "./BlogCard";
 import { FeaturedArticleBanner } from "./FeaturedArticleBanner";
 
 const PAGE_SIZE = 10;
+
+/** 1 … 4 5 6 … 20 style page list. */
+function buildPageItems(page: number, total: number): (number | "...")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const items: (number | "...")[] = [1];
+  const start = Math.max(2, page - 1);
+  const end = Math.min(total - 1, page + 1);
+  if (start > 2) items.push("...");
+  for (let p = start; p <= end; p++) items.push(p);
+  if (end < total - 1) items.push("...");
+  items.push(total);
+  return items;
+}
 
 interface BlogFeedProps {
   locale?: "en" | "fa";
@@ -102,10 +115,7 @@ export function BlogFeed({ locale = "en", basePath, featuredArticle }: BlogFeedP
   const posts = data?.posts ?? [];
   const total = data?.pagination.total ?? 0;
   const totalPages = data?.pagination.totalPages ?? 1;
-  const PrevIcon = isFa ? ChevronRight : ChevronLeft;
-  const NextIcon = isFa ? ChevronLeft : ChevronRight;
-  const btn =
-    "px-4 py-2 rounded-xl border border-[var(--border)] text-xs font-semibold flex items-center gap-1.5 transition-colors";
+  const pageItems = buildPageItems(page, totalPages);
 
   return (
     <>
@@ -202,32 +212,54 @@ export function BlogFeed({ locale = "en", basePath, featuredArticle }: BlogFeedP
         )}
 
         <div className="mt-auto pt-8 flex items-center justify-center gap-4">
-          {totalPages > 1 && (
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                disabled={page <= 1 || loading}
-                onClick={() => update({ page: page - 1 })}
-                className={`${btn} text-[var(--text)] hover:bg-[var(--surface-2)] disabled:opacity-40 disabled:pointer-events-none`}
-              >
-                <PrevIcon className="w-4 h-4" />
-                <span>{isFa ? "صفحه قبل" : "Previous"}</span>
-              </button>
-              <span className="text-xs text-[var(--muted)] font-mono px-2">
-                {page} {isFa ? "از" : "/"} {totalPages}
-              </span>
-              <button
-                type="button"
-                disabled={page >= totalPages || loading}
-                onClick={() => update({ page: page + 1 })}
-                className={`${btn} text-[var(--text)] hover:bg-[var(--surface-2)] disabled:opacity-40 disabled:pointer-events-none`}
-              >
-                <span>{isFa ? "صفحه بعد" : "Next"}</span>
-                <NextIcon className="w-4 h-4" />
-              </button>
-            </div>
-          )}
+          <nav
+            aria-label="Pagination"
+            dir="ltr"
+            className="flex items-center gap-1 sm:gap-2 text-sm"
+          >
+            <button
+              type="button"
+              disabled={page <= 1 || loading}
+              onClick={() => update({ page: page - 1 })}
+              className="px-3 py-2 rounded-xl flex items-center gap-1.5 font-medium text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>{isFa ? "قبلی" : "Previous"}</span>
+            </button>
 
+            {pageItems.map((item, i) =>
+              item === "..." ? (
+                <span key={`e${i}`} className="px-2 text-[var(--muted)]">
+                  <MoreHorizontal className="w-4 h-4" />
+                </span>
+              ) : (
+                <button
+                  key={item}
+                  type="button"
+                  disabled={loading}
+                  aria-current={item === page ? "page" : undefined}
+                  onClick={() => item !== page && update({ page: item })}
+                  className={`min-w-9 h-9 px-2 rounded-xl font-medium transition-colors ${
+                    item === page
+                      ? "border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] shadow-sm"
+                      : "text-[var(--text)] hover:bg-[var(--surface-2)]"
+                  }`}
+                >
+                  {item}
+                </button>
+              )
+            )}
+
+            <button
+              type="button"
+              disabled={page >= totalPages || loading}
+              onClick={() => update({ page: page + 1 })}
+              className="px-3 py-2 rounded-xl flex items-center gap-1.5 font-medium text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <span>{isFa ? "بعدی" : "Next"}</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </nav>
         </div>
       </section>
     </>
